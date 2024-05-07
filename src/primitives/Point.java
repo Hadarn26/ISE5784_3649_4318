@@ -3,7 +3,7 @@ package primitives;
 import static primitives.Util.isZero;
 
 public class Point {
-    private final Double3 xyz;
+    protected final Double3 xyz;
     public static final Point ZERO=Double3.ZERO;
     public Point (double x, double y, double z){
         xyz = new Double3(x, y, z);;
