@@ -1,5 +1,7 @@
 package primitives;
 
+import static primitives.Util.isZero;
+
 public class Point {
     private final Double3 xyz;
     public static final Point ZERO=Double3.ZERO;
@@ -22,7 +24,22 @@ public class Point {
     }
 
     public double distanceSquared(Point other){
-        return Math.pow((this.xyz.d1-other.xyz.d1),2) + Math.pow((this.xyz.d2-other.xyz.d2),2) + Math.pow((this.xyz.d3-other.xyz.d3),2);
+        return (this.xyz.d1-other.xyz.d1)*(this.xyz.d1-other.xyz.d1) + (this.xyz.d2-other.xyz.d2)*(this.xyz.d2-other.xyz.d2) + (this.xyz.d3-other.xyz.d3)*(this.xyz.d3-other.xyz.d3);
     }
 
+    public double distance(Point other){
+        return Math.sqrt(distanceSquared(other));
+    }
+
+    @Override
+    public String toString() {
+        return xyz.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        return (obj instanceof Point other)
+                &&xyz.equals(other.xyz);
+    }
 }
