@@ -4,23 +4,23 @@ import static primitives.Util.isZero;
 
 public class Point {
     protected final Double3 xyz;
-    public static final Point ZERO=Double3.ZERO;
+    public static final Point ZERO=new Point(0,0,0);
     public Point (double x, double y, double z){
-        xyz = new Double3(x, y, z);;
+        xyz = new Double3(x, y, z);
     }
 
     public Point(Double3 xyz){
-        this.xyz= new Double3(xyz.d1, xyz.d2, xyz.d3);;
+        this.xyz= new Double3(xyz.d1, xyz.d2, xyz.d3);
     }
 
     public Vector Substract(Point other){
         if(other==null)
             throw new NullPointerException("the other point is null");
-        return other.xyz.subtract(xyz);
+        return new Vector(other.xyz.subtract(xyz));
     }
 
     public Point Add(Vector v){
-        return xyz.add(v.xyz);
+        return new Point(xyz.add(v.xyz));
     }
 
     public double distanceSquared(Point other){
