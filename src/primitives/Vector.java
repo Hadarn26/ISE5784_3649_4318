@@ -20,7 +20,7 @@ public class Vector extends Point {
     public Vector Add(Vector v){
         ///if(Double3.ZERO.equals(temp.xyz))
         ///    throw  new IllegalArgumentException("can't be (0,0,0)");
-        return new Vector(super.Add(v).xyz);
+        return new Vector(xyz.add(v.xyz));
     }
 
     public Vector scale(double num){
