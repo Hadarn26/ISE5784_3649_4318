@@ -11,10 +11,11 @@ import primitives.Vector;
  */
 public class Plane implements Geometry {
 
-    private final Point q;
+    /** The base point of the plane. */
+    final Point q;
 
     /** The normal vector to the plane.*/
-    private final Vector normal;
+    final Vector normal;
 
     /**
      * Constructs a plane from three points on the plane.

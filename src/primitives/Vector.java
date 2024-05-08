@@ -62,8 +62,6 @@ public class Vector extends Point {
      * @return The new vector resulting from adding the specified vector to this vector.
      */
     public Vector add(Vector v){
-        ///if(Double3.ZERO.equals(temp.xyz))
-        ///    throw  new IllegalArgumentException("can't be (0,0,0)");
         return new Vector(xyz.add(v.xyz));
     }
 

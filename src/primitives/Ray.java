@@ -25,8 +25,10 @@ package primitives;
  */
 public class Ray {
 
-    private final Point head;
-    private final Vector direction;
+    /** The starting point (head) of the ray. */
+    final Point head;
+    /** The direction vector of the ray. */
+    final Vector direction;
 
     /**
      * Constructs a ray with the specified starting point and direction.

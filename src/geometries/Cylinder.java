@@ -10,7 +10,8 @@ import primitives.Ray;
  */
 public class Cylinder extends Tube{
 
-    private final double height;
+    /** The height of the cylinder. */
+    final double height;
 
     /**
      * Constructs a new Cylinder object with the specified height, base ray, and radius.
