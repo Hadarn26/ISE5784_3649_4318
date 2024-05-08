@@ -15,7 +15,7 @@ public final class Util {
      * the number is m+2^e where 1&lt;=m&lt;2<br>
      * NB: exponent is stored "normalized" (i.e. always positive by adding 1023)<br>
      * @param  num the original number
-     * @return     the exponent value */
+     * @return  the exponent value */
     private static int getExp(double num) {
         // 1. doubleToRawLongBits: "convert" the stored number to set of bits
         // 2. Shift all 52 bits to the right (removing mantissa)
@@ -26,21 +26,21 @@ public final class Util {
 
     /** Checks whether the number is [almost] zero
      * @param  number the number to check
-     * @return        true if the number is zero or almost zero, false otherwise */
+     * @return  true if the number is zero or almost zero, false otherwise */
     public static boolean isZero(double number) {
         return getExp(number) < ACCURACY;
     }
 
     /** Aligns the number to zero if it is almost zero
      * @param  number the number to align
-     * @return        0.0 if the number is very close to zero, the number itself
-     *                otherwise */
+     * @return  0.0 if the number is very close to zero, the number itself
+     *          otherwise */
     public static double alignZero(double number) { return isZero(number) ? 0.0 : number; }
 
     /** Check whether two numbers have the same sign
      * @param  n1 1st number
      * @param  n2 2nd number
-     * @return    true if the numbers have the same sign */
+     * @return true if the numbers have the same sign */
     public static boolean compareSign(double n1, double n2) {
         return (n1 < 0 && n2 < 0) || (n1 > 0 && n2 > 0);
     }

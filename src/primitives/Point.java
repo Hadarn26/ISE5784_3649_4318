@@ -24,24 +24,18 @@ import static primitives.Util.isZero;
  * This class also defines a constant {@code ZERO} representing the origin (0, 0, 0).
  * </p>
  *
- * @author Hadar&Elinoy
- * @version [Version number]
+ * @author Hadar Nagar & Elinoy Damari
  */
 public class Point {
 
-    /**
-     * The coordinates of the point.
-     */
+    /** The coordinates of the point.*/
     protected final Double3 xyz;
 
-    /**
-     * Represents the origin point (0, 0, 0).
-     */
+    /**Represents the origin point (0, 0, 0).*/
     public static final Point ZERO=new Point(0,0,0);
 
     /**
      * Constructs a point with the specified coordinates.
-     *
      * @param x The x-coordinate of the point.
      * @param y The y-coordinate of the point.
      * @param z The z-coordinate of the point.
@@ -61,7 +55,6 @@ public class Point {
 
     /**
      * Computes the vector from this point to another point.
-     *
      * @param other The other point.
      * @return The vector representing the displacement from this point to the other point.
      * @throws NullPointerException if the other point is null.
@@ -74,7 +67,6 @@ public class Point {
 
     /**
      * Computes the point resulting from adding a vector to this point.
-     *
      * @param v The vector to add.
      * @return The new point resulting from adding the vector to this point.
      */
@@ -84,7 +76,6 @@ public class Point {
 
     /**
      * Computes the square of the distance between this point and another point.
-     *
      * @param other The other point.
      * @return The square of the distance between this point and the other point.
      */
@@ -96,7 +87,6 @@ public class Point {
 
     /**
      * Computes the distance between this point and another point.
-     *
      * @param other The other point.
      * @return The distance between this point and the other point.
      */
@@ -106,7 +96,6 @@ public class Point {
 
     /**
      * Returns a string representation of this point.
-     *
      * @return A string representation of this point in the format (x, y, z).
      */
     @Override
@@ -114,16 +103,7 @@ public class Point {
         return xyz.toString();
     }
 
-    /**
-     * Indicates whether some other object is "equal to" this one.
-     *
-     * <p>
-     * Two points are considered equal if they have the same coordinates.
-     * </p>
-     *
-     * @param obj The reference object with which to compare.
-     * @return {@code true} if this point is the same as the obj argument; {@code false} otherwise.
-     */
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

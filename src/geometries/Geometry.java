@@ -9,8 +9,7 @@ import primitives.Vector;
  * Implementing classes must override the {@code getNormal} method to provide specific behavior
  * for calculating the normal vector.
  *
- * @author Hadar&Elinoy
- * @version [Version number]
+ * @author Hadar Nagar & Elinoy Damari
  */
 public interface Geometry {
 

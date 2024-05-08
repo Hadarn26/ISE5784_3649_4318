@@ -28,14 +28,12 @@ import static primitives.Util.isZero;
  * Vectors are compared for equality based on their coordinates.
  * </p>
  *
- * @author Hadar&Elinoy
- * @version [Version number]
+ * @author Hadar Nagar & Elinoy Damari
  */
 public class Vector extends Point {
 
     /**
      * Constructs a vector with the specified coordinates.
-     *
      * @param x The x-coordinate of the vector.
      * @param y The y-coordinate of the vector.
      * @param z The z-coordinate of the vector.
@@ -49,7 +47,6 @@ public class Vector extends Point {
 
     /**
      * Constructs a vector from a {@link Double3} object representing the coordinates.
-     *
      * @param xyz The coordinates of the vector.
      * @throws IllegalArgumentException if the coordinates are equal to zero.
      */
@@ -61,7 +58,6 @@ public class Vector extends Point {
 
     /**
      * Computes the vector resulting from adding another vector to this vector.
-     *
      * @param v The vector to add.
      * @return The new vector resulting from adding the specified vector to this vector.
      */
@@ -73,7 +69,6 @@ public class Vector extends Point {
 
     /**
      * Scales this vector by a scalar value.
-     *
      * @param num The scalar value to scale the vector by.
      * @return The new scaled vector.
      */
