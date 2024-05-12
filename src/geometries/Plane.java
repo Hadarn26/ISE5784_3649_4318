@@ -1,7 +1,9 @@
 package geometries;
 
 import primitives.Point;
+import primitives.Util;
 import primitives.Vector;
+
 
 /**
  * Represents a plane in three-dimensional space.
@@ -25,9 +27,16 @@ public class Plane implements Geometry {
      * @param p3 The third point on the plane.
      */
     public Plane(Point p1, Point p2, Point p3){
+       if(p1.equals(p2)||p2.equals(p3)||p1.equals(p3))
+           throw new IllegalArgumentException("can't create plane with less than 3 different points");
+       if(Util.isZero(new Vector(p1.xyz)))
         normal=null;
         q=p1;
+
     }
+
+
+
 
     /**
      * Constructs a plane from a point on the plane and its normal vector.

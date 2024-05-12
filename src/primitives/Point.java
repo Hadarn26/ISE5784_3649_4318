@@ -29,7 +29,7 @@ import static primitives.Util.isZero;
 public class Point {
 
     /** The coordinates of the point.*/
-    protected final Double3 xyz;
+    final Double3 xyz;
 
     /**Represents the origin point (0, 0, 0).*/
     public static final Point ZERO=new Point(0,0,0);

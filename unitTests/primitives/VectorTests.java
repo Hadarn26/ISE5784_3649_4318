@@ -82,29 +82,35 @@ class VectorTests {
         assertTrue(Util.isZero(vr.dotProduct(v1)) && Util.isZero(vr.dotProduct(v3)), "ERROR: crossProduct() result is not orthogonal to the operands");
 
         // =============== Boundary Values Tests ==================
-        // TC01: Test zero vector from cross-product of co-lined vectors and two vectors in opposite directions and different length
+        // TC01: Test zero vector from cross-product of co-lined vectors and two vectors in opposite/same directions and different length or opposite/same directions and same length
         assertThrows(IllegalArgumentException.class, () -> v1.crossProduct(v2),
                 "ERROR: does not throw exception for cross-product of co-lined vectors");
-
-        // TC02: Test two vectors in same directions and different length
-
-
-        // TC03: Test two vectors in opposite directions and same length
-
-        // TC04: Test two vectors in same directions and same length
 
     }
 
 
     @Test
     void testLengthSquared() {
+        Vector v1 = new Vector(1, 2, 3);
+        // ============ Equivalence Partitions Tests ==============
+        // TC01: Test length squared
+        assertEquals( 14,v1.lengthSquared(), "ERROR: lengthSquared() does not work correctly");
     }
 
     @Test
     void testLength() {
+        Vector v1 = new Vector(0, 3, 4);
+        // ============ Equivalence Partitions Tests ==============
+
+        // TC01: Test length
+        assertEquals( 5,v1.length(), "ERROR: length() does not work correctly");
     }
 
     @Test
     void testNormalize() {
+        Vector v1 = new Vector(1, 2, 3);
+        // ============ Equivalence Partitions Tests ==============
+        // TC01: Test normalize
+        assertEquals( 1,v1.normalize().length(), "ERROR: normalize() result is not a unit vector");
     }
 }
