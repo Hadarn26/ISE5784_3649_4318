@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fa1e206-b9eb-406f-af29-0232df645b0f" name="Changes" comment="add unitTests declarations to Vector + Polygon">
+    <list default="true" id="6fa1e206-b9eb-406f-af29-0232df645b0f" name="Changes" comment="add test case to the functions in PointTest">
+      <change afterPath="$PROJECT_DIR$/unitTests/geometries/CylinderTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/unitTests/geometries/GeometryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/unitTests/geometries/PlaneTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/unitTests/geometries/RadialGeometryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/unitTests/geometries/SphereTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/unitTests/geometries/TriangleTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/unitTests/geometries/TubeTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/unitTests/primitives/PointTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/unitTests/primitives/RayTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,12 +31,6 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="PUSH_TAGS">
-      <GitPushTagMode>
-        <option name="argument" value="--tags" />
-        <option name="title" value="All" />
-      </GitPushTagMode>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -36,12 +39,12 @@
     &quot;assignee&quot;: &quot;Hadarn26&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Hadarn26/ISE5784_3649_4318.git&quot;,
-    &quot;accountId&quot;: &quot;9a57e212-8cc2-4255-8c7f-9030257c05c3&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Hadarn26/ISE5784_3649_4318..git",
+    "accountId": "70da460a-2e86-4003-9d68-c9ac63601127"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -55,12 +58,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
     "Application.Main.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "true",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
@@ -68,9 +66,6 @@
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/hadar/ISE5784_3649_4318",
     "onboarding.tips.debug.path": "C:/Users/navat/ISE5784_3649_4318/src/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "fileTemplates"
   }
 }]]></component>
@@ -80,6 +75,7 @@
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="primitives" />
+      <recent name="geometries" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -91,31 +87,23 @@
       <option name="presentableId" value="Default" />
       <updated>1715023465353</updated>
     </task>
-    <task id="LOCAL‎-00001" summary="final commit stage 1">
+    <task id="LOCAL-00001" summary="add documentation to the functions">
       <option name="closed" value="true" />
-      <created>1715158425736</created>
+      <created>1715123560363</created>
       <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL‎-00001" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1715158425736</updated>
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1715123560363</updated>
     </task>
-    <task id="LOCAL‎-00002" summary="final commit stage 1">
+    <task id="LOCAL-00002" summary="delete access premition- private from the fields and deleting unnecessary lines">
       <option name="closed" value="true" />
-      <created>1715214465505</created>
+      <created>1715186755144</created>
       <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL‎-00002" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1715214465505</updated>
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1715186755144</updated>
     </task>
-    <task id="LOCAL‎-00003" summary="add unitTests declarations to Vector + Polygon">
-      <option name="closed" value="true" />
-      <created>1715530652743</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL‎-00003" />
-      <option name="project" value="LOCAL‎" />
-      <updated>1715530652743</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -130,9 +118,9 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="final commit stage 1" />
-    <MESSAGE value="add unitTests declarations to Vector + Polygon" />
-    <option name="LAST_COMMIT_MESSAGE" value="add unitTests declarations to Vector + Polygon" />
+    <MESSAGE value="add documentation to the functions" />
+    <MESSAGE value="delete access premition- private from the fields and deleting unnecessary lines" />
+    <MESSAGE value="add test case to the functions in PointTest" />
+    <option name="LAST_COMMIT_MESSAGE" value="add test case to the functions in PointTest" />
   </component>
 </project>
