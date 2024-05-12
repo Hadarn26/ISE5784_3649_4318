@@ -10,7 +10,7 @@ class TriangleTest {
     @Test
     void testGetNormal() {
         // ============ Equivalence Partitions Tests ==============
-        // TC01: There is a simple single test here - using a quad
+        // TC01:
         Point[] pts =
                 { new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0) };
         Triangle tr = new Triangle(pts);
@@ -23,7 +23,7 @@ class TriangleTest {
         // ensure the result is orthogonal to all the edges
         for (int i = 0; i < 3; ++i)
             assertTrue(Util.isZero( result.dotProduct(pts[i].subtract(pts[i == 0 ? 2 : i - 1]))),
-                    "Polygon's normal is not orthogonal to one of the edges");
+                    "Triangle's normal is not orthogonal to one of the edges");
     }
   
 }
