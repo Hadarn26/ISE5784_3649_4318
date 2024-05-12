@@ -29,10 +29,10 @@ public class Plane implements Geometry {
     public Plane(Point p1, Point p2, Point p3){
        if(p1.equals(p2)||p2.equals(p3)||p1.equals(p3))
            throw new IllegalArgumentException("can't create plane with less than 3 different points");
-       if(Util.isZero(new Vector(p1.xyz)))
+       if(Util.isZero(p1.subtract(p2).crossProduct(p3.subtract(p2)).length()))
+           throw new IllegalArgumentException("can't create plane with 3 points on the same line");
         normal=null;
         q=p1;
-
     }
 
 
