@@ -7,6 +7,11 @@ import static primitives.Util.isZero;
 import primitives.*;
 
 /**
+ * Elinoy Damari 325984318 elinoy.damari@gmail.com
+ * Hadar Nagar 213203649 hadarn26@gmail.com
+ */
+
+/**
  * Test program for the 1st stage
  * @author Dan Zilberstein
  */
