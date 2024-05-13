@@ -30,7 +30,8 @@ public class Tube extends  RadialGeometry{
         double t=(point.subtract(axis.getHead())).dotProduct(axis.getDirection());
         if (Util.isZero(t))
              o=axis.getHead();
-        o=(axis.getHead()).add((axis.getDirection()).scale(t));
+        else
+             o=(axis.getHead()).add((axis.getDirection()).scale(t));
         return (point.subtract(o)).normalize();
     }
 }
