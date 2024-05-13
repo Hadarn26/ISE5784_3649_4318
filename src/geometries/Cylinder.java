@@ -1,6 +1,8 @@
 package geometries;
 
+import primitives.Point;
 import primitives.Ray;
+import primitives.Vector;
 
 /**
  * Represents a cylinder, a three-dimensional geometric shape with a circular base and a certain height.
@@ -22,5 +24,13 @@ public class Cylinder extends Tube{
     public Cylinder(double height, Ray ray , double radius) {
         super(radius, ray);
         this.height=height;
+    }
+
+    @Override
+    public Vector getNormal(Point point) {
+        //if על הבסיס
+        if()
+        //else כמו טיוב
+        return super.getNormal(point);
     }
 }

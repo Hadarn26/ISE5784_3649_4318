@@ -31,7 +31,10 @@ public class Plane implements Geometry {
            throw new IllegalArgumentException("can't create plane with less than 3 different points");
        if(Util.isZero(p1.subtract(p2).crossProduct(p3.subtract(p2)).length()))
            throw new IllegalArgumentException("can't create plane with 3 points on the same line");
-        normal=null;
+       ///////////////////////////////////////////////////////////////////////////////////////////////
+        Vector v1=p2.subtract(p1);
+        Vector v2=p3.subtract(p1);
+        normal=(v1.crossProduct(v2)).normalize();
         q=p1;
     }
 
@@ -50,7 +53,7 @@ public class Plane implements Geometry {
 
     @Override
     public Vector getNormal(Point point) {
-        return null;
+        return normal;
     }
 
     /**
