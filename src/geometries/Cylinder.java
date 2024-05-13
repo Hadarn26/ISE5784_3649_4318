@@ -30,10 +30,10 @@ public class Cylinder extends Tube{
     @Override
     public Vector getNormal(Point point) {
         //if על הבסיס
-        double t=(point.subtract(axis.getHead())).dotProduct(axis.getDirection());
-        if(point.equals(axis.getDirection()))
+        if(point.equals(axis.getHead()))
             return (axis.getDirection()).scale(-1);
-        else if (Util.isZero(t))
+        double t=(point.subtract(axis.getHead())).dotProduct(axis.getDirection());
+        if (Util.isZero(t))
             return (axis.getDirection()).scale(-1);
         else if(t==height)
             return axis.getDirection();
