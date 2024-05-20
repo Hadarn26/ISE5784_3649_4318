@@ -64,6 +64,7 @@ class SphereTest {
         assertEquals(exp, result5, "Ray starts at sphere and goes inside");
         // TC06: Ray starts at sphere and goes outside (0 points)
         assertNull(sphere.findIntsersections(new Ray(new Point(1.61,0.61,0.51), v310)), "Ray starts at sphere and goes outside");
+
         // **** Group: Ray's line goes through the center
         // TC07: Ray starts before the sphere (2 points)
         exp=List.of(Point.ZERO,new Point(2,0,0));
@@ -79,6 +80,12 @@ class SphereTest {
         assertEquals(1, result8.size(), "Wrong number of points");
         assertEquals(exp, result8, "Ray starts at sphere and goes inside");
         // TC09: Ray starts inside (1 point)
+        Ray r9=new Ray(new Point(1.5,0,0),v100);
+        exp=List.of(new Point(2,0,0));
+        final var result9 = sphere.findIntsersections(r9)
+                .stream().sorted(Comparator.comparingDouble(p-> p.distance(new Point(1.5,0,0)))).toList();
+        assertEquals(1, result9.size(), "Wrong number of points");
+        assertEquals(exp, result9, "Ray starts inside");
         // TC10: Ray starts at the center (1 point)
         Ray r100=new Ray(p100,v310);
         exp=List.of(new Point(1.95,0.32,0));
@@ -90,11 +97,14 @@ class SphereTest {
         assertNull(sphere.findIntsersections(new Ray(new Point(2,0,0), v100)), "Ray starts at sphere and goes outside");
         // TC12: Ray starts after sphere (0 points)
         assertNull(sphere.findIntsersections(new Ray(new Point(3,0,0), v100)), "Ray starts after sphere");
+
         // **** Group: Ray's line is tangent to the sphere (all tests 0 points)
         // TC13: Ray starts before the tangent point
+        assertNull(sphere.findIntsersections(new Ray(new Point(0,0,1), v100)), "Ray starts before the tangent point");
         // TC14: Ray starts at the tangent point
         assertNull(sphere.findIntsersections(new Ray(new Point(1,0,1), v100)), "Ray starts at the tangent point");
         // TC15: Ray starts after the tangent point
+        assertNull(sphere.findIntsersections(new Ray(new Point(3,0,1), v100)), "Ray starts after the tangent point");
 
         // **** Group: Special cases
         // TC16: Ray's line is outside, ray is orthogonal to ray start to sphere's center line
