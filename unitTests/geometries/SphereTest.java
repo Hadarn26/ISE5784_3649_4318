@@ -55,8 +55,15 @@ class SphereTest {
         // =============== Boundary Values Tests ==================
 
         // **** Group: Ray's line crosses the sphere (but not the center)
-        // TC05: Ray starts at sphere and goes inside (1 points)
+        // TC05: Ray starts at sphere and goes inside (1 point)
+        Ray r5=new Ray(new Point(1.61,0.61,0.51),v310.scale(-1));
+        exp=List.of(new Point(0.15,0.12,0.51));
+        final var result5 = sphere.findIntsersections(r5)
+                .stream().sorted(Comparator.comparingDouble(p-> p.distance(new Point(1.61,0.61,0.51)))).toList();
+        assertEquals(1, result5.size(), "Wrong number of points");
+        assertEquals(exp, result5, "Ray starts at sphere and goes inside");
         // TC06: Ray starts at sphere and goes outside (0 points)
+        assertNull(sphere.findIntsersections(new Ray(new Point(1.61,0.61,0.51), v310)), "Ray starts at sphere and goes outside");
         // **** Group: Ray's line goes through the center
         // TC07: Ray starts before the sphere (2 points)
         exp=List.of(Point.ZERO,new Point(2,0,0));
@@ -64,9 +71,15 @@ class SphereTest {
                 .stream().sorted(Comparator.comparingDouble(p-> p.distance(p01))).toList();
         assertEquals(2, result7.size(), "Wrong number of points");
         assertEquals(exp, result7, "Ray crosses sphere and start before the sphere");
-        // TC08: Ray starts at sphere and goes inside (1 points)
-        // TC09: Ray starts inside (1 points)
-        // TC10: Ray starts at the center (1 points)
+        // TC08: Ray starts at sphere and goes inside (1 point)
+        Ray r0=new Ray(Point.ZERO,v100);
+        exp=List.of(new Point(2,0,0));
+        final var result8 = sphere.findIntsersections(r0)
+                .stream().sorted(Comparator.comparingDouble(p-> p.distance(Point.ZERO))).toList();
+        assertEquals(1, result8.size(), "Wrong number of points");
+        assertEquals(exp, result8, "Ray starts at sphere and goes inside");
+        // TC09: Ray starts inside (1 point)
+        // TC10: Ray starts at the center (1 point)
         Ray r100=new Ray(p100,v310);
         exp=List.of(new Point(1.95,0.32,0));
         final var result4 = sphere.findIntsersections(r100)
@@ -74,12 +87,17 @@ class SphereTest {
         assertEquals(1, result4.size(), "Wrong number of points");
         assertEquals(exp, result4, "Ray crosses sphere and start within the sphere");
         // TC11: Ray starts at sphere and goes outside (0 points)
+        assertNull(sphere.findIntsersections(new Ray(new Point(2,0,0), v100)), "Ray starts at sphere and goes outside");
         // TC12: Ray starts after sphere (0 points)
+        assertNull(sphere.findIntsersections(new Ray(new Point(3,0,0), v100)), "Ray starts after sphere");
         // **** Group: Ray's line is tangent to the sphere (all tests 0 points)
         // TC13: Ray starts before the tangent point
         // TC14: Ray starts at the tangent point
+        assertNull(sphere.findIntsersections(new Ray(new Point(1,0,1), v100)), "Ray starts at the tangent point");
         // TC15: Ray starts after the tangent point
+
         // **** Group: Special cases
         // TC16: Ray's line is outside, ray is orthogonal to ray start to sphere's center line
+        assertNull(sphere.findIntsersections(new Ray(new Point(3,0,0), new Vector(0,0,1))), "Ray's line is outside, ray is orthogonal to ray start to sphere's center line");
     }
 }
