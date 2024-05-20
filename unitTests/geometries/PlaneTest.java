@@ -3,6 +3,8 @@ package geometries;
 import org.junit.jupiter.api.Test;
 import primitives.*;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 class PlaneTest {
 
@@ -64,9 +66,12 @@ class PlaneTest {
         // TC01: Ray starts outside the plane, not orthogonal, not paralal, cross the Plane
         Point p200=new Point(2,0,0);
         Vector v502=new Vector(-5,0,2);
-
+        List<Point> result1=plane.findIntsersections(new Ray(p200,v502));
+        List<Point> exp=List.of(new Point(0.33,0,0.67));
+        assertEquals(1, result1.size(), "Wrong number of points");
+        assertEquals(exp, result1, "Ray starts outside the plane, not orthogonal, not paralal, cross the Plane");
         // TC02: Ray starts outside the plane, not orthogonal, not paralal, doesn't cross the Plane
-
+        assertNull(plane.findIntsersections(new Ray(p200, v502.scale(-1))), "Ray starts outside the plane, not orthogonal, not paralal, doesn't cross the Plane");
 
     }
 }
