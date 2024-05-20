@@ -34,5 +34,9 @@ class CylinderTest {
         // TC02: Test that getNormal works for the center point of the top base
         assertEquals(new Vector(0, 1, 0), b2, "getNormal() didn't work properly for the center point of the top base");
     }
+
+    @Test
+    void testFindIntsersections() {
+    }
   
 }

@@ -37,4 +37,8 @@ class PlaneTest {
                 () -> new Plane(new Point(1, 2, 3), new Point(2, 4, 6), new Point(3, 6, 9)),
                 "ERROR: does not throw exception for three points are on the same line");
     }
+
+    @Test
+    void testFindIntsersections() {
+    }
 }

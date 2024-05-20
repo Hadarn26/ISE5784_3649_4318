@@ -11,7 +11,7 @@ import primitives.Vector;
  *
  * @author Hadar Nagar & Elinoy Damari
  */
-public interface Geometry {
+public interface Geometry extends Intersectable {
 
     /**
      * Retrieves the normal vector at a given point on the surface of the geometric shape.

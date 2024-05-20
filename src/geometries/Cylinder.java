@@ -5,6 +5,8 @@ import primitives.Ray;
 import primitives.Util;
 import primitives.Vector;
 
+import java.util.List;
+
 /**
  * Represents a cylinder, a three-dimensional geometric shape with a circular base and a certain height.
  * This class extends Tube, inheriting its properties and methods.
@@ -12,6 +14,7 @@ import primitives.Vector;
  * @author  Hadar Nagar & Elinoy Damari
  */
 public class Cylinder extends Tube{
+
 
     /** The height of the cylinder. */
     final double height;
@@ -39,5 +42,9 @@ public class Cylinder extends Tube{
             return axis.getDirection();
         else
             return super.getNormal(point);
+    }
+    @Override
+    public List<Point> findIntsersections(Ray ray) {
+        return null;
     }
 }

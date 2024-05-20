@@ -4,6 +4,8 @@ import primitives.Ray;
 import primitives.Util;
 import primitives.Vector;
 
+import java.util.List;
+
 /**
  * Represents a tube in three-dimensional space.
  * This class extends RadialGeometry, inheriting its properties and methods.
@@ -33,5 +35,10 @@ public class Tube extends  RadialGeometry{
         else
              o=(axis.getHead()).add((axis.getDirection()).scale(t));
         return (point.subtract(o)).normalize();
+    }
+
+    @Override
+    public List<Point> findIntsersections(Ray ray) {
+        return null;
     }
 }

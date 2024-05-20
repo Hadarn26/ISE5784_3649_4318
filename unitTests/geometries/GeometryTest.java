@@ -9,4 +9,8 @@ class GeometryTest {
     @Test
     void testGetNormal() {
     }
+
+    @Test
+    void testFindIntsersections() {
+    }
 }

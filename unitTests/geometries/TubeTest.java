@@ -23,5 +23,8 @@ class TubeTest {
         assertEquals(new Vector(0,0,1),result2,"ERROR: Tube's getNormal(Point p) does not work correctly");
 
     }
-  
+
+    @Test
+    void testFindIntsersections() {
+    }
 }
