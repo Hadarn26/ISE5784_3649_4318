@@ -34,13 +34,16 @@ public class Sphere extends RadialGeometry{
 
     @Override
     public List<Point> findIntsersections(Ray ray) {
-        Vector u=center.subtract(ray.getHead());
-        double tm=(ray.getDirection()).dotProduct(u);
-        double d=Math.sqrt(u.dotProduct(u)-(ray.getDirection()).dotProduct((ray.getDirection())));
-        if(d>=radius)
+        Vector u=center.subtract(ray.getHead()); //(1,0,0)-(-1,0,0)=(2,0,0)
+        double tm=(ray.getDirection()).dotProduct(u); //(3,1,0)*(2,0,0)=6
+        double d=u.lengthSquared()-tm*tm;//4-36
+        double th=radius*radius-d*d;
+                // 4-10
+        if(alignZero(th)<=0)
             return null;
         //d<radius
-        double th=Math.sqrt(radius*radius-d*d);
+
+        th=Math.sqrt(th);
         double t1,t2;
         t1=tm+th;
         t2=tm-th;

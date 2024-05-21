@@ -53,7 +53,7 @@ class PlaneTest {
         // ============ Equivalence Partitions Tests ==============
         // TC01: Ray starts outside the plane, not orthogonal, not paralal, cross the Plane
         List<Point> result1=plane.findIntsersections(new Ray(p200,v502));
-        List<Point> exp=List.of(new Point(0.33,0,0.67));
+        List<Point> exp=List.of(new Point(0.33333333333333326,0,0.6666666666666667));
         assertEquals(1, result1.size(), "Wrong number of points");
         assertEquals(exp, result1, "Ray starts outside the plane, not orthogonal, not paralal, cross the Plane");
 
