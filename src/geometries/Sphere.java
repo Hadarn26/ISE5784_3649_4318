@@ -3,7 +3,7 @@ package geometries;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
-
+import static primitives.Util.*;
 import java.util.List;
 
 /**
@@ -34,6 +34,18 @@ public class Sphere extends RadialGeometry{
 
     @Override
     public List<Point> findIntsersections(Ray ray) {
-        return null;
+        Vector u=center.subtract(ray.getHead());
+        double tm=(ray.getDirection()).dotProduct(u);
+        double d=Math.sqrt(u.dotProduct(u)-(ray.getDirection()).dotProduct((ray.getDirection())));
+        if(d>=radius)
+            return null;
+        //d<radius
+        double th=Math.sqrt(radius*radius-d*d);
+        double t1,t2;
+        t1=tm+th;
+        t2=tm-th;
+        if (t1>0 & t2>0){
+            return List.of(ray.getHead().add(ray.getDirection().scale(t1)))
+        }
     }
 }
