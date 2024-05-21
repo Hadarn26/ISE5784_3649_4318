@@ -47,21 +47,6 @@ class PlaneTest {
     @Test
     void testFindIntsersections() {
         Plane plane=new Plane(p001,p010,p100);
-                /*
-        * מחלקות שקילות:
-.1קרן שמתחילה מחוץ למישור, לא מקבילה למישור, מייצרת זווית לא ישרה עם
-המישור, וחותכת את המישור
-.2קרן שמתחילה מחוץ למישור, לא מקבילה למישור, מייצרת זווית לא ישרה עם
-המישור, ולא חותכת את המישור
-מקרי קצה וגבול:
-.12מקרים של קרן שמקבילה למישור (מקרה של קרן מחוץ למישור ומקרה של קרן
-בתוך המישור)
-.23מקרים של קרן המאוðכת למישור (מתחילה "לפðי", בתוך, ו"אחרי" המישור)
-.3מקרה אחד של קרן שלא מקבילה ולא מאוðכת למישור אך מתחיל בתוך המישור
-.4 ומקרה אחד שדומה למקרה הקודם, אך ראשית הקרן בדיוק ב"ðקודת הייחוס" של
-המישור (הðקודה ששמורה באובייקט של המישור בðוסף לווקטור הðורמל, או
-במילים אחרות - ðקודה ðתוðה בתוך המישור)
-        * */
         Point p200=new Point(2,0,0);
         Vector v502=new Vector(-5,0,2);
 
@@ -79,16 +64,31 @@ class PlaneTest {
 
         //**** Group: Ray parallel to the Plane
         // TC03: Ray inside the plane
-        // TC04: Ray outside inside the plane
+        assertNull(plane.findIntsersections(new Ray(new Point(0.5, 0.25, 0.25), new Vector(-0.5, 0.2, 0.3))),
+                "ERROR: findIntersections() did not return null when the ray is parallel to the plane and included in the plane");
+        // TC04: Ray outside the plane
+        assertNull(plane.findIntsersections(new Ray(new Point(0.6, 0.25, 0.25), new Vector(-0.5, 0.2, 0.3))),
+                "ERROR: findIntersections() did not return null when the ray is parallel to the plane and not included in the plane");
 
         //**** Group: Ray orthogonal to the Plane
-        // TC05: Ray start inside the plane
-        // TC06: Ray starts before the plane
+        // TC05: Ray starts before the plane
+        result1 = plane.findIntsersections(new Ray(new Point(0.6, 0.25, 0.25), new Vector(-1, -1, -1)));
+        assertEquals(1, result1.size(),
+                "ERROR: findIntersections() returned incorrect number of points when the ray is orthogonal to the plane and begins before the plane");
+        // TC06: Ray starts inside the plane
+        assertNull(plane.findIntsersections(new Ray(new Point(0.5, 0.25, 0.25), new Vector(-1, -1, -1))),
+                "ERROR: findIntersections() did not return null when the ray is orthogonal to the plane and begins inside the plane");
         // TC07: Ray starts after the plane
+        assertNull(plane.findIntsersections(new Ray(new Point(0.4, 0.25, 0.25), new Vector(-1, -1, -1))),
+                "ERROR: findIntersections() did not return null when the ray is orthogonal to the plane and begins after the plane");
 
         //**** Group: Ray not parallel and not orthogonal to the Plane
         // TC08: Ray starts inside the plane
-        // TC09: Ray tstarts in the reference point of the plane
+        assertNull(plane.findIntsersections(new Ray(new Point(0.5, 0.25, 0.25), new Vector(-3, 5, 2))),
+                "ERROR: findIntersections() did not return null when the ray begins in the plane");
+        // TC09: Ray starts in the reference point of the plane
+        assertNull(plane.findIntsersections(new Ray(plane.q, new Vector(-3, 5, 2))),
+                "ERROR: findIntersections() did not return null when the ray begins in the same point which appears as reference point in the plane");
 
     }
 }
