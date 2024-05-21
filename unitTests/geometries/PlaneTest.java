@@ -62,16 +62,33 @@ class PlaneTest {
 המישור (הðקודה ששמורה באובייקט של המישור בðוסף לווקטור הðורמל, או
 במילים אחרות - ðקודה ðתוðה בתוך המישור)
         * */
-        // ============ Equivalence Partitions Tests ==============
-        // TC01: Ray starts outside the plane, not orthogonal, not paralal, cross the Plane
         Point p200=new Point(2,0,0);
         Vector v502=new Vector(-5,0,2);
+
+        // ============ Equivalence Partitions Tests ==============
+        // TC01: Ray starts outside the plane, not orthogonal, not paralal, cross the Plane
         List<Point> result1=plane.findIntsersections(new Ray(p200,v502));
         List<Point> exp=List.of(new Point(0.33,0,0.67));
         assertEquals(1, result1.size(), "Wrong number of points");
         assertEquals(exp, result1, "Ray starts outside the plane, not orthogonal, not paralal, cross the Plane");
+
         // TC02: Ray starts outside the plane, not orthogonal, not paralal, doesn't cross the Plane
         assertNull(plane.findIntsersections(new Ray(p200, v502.scale(-1))), "Ray starts outside the plane, not orthogonal, not paralal, doesn't cross the Plane");
+
+        // =============== Boundary Values Tests ==================
+
+        //**** Group: Ray parallel to the Plane
+        // TC03: Ray inside the plane
+        // TC04: Ray outside inside the plane
+
+        //**** Group: Ray orthogonal to the Plane
+        // TC05: Ray start inside the plane
+        // TC06: Ray starts before the plane
+        // TC07: Ray starts after the plane
+
+        //**** Group: Ray not parallel and not orthogonal to the Plane
+        // TC08: Ray starts inside the plane
+        // TC09: Ray tstarts in the reference point of the plane
 
     }
 }
