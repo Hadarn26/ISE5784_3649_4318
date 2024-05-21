@@ -74,6 +74,8 @@ public class Plane implements Geometry {
         double nv=normal.dotProduct(v);
         if (isZero(nv))
             return null;
+        if(q.equals(ray.getHead()))
+            return null;
         double t=alignZero((normal.dotProduct((q.subtract(ray.getHead()))))/(nv));
         if(t>0)
             return List.of(ray.getHead().add(ray.getDirection().scale(t)));
