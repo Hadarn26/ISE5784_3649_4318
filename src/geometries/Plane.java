@@ -2,10 +2,11 @@ package geometries;
 
 import primitives.Point;
 import primitives.Ray;
-import primitives.Util;
 import primitives.Vector;
 
 import java.util.List;
+
+import static primitives.Util.*;
 
 
 /**
@@ -32,7 +33,7 @@ public class Plane implements Geometry {
     public Plane(Point p1, Point p2, Point p3){
        if(p1.equals(p2)||p2.equals(p3)||p1.equals(p3))
            throw new IllegalArgumentException("can't create plane with less than 3 different points");
-       if(Util.isZero(p1.subtract(p2).crossProduct(p3.subtract(p2)).length()))
+       if(isZero(p1.subtract(p2).crossProduct(p3.subtract(p2)).length()))
            throw new IllegalArgumentException("can't create plane with 3 points on the same line");
        ///////////////////////////////////////////////////////////////////////////////////////////////
         Vector v1=p2.subtract(p1);
@@ -69,6 +70,13 @@ public class Plane implements Geometry {
 
     @Override
     public List<Point> findIntsersections(Ray ray) {
+        Vector v=ray.getDirection();
+        double nv=normal.dotProduct(v);
+        if (isZero(nv))
+            return null;
+        double t=alignZero((normal.dotProduct((q.subtract(ray.getHead()))))/(nv));
+        if(t>0)
+            return List.of(ray.getHead().add(ray.getDirection().scale(t)));
         return null;
     }
 }
