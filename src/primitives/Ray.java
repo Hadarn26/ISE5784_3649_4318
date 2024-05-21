@@ -54,6 +54,11 @@ public class Ray {
         return (obj instanceof Ray other)&&this.head.equals(other.head)&&this.direction.equals(other.direction);
     }
 
+    public Point getPoint(double t){
+        if(Util.isZero(t))
+            return head;
+        return  head.add(direction.scale(t));
+    }
 
     @Override
     public String toString() {

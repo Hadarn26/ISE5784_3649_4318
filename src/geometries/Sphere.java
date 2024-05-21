@@ -48,9 +48,9 @@ public class Sphere extends RadialGeometry{
         t1=tm+th;
         t2=tm-th;
         if (t1>0 & t2>0)
-            return List.of(ray.getHead().add(ray.getDirection().scale(t1)),ray.getHead().add(ray.getDirection().scale(t2)));
+            return List.of(ray.getPoint(t1),ray.getPoint(t2));
         if((isZero(t1) || t1<0) && t2>0)
-            return List.of(ray.getHead().add(ray.getDirection().scale(t2)));
-        return List.of(ray.getHead().add(ray.getDirection().scale(t1)));
+            return List.of(ray.getPoint(t2));
+        return List.of(ray.getPoint(t1));
     }
 }
