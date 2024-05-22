@@ -13,7 +13,7 @@ class TriangleTest {
     @Test
     void testGetNormal() {
         // ============ Equivalence Partitions Tests ==============
-        // TC01:
+        // TC01: A point on the surface of the triangle
         Point[] pts =
                 { new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0) };
         Triangle tr = new Triangle(pts);

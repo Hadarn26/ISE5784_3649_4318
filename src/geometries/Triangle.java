@@ -17,7 +17,6 @@ public class Triangle extends Polygon{
      * Constructs a triangle with the specified vertices.
      * @param vertices The vertices of the triangle.
      */
-
     public Triangle(Point... vertices) {
         super(vertices);
     }

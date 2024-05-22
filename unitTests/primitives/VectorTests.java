@@ -75,7 +75,7 @@ class VectorTests {
         Vector v3 = new Vector(0, 3, -2);
         // ============ Equivalence Partitions Tests ==============
         Vector vr = new Vector(-13,2,3);
-        // TC01:
+        // TC01:Test that the normal orthogonality to the operands
         //
         assertEquals(vr,v1.crossProduct(v3), "ERROR: crossProduct() wrong result");
         // Test cross-product result orthogonality to its operands

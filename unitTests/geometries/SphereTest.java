@@ -17,10 +17,12 @@ class SphereTest {
     @Test
     void testGetNormal() {
         // ============ Equivalence Partitions Tests ==============
-        // TC01:
+        // TC01: A point on the surface of the sphere
         Sphere sp=new Sphere(1, Point.ZERO);
         Vector result=sp.getNormal(new Point(0,0,1));
+        // Check if the resulting normal vector is a unit vector
         assertEquals(1,result.length(),"ERROR: Sphere's normal is not a unit vector ");
+        // Check if the normal vector is correctly calculated
         assertEquals(new Vector(0,0,1),result,
                 "ERROR: Sphere's getNormal(Point p) does not work correctly");
     }
