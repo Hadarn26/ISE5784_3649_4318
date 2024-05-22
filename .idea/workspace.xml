@@ -4,17 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fa1e206-b9eb-406f-af29-0232df645b0f" name="Changes" comment="add test case to the functions in PointTest">
-      <change afterPath="$PROJECT_DIR$/unitTests/geometries/CylinderTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unitTests/geometries/GeometryTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unitTests/geometries/PlaneTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unitTests/geometries/RadialGeometryTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unitTests/geometries/SphereTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unitTests/geometries/TriangleTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unitTests/geometries/TubeTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unitTests/primitives/PointTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unitTests/primitives/RayTest.java" afterDir="false" />
+    <list default="true" id="6fa1e206-b9eb-406f-af29-0232df645b0f" name="Changes" comment="implement geometries + tests +add getPoint method in Ray +&#10;refactoring the code to use that method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/geometries/Sphere.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Sphere.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/geometries/Triangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Triangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitives/Ray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Ray.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/geometries/SphereTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/geometries/SphereTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +19,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
         <option value="JUnit5 Test Class" />
       </list>
     </option>
@@ -39,12 +34,12 @@
     &quot;assignee&quot;: &quot;Hadarn26&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Hadarn26/ISE5784_3649_4318..git",
-    "accountId": "70da460a-2e86-4003-9d68-c9ac63601127"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Hadarn26/ISE5784_3649_4318.git&quot;,
+    &quot;accountId&quot;: &quot;9a57e212-8cc2-4255-8c7f-9030257c05c3&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -59,6 +54,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
+    "JUnit.All in ISE5784_3649_4318.executor": "Run",
+    "JUnit.PlaneTest.testPlane.executor": "Run",
+    "JUnit.SphereTest.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
@@ -77,6 +75,54 @@
       <recent name="primitives" />
       <recent name="geometries" />
     </key>
+  </component>
+  <component name="RunManager" selected="JUnit.SphereTest">
+    <configuration name="All in ISE5784_3649_4318" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ISE5784_3649_4318" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlaneTest.testPlane" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ISE5784_3649_4318" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="geometries.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="geometries" />
+      <option name="MAIN_CLASS_NAME" value="geometries.PlaneTest" />
+      <option name="METHOD_NAME" value="testPlane" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SphereTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ISE5784_3649_4318" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="geometries.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="geometries" />
+      <option name="MAIN_CLASS_NAME" value="geometries.SphereTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.SphereTest" />
+        <item itemvalue="JUnit.All in ISE5784_3649_4318" />
+        <item itemvalue="JUnit.PlaneTest.testPlane" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -103,7 +149,103 @@
       <option name="project" value="LOCAL" />
       <updated>1715186755144</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL‎-00003" summary="finish implementation of the point tests + start the implenentation of vector tests">
+      <option name="closed" value="true" />
+      <created>1715536057401</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL‎-00003" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1715536057401</updated>
+    </task>
+    <task id="LOCAL‎-00004" summary="finish implementation of the vector tests + start fix the implenentation of Plane ctor">
+      <option name="closed" value="true" />
+      <created>1715547296192</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL‎-00004" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1715547296192</updated>
+    </task>
+    <task id="LOCAL‎-00005" summary="implementation of getNoramal's in Sphere and Triangle tests + start Tube's">
+      <option name="closed" value="true" />
+      <created>1715552525438</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL‎-00005" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1715552525438</updated>
+    </task>
+    <task id="LOCAL‎-00006" summary="implementation of getNoramal method in Plane,Sphere,Tube + start Cylinder's +add getters in Ray">
+      <option name="closed" value="true" />
+      <created>1715601053358</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL‎-00006" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1715601053358</updated>
+    </task>
+    <task id="LOCAL‎-00007" summary="fix the getNormal in Cylinder+ run all the tests">
+      <option name="closed" value="true" />
+      <created>1715604580668</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL‎-00007" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1715604580668</updated>
+    </task>
+    <task id="LOCAL‎-00008" summary="add inteface Intersectable + definitions of find intersection method + define test for this function">
+      <option name="closed" value="true" />
+      <created>1716228931053</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL‎-00008" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1716228931053</updated>
+    </task>
+    <task id="LOCAL‎-00009" summary="write test to findInterSections in Sphere">
+      <option name="closed" value="true" />
+      <created>1716235724402</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL‎-00009" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1716235724402</updated>
+    </task>
+    <task id="LOCAL‎-00010" summary="finishing the sphere findIntersections tests+ start Plane's findIntersections tests">
+      <option name="closed" value="true" />
+      <created>1716241647478</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL‎-00010" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1716241647478</updated>
+    </task>
+    <task id="LOCAL‎-00011" summary="organize the code">
+      <option name="closed" value="true" />
+      <created>1716315606079</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL‎-00011" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1716315606079</updated>
+    </task>
+    <task id="LOCAL‎-00012" summary="add triangle's findintersection tests + implemrntation of findintersection in sphere">
+      <option name="closed" value="true" />
+      <created>1716321303132</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL‎-00012" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1716321303132</updated>
+    </task>
+    <task id="LOCAL‎-00013" summary="fix plane test+ fix sphere's find intersections method+ implementation of find Intersection in Triangle">
+      <option name="closed" value="true" />
+      <created>1716326616216</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL‎-00013" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1716326616216</updated>
+    </task>
+    <task id="LOCAL‎-00014" summary="implement geometries + tests +add getPoint method in Ray +&#10;refactoring the code to use that method">
+      <option name="closed" value="true" />
+      <created>1716331301049</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL‎-00014" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1716331301049</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -121,6 +263,18 @@
     <MESSAGE value="add documentation to the functions" />
     <MESSAGE value="delete access premition- private from the fields and deleting unnecessary lines" />
     <MESSAGE value="add test case to the functions in PointTest" />
-    <option name="LAST_COMMIT_MESSAGE" value="add test case to the functions in PointTest" />
+    <MESSAGE value="finish implementation of the point tests + start the implenentation of vector tests" />
+    <MESSAGE value="finish implementation of the vector tests + start fix the implenentation of Plane ctor" />
+    <MESSAGE value="implementation of getNoramal's in Sphere and Triangle tests + start Tube's" />
+    <MESSAGE value="implementation of getNoramal method in Plane,Sphere,Tube + start Cylinder's +add getters in Ray" />
+    <MESSAGE value="fix the getNormal in Cylinder+ run all the tests" />
+    <MESSAGE value="add inteface Intersectable + definitions of find intersection method + define test for this function" />
+    <MESSAGE value="write test to findInterSections in Sphere" />
+    <MESSAGE value="finishing the sphere findIntersections tests+ start Plane's findIntersections tests" />
+    <MESSAGE value="organize the code" />
+    <MESSAGE value="add triangle's findintersection tests + implemrntation of findintersection in sphere" />
+    <MESSAGE value="fix plane test+ fix sphere's find intersections method+ implementation of find Intersection in Triangle" />
+    <MESSAGE value="implement geometries + tests +add getPoint method in Ray +&#10;refactoring the code to use that method" />
+    <option name="LAST_COMMIT_MESSAGE" value="implement geometries + tests +add getPoint method in Ray +&#10;refactoring the code to use that method" />
   </component>
 </project>

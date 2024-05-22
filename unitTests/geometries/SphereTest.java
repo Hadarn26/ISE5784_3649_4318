@@ -51,14 +51,15 @@ class SphereTest {
         // TC02: Ray starts before and crosses the sphere (2 points)
         var exp = List.of(gp1, gp2);
         final var result2 = sphere.findIntsersections(new Ray(p01, v310)).stream().sorted(Comparator
-                .comparingDouble(p-> p.distance(p01))).toList();
+              .comparingDouble(p-> p.distance(p01))).toList();
         assertEquals(2, result2.size(), "Wrong number of points");
         assertEquals(exp, result2, "Ray crosses sphere");
 
         // TC03: Ray starts inside the sphere (1 point)
         exp=List.of(new Point(1.89,0.46,0));
-        final var result3 = sphere.findIntsersections(new Ray(p02, v310)).stream().sorted(Comparator
-                .comparingDouble(p-> p.distance(p02))).toList();
+        final var result3 = sphere.findIntsersections(new Ray(p02, v310));
+        /*.stream().sorted(Comparator
+                .comparingDouble(p-> p.distance(p02))).toList();*/
         assertEquals(1, result3.size(), "Wrong number of points");
         assertEquals(exp, result3, "Ray crosses sphere and start within the sphere");
 
