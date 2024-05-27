@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fa1e206-b9eb-406f-af29-0232df645b0f" name="Changes" comment="implement geometries + tests +add getPoint method in Ray +&#10;refactoring the code to use that method">
+    <list default="true" id="6fa1e206-b9eb-406f-af29-0232df645b0f" name="Changes" comment="fix triangle">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/geometries/Sphere.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Sphere.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Triangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Triangle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitives/Ray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Ray.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/unitTests/geometries/SphereTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/geometries/SphereTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,7 +74,7 @@
       <recent name="geometries" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.SphereTest">
+  <component name="RunManager" selected="JUnit.All in ISE5784_3649_4318">
     <configuration name="All in ISE5784_3649_4318" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5784_3649_4318" />
       <option name="PACKAGE_NAME" value="" />
@@ -118,8 +116,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.SphereTest" />
         <item itemvalue="JUnit.All in ISE5784_3649_4318" />
+        <item itemvalue="JUnit.SphereTest" />
         <item itemvalue="JUnit.PlaneTest.testPlane" />
       </list>
     </recent_temporary>
@@ -245,7 +243,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1716331301049</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL‎-00015" summary="fix triangle">
+      <option name="closed" value="true" />
+      <created>1716370806382</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL‎-00015" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1716370806382</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -275,6 +281,19 @@
     <MESSAGE value="add triangle's findintersection tests + implemrntation of findintersection in sphere" />
     <MESSAGE value="fix plane test+ fix sphere's find intersections method+ implementation of find Intersection in Triangle" />
     <MESSAGE value="implement geometries + tests +add getPoint method in Ray +&#10;refactoring the code to use that method" />
-    <option name="LAST_COMMIT_MESSAGE" value="implement geometries + tests +add getPoint method in Ray +&#10;refactoring the code to use that method" />
+    <MESSAGE value="fix triangle" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix triangle" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="v310.scale(-1))" />
+        <watch expression=" v310.scale(-1)" />
+        <watch expression="v310.scale(-1)" />
+        <watch expression="xyz.scale(num" />
+        <watch expression="base - inside" />
+        <watch expression="alignZero(base - inside)" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
