@@ -23,7 +23,9 @@ public class Triangle extends Polygon{
 
     @Override
     public List<Point> findIntsersections(Ray ray) {
-
+        List<Point> intersections=plane.findIntsersections(ray);
+        if(intersections==null)
+            return null;
         Vector v1= vertices.get(0).subtract(ray.getHead());
         Vector v2= vertices.get(1).subtract(ray.getHead());
         Vector v3= vertices.get(2).subtract(ray.getHead());
@@ -37,7 +39,7 @@ public class Triangle extends Polygon{
         if(isZero(vn1)||isZero(vn2)||isZero(vn3))
             return null;
         if((vn1>0&&vn2>0&&vn3>0)||(vn1<0&&vn2<0&&vn3<0))
-            return plane.findIntsersections(ray);
+            return intersections;
         return null;
     }
 }

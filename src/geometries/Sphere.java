@@ -33,24 +33,58 @@ public class Sphere extends RadialGeometry{
     }
 
     @Override
-    public List<Point> findIntsersections(Ray ray) {
-        Vector u=center.subtract(ray.getHead()); //(1,0,0)-(-1,0,0)=(2,0,0)
-        double tm=(ray.getDirection()).dotProduct(u); //(3,1,0)*(2,0,0)=6
-        double d=u.lengthSquared()-tm*tm;//4-36
-        double th=radius*radius-d*d;
-                // 4-10
-        if(alignZero(th)<=0)
-            return null;
-        //d<radius
+    public List<Point> findIntsersections(Ray ray) { //(-1,0,0) (3,1,0)
+        Point p0 = ray.getHead();
+        Vector dir = ray.getDirection();
 
-        th=Math.sqrt(th);
-        double t1,t2;
-        t1=tm+th;
-        t2=tm-th;
-        if (t1>0 & t2>0)
-            return List.of(ray.getPoint(t1),ray.getPoint(t2));
-        if((isZero(t1) || t1<0) && t2>0)
-            return List.of(ray.getPoint(t2));
-        return List.of(ray.getPoint(t1));
+        // Deals with case where ray starts from the center of the sphere
+        if (p0.equals(center))
+            return List.of(ray.getPoint(this.radius));
+
+        // Finding the hypotenuse, base and perpendicular of the triangle formed by
+        // ray's starting point, the center of the sphere and the intersection point of
+        // the ray and the perpendicular line crosing the sphere's center.
+        Vector hypotenuse = this.center.subtract(p0);
+        double base = dir.dotProduct(hypotenuse);
+        double perpendicular = Math.sqrt(hypotenuse.dotProduct(hypotenuse) - base*base);
+
+        // Dealing with a case in which the ray is perpendicular to the sphere at the
+        // intersection point.
+        if (perpendicular == this.radius)
+            return null;
+
+        // Returning intersection points, ensuring that only those intersected by the
+        // ray are returned.
+        double inside = Math.sqrt(Math.pow(this.radius, 2) - Math.pow(perpendicular, 2));
+        if (alignZero(base - inside) > 0 && alignZero(base + inside)>0)
+            return List.of(ray.getPoint(base - inside), ray.getPoint(base + inside));
+        else if (base - inside > 0)
+            return List.of(ray.getPoint(base - inside));
+        else if (base + inside > 0)
+            return List.of(ray.getPoint(base + inside));
+       return null;
+//        if(ray.getHead().equals(center))
+//            return List.of(ray.getPoint(radius));
+//
+//        Vector u=center.subtract(ray.getHead()); //(1,0,0)-(-1,0,0)=(2,0,0)
+//        double tm=(ray.getDirection()).dotProduct(u); //(3,1,0)*(2,0,0)=6
+//        double dSquared=u.lengthSquared()-tm*tm;//4-36=-32
+//        double th=radius*radius-dSquared*dSquared;//33
+//                // 4-10
+//        if(alignZero(th)<=0)
+//            return null;
+//        //d<radius
+//
+//
+//
+//        th=Math.sqrt(th); // 5.744562647
+//        double t1,t2;
+//        t1=alignZero(tm+th);
+//        t2=alignZero(tm-th);
+//        if (t1>0 && t2>0)
+//            return List.of(ray.getPoint(t1),ray.getPoint(t2));
+//        if(((isZero(t1) || t1<0)) && t2>0)
+//            return List.of(ray.getPoint(t2));
+//        return List.of(ray.getPoint(t1));
     }
 }
