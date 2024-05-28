@@ -49,11 +49,21 @@ public class Camera implements Cloneable{
     }
 
     public static Builder getBuilder() {
-        return null;
+        return new Builder();
     }
 
     public Ray constructRay(int nX, int nY, int j, int i){
-        return null;
+
+        Point pixelIJ=position.add(vTo.scale(distance));
+        Double rY=height/nY;
+        Double rX=width/nX;
+        Double yI=-(i-(nY-1)/2.0)*rY;
+        Double xJ=-(j-(nX-1)/2.0)*rX;
+        if(!Util.isZero(xJ))
+            pixelIJ=pixelIJ.add(vRight.scale(-xJ));
+        if(!Util.isZero(yI))
+            pixelIJ=pixelIJ.add(vUp.scale(yI));
+        return new Ray(position,pixelIJ.subtract(position));
     }
 
     @Override
