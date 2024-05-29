@@ -8,6 +8,11 @@ import primitives.Vector;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Testing Triangles
+ * @author Hadar Nagar & Elinoy Damari
+ */
 class TriangleTest {
 
     @Test

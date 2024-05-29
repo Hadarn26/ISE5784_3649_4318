@@ -3,6 +3,11 @@ import org.junit.jupiter.api.Test;
 import primitives.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Testing Cylinders
+ * @author Hadar Nagar & Elinoy Damari
+ */
 class CylinderTest {
 
     @Test

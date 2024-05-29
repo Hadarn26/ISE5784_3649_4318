@@ -6,6 +6,11 @@ import primitives.*;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Testing Planes
+ * @author Hadar Nagar & Elinoy Damari
+ */
 class PlaneTest {
 
     private final Point p001 = new Point(0, 0, 1);

@@ -7,6 +7,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Testing Geometries
+ * @author Hadar Nagar & Elinoy Damari
+ */
 class GeometriesTests {
 
     @Test
