@@ -1,5 +1,7 @@
 package primitives;
 
+import java.util.List;
+
 /**
  * Represents a ray in three-dimensional space.
  * A ray is defined by its starting point (head) and direction.
@@ -63,6 +65,10 @@ public class Ray {
     @Override
     public String toString() {
         return "head= "+head.toString()+" direction= "+direction.toString();
+    }
+
+    public Point findClosestPoint(List<Point> points){
+        return null;
     }
 }
 /////sort
