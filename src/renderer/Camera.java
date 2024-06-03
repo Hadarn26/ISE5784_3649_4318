@@ -1,9 +1,6 @@
 package renderer;
 
-import primitives.Point;
-import primitives.Ray;
-import primitives.Util;
-import primitives.Vector;
+import primitives.*;
 
 import java.nio.channels.Pipe;
 import java.util.MissingResourceException;
@@ -26,6 +23,9 @@ public class Camera implements Cloneable {
     private Double height = 0.0;
     private Double width = 0.0;
     private Double distance = 0.0;
+
+    private ImageWriter imageWriter;
+    private RayTracerBase rayTracer;
 
     /**
      * Private constructor to enforce the use of the builder for creating Camera instances.
@@ -96,6 +96,15 @@ public class Camera implements Cloneable {
         return distance;
     }
 
+    public void printGrid(int interval, Color color){
+        for (int i = 0; i < imageWriter.getNy(); ++i) {
+            for (int j = 0; j < imageWriter.getNx(); ++j) {
+                if ((i % (imageWriter.getNy() / interval)) == 0 || j % (imageWriter.getNx() / interval) == 0)
+                    imageWriter.writePixel(j, i, color);
+            }
+        }
+    }
+
     /**
      * Creates a new builder for Camera.
      *
@@ -105,6 +114,9 @@ public class Camera implements Cloneable {
         return new Builder();
     }
 
+    public void renderImage(){
+        throw new UnsupportedOperationException("Unsupported Operation Exception");
+    }
     /**
      * Constructs a ray through a specific pixel in the view plane.
      *
@@ -189,6 +201,11 @@ public class Camera implements Cloneable {
             return this;
         }
 
+        public Builder setImageWriter(ImageWriter imageWriter) {
+            camera.imageWriter = imageWriter;
+            return this;
+        }
+
         /**
          * Sets the direction vectors of the camera.
          *
@@ -222,6 +239,10 @@ public class Camera implements Cloneable {
             return this;
         }
 
+        public Builder setRayTracer(RayTracerBase rayTracer) {
+            camera.rayTracer = rayTracer;
+            return this;
+        }
         /**
          * Sets the distance from the camera to the view plane.
          *
@@ -252,6 +273,10 @@ public class Camera implements Cloneable {
                 throw new MissingResourceException(missingRenderingData, cameraClass, "camera's vTo");
             if (camera.vUp == null)
                 throw new MissingResourceException(missingRenderingData,cameraClass, "camera's vUp");
+            if (camera.imageWriter == null)
+                throw new MissingResourceException(missingRenderingData,cameraClass, "camera's image Writer");
+            if (camera.rayTracer == null)
+                throw new MissingResourceException(missingRenderingData,cameraClass, "camera's ray tracer");
             if (Util.alignZero(camera.height) <= 0)
                 throw new MissingResourceException(missingRenderingData, cameraClass, "camera's height");
             if (Util.alignZero(camera.width) <= 0)
