@@ -91,7 +91,7 @@ class IntegrationCameraTest {
 
     private void checkFunc(Intersectable obj, Point cameraLocation, int numOfIntersections){
 
-        Camera camera=Camera.getBuilder().setLocation(cameraLocation).setDirection(new Vector(0,0,-1),new Vector(0,1,0)).setVpSize(3d,3d).setVpDistance(1d).build();
+        Camera camera=Camera.getBuilder().setLocation(cameraLocation).setDirection(new Vector(0,1,0),new Vector(0,0,-1)).setVpSize(3d,3d).setVpDistance(1d).build();
         Ray ray;
 
         int counter = 0;

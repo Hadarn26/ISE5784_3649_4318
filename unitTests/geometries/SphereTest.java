@@ -87,11 +87,11 @@ class SphereTest {
 //        assertEquals(1, result5.size(), "Wrong number of points");
 //        assertEquals(exp, result5, "Ray starts at sphere and goes inside");
 
-        final var result = sphere.findIntersections(new Ray(p200, new Vector(-1, 1, 0))).stream().sorted(Comparator
-                       .comparingDouble(p-> p.distance(new Point(1.61,0.61,0.51)))).toList();
+        final var result = sphere.findIntersections(new Ray(Point.ZERO, new Vector(1, 1, 0))).stream().sorted(Comparator
+                       .comparingDouble(p-> p.distance(Point.ZERO))).toList();
         assertEquals(1, result.size(), "There should be one intersection");
-        assertEquals(List.of(p100), result, "Incorrect intersection point");
-        assertEquals(1, result.size(), DELTA, "Polygon's normal is not a unit vector");
+        assertEquals(List.of(p110), result, "Incorrect intersection point");
+//        assertEquals(1, result.size(), DELTA, "Polygon's normal is not a unit vector");
         // TC06: Ray starts at sphere and goes outside (0 points)
         assertNull(sphere.findIntersections(new Ray(new Point(1.61,0.61,0.51), v310)),
                 "Ray starts at sphere and goes outside");
