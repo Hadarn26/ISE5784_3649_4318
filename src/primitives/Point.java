@@ -50,8 +50,13 @@ public class Point {
      * @param xyz The coordinates of the point.
      */
     public Point(Double3 xyz){
-        this.xyz= new Double3(xyz.d1, xyz.d2, xyz.d3);
+        this.xyz= xyz;
     }
+    //////////////////////////////////////////////////////////////////////////////////
+    public Double3 getXyz() {
+        return xyz;
+    }
+    /////////////////////////////////////////////////////////////////////////////////
 
     /**
      * Computes the vector from this point to another point.
@@ -62,6 +67,10 @@ public class Point {
     public Vector subtract(Point other){
         if(other==null)
             throw new NullPointerException("the other point is null");
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(xyz.equals(other.xyz))
+            throw new IllegalArgumentException("Error: Subtraction of two equal vectors results a zero vector");
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
         return new Vector(xyz.subtract(other.xyz));
     }
 

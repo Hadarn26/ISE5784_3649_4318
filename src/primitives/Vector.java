@@ -41,7 +41,7 @@ public class Vector extends Point {
      */
     public Vector(double x,double y,double z){
         super(x,y,z);
-        if(Double3.ZERO.equals(new Double3(x,y,z)))
+        if(Double3.ZERO.equals(this.xyz))
             throw  new IllegalArgumentException("x,y,z can't be 0");
     }
 
@@ -51,7 +51,7 @@ public class Vector extends Point {
      * @throws IllegalArgumentException if the coordinates are equal to zero.
      */
     public Vector(Double3 xyz) {
-         super(xyz);
+        super(xyz);
         if(Double3.ZERO.equals(xyz))
             throw  new IllegalArgumentException("can't be (0,0,0)");
     }
@@ -62,6 +62,8 @@ public class Vector extends Point {
      * @return The new vector resulting from adding the specified vector to this vector.
      */
     public Vector add(Vector v){
+        if(this.equals(v.scale(-1)))
+            throw new IllegalArgumentException("Adding opposite vectors gives the zero vector");
         return new Vector(xyz.add(v.xyz));
     }
 
@@ -125,7 +127,7 @@ public class Vector extends Point {
      * @return The normalized vector.
      */
     public Vector normalize(){
-        return scale(1/length());
+        return scale(1/length()); //////////////////////////////////////////////////////////////////////
     }
 
     /**
@@ -142,7 +144,7 @@ public class Vector extends Point {
     public boolean equals(Object obj) {
         if (this == obj) return true;
         return (obj instanceof Vector other)
-                && xyz.equals(other.xyz);
+                && super.equals(other);
     }
 
     /**

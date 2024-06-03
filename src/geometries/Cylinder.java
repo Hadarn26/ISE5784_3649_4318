@@ -32,19 +32,27 @@ public class Cylinder extends Tube{
 
     @Override
     public Vector getNormal(Point point) {
+        Point p0=axis.getHead();
+        Vector direction=axis.getDirection();
+
         //if על הבסיס
-        if(point.equals(axis.getHead()))
-            return (axis.getDirection()).scale(-1);
-        double t=(point.subtract(axis.getHead())).dotProduct(axis.getDirection());
+        if(point.equals(p0))
+            return (direction.scale(-1));
+        double t=(point.subtract(p0)).dotProduct(direction);
         if (Util.isZero(t))
-            return (axis.getDirection()).scale(-1);
-        else if(t==height)
-            return axis.getDirection();
-        else
-            return super.getNormal(point);
+            return (direction).scale(-1);
+        if(Util.isZero(t-height))
+            return direction;
+
+        ///////////////////////////////////////////////////////////////
+        if (Util.isZero(direction.dotProduct(point.subtract(p0))))
+            return direction;
+        ///////////////////////////////////////////////////////////////
+
+        return super.getNormal(point);
     }
-    @Override
-    public List<Point> findIntsersections(Ray ray) {
-        return null;
-    }
+   // @Override
+//    public List<Point> findIntsersections(Ray ray) {
+//        return null;
+//    }
 }

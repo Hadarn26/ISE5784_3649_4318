@@ -19,5 +19,5 @@ public interface Geometry extends Intersectable {
      * @param point The point on the surface of the shape.
      * @return The normal vector at the specified point.
      */
-    public Vector getNormal(Point point);
+    Vector getNormal(Point point);
 }

@@ -33,15 +33,18 @@ public class Plane implements Geometry {
     public Plane(Point p1, Point p2, Point p3){
        if(p1.equals(p2)||p2.equals(p3)||p1.equals(p3))
            throw new IllegalArgumentException("can't create plane with less than 3 different points");
-       if(isZero(p1.subtract(p2).crossProduct(p3.subtract(p2)).length()))
-           throw new IllegalArgumentException("can't create plane with 3 points on the same line");
-       ///////////////////////////////////////////////////////////////////////////////////////////////
-        Vector v1=p2.subtract(p1);
-        Vector v2=p3.subtract(p1);
-        normal=(v1.crossProduct(v2)).normalize();
-        q=p1;
-    }
 
+       Vector v1=p2.subtract(p1);
+       Vector v2=p3.subtract(p1);
+       q=p1;
+
+       try {
+           normal=(v1.crossProduct(v2)).normalize();
+       } catch (IllegalArgumentException zeroVectorIgnore) {
+           throw new IllegalArgumentException("can't create plane with 3 points on the same line");
+       }
+
+    }
 
 
 
@@ -69,7 +72,7 @@ public class Plane implements Geometry {
     }
 
     @Override
-    public List<Point> findIntsersections(Ray ray) {
+    public List<Point> findIntersections(Ray ray) {
         Vector v=ray.getDirection();
         double nv=normal.dotProduct(v);
         if (isZero(nv))
