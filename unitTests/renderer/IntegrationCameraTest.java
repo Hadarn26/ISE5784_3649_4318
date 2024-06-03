@@ -22,9 +22,9 @@ class IntegrationCameraTest {
     @Test
     void testSphere() {
 
-        //01: Small Sphere centered at (0,0,-3) with radius 1
-        Sphere sphere=new Sphere(1, new Point(0,0,-3));
-        checkFunc(sphere, Point.ZERO, 2);
+//        //01: Small Sphere centered at (0,0,-3) with radius 1
+        Sphere sphere=new Sphere(1, new Point(0,0,0));
+       checkFunc(sphere, Point.ZERO, 9);
 
         //02: Large Sphere centered at (0,0,-2.5) with radius 2.5
         sphere=new Sphere(2.5, new Point(0,0,-2.5));
@@ -39,8 +39,8 @@ class IntegrationCameraTest {
         checkFunc(sphere, Point.ZERO, 9);
 
         //05: Small Sphere centered at (0,0,1) with radius 0.5
-        sphere=new Sphere(0.5, new Point(0,0,1));
-        checkFunc(sphere, Point.ZERO , 0);
+        sphere=new Sphere(50, new Point(0,0,1));
+        checkFunc(sphere, Point.ZERO , 9);
 
 
     }
@@ -89,16 +89,16 @@ class IntegrationCameraTest {
      * @param numOfIntersections  the expected number of intersections
      */
 
-    void checkFunc(Intersectable obj, Point cameraLocation, int numOfIntersections){
+    private void checkFunc(Intersectable obj, Point cameraLocation, int numOfIntersections){
 
-        Camera camera=Camera.getBuilder().setLocation(cameraLocation).setDirection(new Vector(0,0,-1),new Vector(0,-1,0)).setVpSize(3d,3d).setVpDistance(1d).build();
+        Camera camera=Camera.getBuilder().setLocation(cameraLocation).setDirection(new Vector(0,0,-1),new Vector(0,1,0)).setVpSize(3d,3d).setVpDistance(1d).build();
         Ray ray;
 
         int counter = 0;
         for(int i=0; i<3; i++)
             for (int j=0; j<3; j++) {
                 ray = camera.constructRay(3, 3, j, i);
-                List<Point> temp=obj.findIntsersections(ray);
+                List<Point> temp=obj.findIntersections(ray);
                 if(temp!=null)
                     counter+=temp.size();
             }

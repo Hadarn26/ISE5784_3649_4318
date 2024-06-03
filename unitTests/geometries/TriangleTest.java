@@ -43,29 +43,29 @@ class TriangleTest {
 
         // ============ Equivalence Partitions Tests ==============
         // TC01: Ray intersects the triangle
-        List<Point> result = triangle.findIntsersections(new Ray(new Point(0.5, 0.5, 1), new Vector(-0.5, -1, -1)));
+        List<Point> result = triangle.findIntersections(new Ray(new Point(0.5, 0.5, 1), new Vector(-0.5, -1, -1)));
         assertEquals(1, result.size(), "ERROR: findIntersections() did not return the right number of points");
         assertEquals(List.of(new Point(0.3, 0.1, 0.6)), result, "Incorrect intersection points");
 
         // TC02: Ray outside against edge
-        assertNull(triangle.findIntsersections(new Ray(new Point(0.5, 0.5, 1), new Vector(-2, -0.5, -1))),
+        assertNull(triangle.findIntersections(new Ray(new Point(0.5, 0.5, 1), new Vector(-2, -0.5, -1))),
                 "ERROR: findIntersections() did not return null");
 
         // TC03: Ray outside against vertex
-        assertNull(triangle.findIntsersections(new Ray(new Point(0.5, 0.5, 1), new Vector(1, -0.5, -1))),
+        assertNull(triangle.findIntersections(new Ray(new Point(0.5, 0.5, 1), new Vector(1, -0.5, -1))),
                 "ERROR: findIntersections() did not return null");
 
         // =============== Boundary Values Tests ==================
         // TC04: Ray on edge
-        assertNull(triangle.findIntsersections(new Ray(new Point(0.5, 0.5, 1), new Vector(-0.5, -0.1, -0.4))),
+        assertNull(triangle.findIntersections(new Ray(new Point(0.5, 0.5, 1), new Vector(-0.5, -0.1, -0.4))),
                 "ERROR: findIntersections() did not return null");
 
         // TC05: Ray on vertex
-        assertNull(triangle.findIntsersections(new Ray(new Point(0.5, 0.5, 1), new Vector(-0.5, 0.5, -1))),
+        assertNull(triangle.findIntersections(new Ray(new Point(0.5, 0.5, 1), new Vector(-0.5, 0.5, -1))),
                 "ERROR: findIntersections() did not return null");
 
         // TC06: Ray on edge's continuation
-        assertNull(triangle.findIntsersections(new Ray(new Point(0.5, 0.5, 1), new Vector(-0.5, -1, 0.5))),
+        assertNull(triangle.findIntersections(new Ray(new Point(0.5, 0.5, 1), new Vector(-0.5, -1, 0.5))),
                 "ERROR: findIntersections() did not return null");
     }
 }
