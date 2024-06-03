@@ -96,18 +96,6 @@ public class Camera implements Cloneable {
         return distance;
     }
 
-    public void printGrid(int interval, Color color){
-        for (int i = 0; i < imageWriter.getNy(); ++i) {
-            for (int j = 0; j < imageWriter.getNx(); ++j) {
-                if ((i % (imageWriter.getNy() / interval)) == 0 || j % (imageWriter.getNx() / interval) == 0)
-                    imageWriter.writePixel(j, i, color);
-            }
-        }
-    }
-
-    public void WriteToImage(){
-        imageWriter.writeToImage();
-    }
 
     /**
      * Creates a new builder for Camera.
@@ -118,20 +106,8 @@ public class Camera implements Cloneable {
         return new Builder();
     }
 
-    public void renderImage(){
 
-        for (int i=0;i<imageWriter.getNy();i++)
-            for (int j=0;j<imageWriter.getNx();j++)
-            {
-               castRay(imageWriter.getNx(),imageWriter.getNy(),i,j);
-            }
-        throw new UnsupportedOperationException("Unsupported Operation Exception");
-    }
 
-    private void castRay(int Nx, int Ny, int column, int row){
-
-        imageWriter.writePixel(column, row, rayTracer.traceRay(constructRay(Nx, Ny, column, row)));
-    }
 
 
     /**
@@ -305,6 +281,37 @@ public class Camera implements Cloneable {
 
             return camera.clone();
         }
+        public void printGrid(int interval, Color color){
+            int nY = camera.imageWriter.getNy();
+            int nX = camera.imageWriter.getNx();
+            for (int i = 0; i < nY; i += interval)
+                for (int j = 0; j < nX; j += 1)
+                    camera.imageWriter.writePixel(i, j, color);
+            for (int i = 0; i < nY; i += 1)
+                for (int j = 0; j < nX; j += interval)
+                    camera.imageWriter.writePixel(i, j, color);
+        }
+
+        public void WriteToImage(){
+            camera.imageWriter.writeToImage();
+        }
+
+        public void renderImage(){
+
+            for (int i=0;i<camera.imageWriter.getNy();i++)
+                for (int j=0;j<camera.imageWriter.getNx();j++)
+                {
+                    castRay(camera.imageWriter.getNx(),camera.imageWriter.getNy(),j,i);
+                }
+
+        }
+
+        private void castRay(int Nx, int Ny, int column, int row){
+
+            camera.imageWriter.writePixel(column, row, camera.rayTracer.traceRay(camera.constructRay(Nx, Ny, row, column)));
+        }
+
+
 
     }
 
