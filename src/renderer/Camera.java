@@ -105,6 +105,10 @@ public class Camera implements Cloneable {
         }
     }
 
+    public void WriteToImage(){
+        imageWriter.writeToImage();
+    }
+
     /**
      * Creates a new builder for Camera.
      *
@@ -115,8 +119,21 @@ public class Camera implements Cloneable {
     }
 
     public void renderImage(){
+
+        for (int i=0;i<imageWriter.getNy();i++)
+            for (int j=0;j<imageWriter.getNx();j++)
+            {
+               castRay(imageWriter.getNx(),imageWriter.getNy(),i,j);
+            }
         throw new UnsupportedOperationException("Unsupported Operation Exception");
     }
+
+    private void castRay(int Nx, int Ny, int column, int row){
+
+        imageWriter.writePixel(column, row, rayTracer.traceRay(constructRay(Nx, Ny, column, row)));
+    }
+
+
     /**
      * Constructs a ray through a specific pixel in the view plane.
      *
