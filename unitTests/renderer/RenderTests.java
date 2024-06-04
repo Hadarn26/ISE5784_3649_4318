@@ -1,3 +1,87 @@
+//package renderer;
+//
+//import static java.awt.Color.*;
+//
+//import org.junit.jupiter.api.Test;
+//
+//import geometries.*;
+//import lighting.AmbientLight;
+//import primitives.*;
+//import renderer.*;
+//import scene.Scene;
+//
+///**
+// * Test rendering a basic image
+// *
+// * @author Dan
+// */
+//public class RenderTests {
+//    /**
+//     * Scene of the tests
+//     */
+//    private final Scene scene = new Scene("Test scene");
+//    /**
+//     * Camera builder of the tests
+//     */
+//    private final Camera.Builder camera = Camera.getBuilder()
+//            .setRayTracer(new SimpleRayTracer(scene))
+//            .setLocation(Point.ZERO).setDirection(new Vector(0, 1, 0), new Vector(0, 0, -1))
+//            .setVpDistance(100d)
+//            .setVpSize(500d, 500d);
+//
+//    /**
+//     * Produce a scene with basic 3D model and render it into a png image with a
+//     * grid
+//     */
+//    @Test
+//    public void renderTwoColorTest() {
+//        scene.geometries.add(new Sphere(50d, new Point(0, 0, -100)),
+//                new Triangle(new Point(-100, 0, -100), new Point(0, 100, -100), new Point(-100, 100, -100)), // up
+//                // left
+//                new Triangle(new Point(-100, 0, -100), new Point(0, -100, -100),
+//                        new Point(-100, -100, -100)), // down
+//                // left
+//                new Triangle(new Point(100, 0, -100), new Point(0, -100, -100), new Point(100, -100, -100))); // down
+//        scene.setAmbientLight(new AmbientLight(new Color(255, 191, 191), Double3.ONE))
+//                .setBackGround(new Color(75, 127, 90));
+//
+//        // right
+//        camera
+//                .setImageWriter(new ImageWriter("base render test", 1000, 1000))
+//                .setRayTracer(new SimpleRayTracer(scene))
+//                .build();
+//        camera.printGrid(100, new Color(YELLOW));
+//        camera.WriteToImage();
+//    }
+//
+//    /**
+//     * Test for XML based scene - for bonus
+//     */
+//    @Test
+//    public void basicRenderXml() {
+//        // enter XML file name and parse from XML file into scene object
+//        // using the code you added in appropriate packages
+//        // ...
+//        // NB: unit tests is not the correct place to put XML parsing code
+////        Camera camera = new Camera(Point.ZERO, new Vector(0, 0, -1), new Vector(0, 1, 0)) //
+////                .setVPDistance(100) //
+////                .setVPSize(500, 500).setImageWriter(new ImageWriter("xml render test", 1000, 1000))
+////                .setRayTracer(new RayTracerBasic(scene));
+////        camera.renderImage();
+////        camera.printGrid(100, new Color(YELLOW));
+////        camera.writeToImage();
+//        camera
+//                .setImageWriter(new ImageWriter("xml render test", 1000, 1000))
+//                .setRayTracer(new SimpleRayTracer(scene))
+//                .build();
+//        camera.renderImage();
+//        camera.printGrid(100, new Color(YELLOW));
+//        camera.WriteToImage();
+//    }
+//}
+//
+
+
 package renderer;
 
 import static java.awt.Color.*;
@@ -25,7 +109,7 @@ public class RenderTests {
      */
     private final Camera.Builder camera = Camera.getBuilder()
             .setRayTracer(new SimpleRayTracer(scene))
-            .setLocation(Point.ZERO).setDirection(new Vector(0, 1, 0), new Vector(0, 0, -1))
+            .setLocation(Point.ZERO).setDirection(new Vector(0,1,0),new Vector(0, 0, -1))
             .setVpDistance(100d)
             .setVpSize(500d, 500d);
 
@@ -48,10 +132,10 @@ public class RenderTests {
         // right
         camera
                 .setImageWriter(new ImageWriter("base render test", 1000, 1000))
-                .setRayTracer(new SimpleRayTracer(scene))
                 .build();
+        camera.renderImage();
         camera.printGrid(100, new Color(YELLOW));
-        camera.WriteToImage();
+        camera.writeToImage();
     }
 
     /**
@@ -63,20 +147,13 @@ public class RenderTests {
         // using the code you added in appropriate packages
         // ...
         // NB: unit tests is not the correct place to put XML parsing code
-//        Camera camera = new Camera(Point.ZERO, new Vector(0, 0, -1), new Vector(0, 1, 0)) //
-//                .setVPDistance(100) //
-//                .setVPSize(500, 500).setImageWriter(new ImageWriter("xml render test", 1000, 1000))
-//                .setRayTracer(new RayTracerBasic(scene));
-//        camera.renderImage();
-//        camera.printGrid(100, new Color(YELLOW));
-//        camera.writeToImage();
+
         camera
                 .setImageWriter(new ImageWriter("xml render test", 1000, 1000))
-                .setRayTracer(new SimpleRayTracer(scene))
                 .build();
         camera.renderImage();
         camera.printGrid(100, new Color(YELLOW));
-        camera.WriteToImage();
+        camera.writeToImage();
     }
 }
 

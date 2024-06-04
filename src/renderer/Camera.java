@@ -286,13 +286,13 @@ public class Camera implements Cloneable {
             int nX = camera.imageWriter.getNx();
             for (int i = 0; i < nY; i += interval)
                 for (int j = 0; j < nX; j += 1)
-                    camera.imageWriter.writePixel(i, j, color);
+                    camera.imageWriter.writePixel(j, i, color);
             for (int i = 0; i < nY; i += 1)
                 for (int j = 0; j < nX; j += interval)
-                    camera.imageWriter.writePixel(i, j, color);
+                    camera.imageWriter.writePixel(j, i, color);
         }
 
-        public void WriteToImage(){
+        public void writeToImage(){
             camera.imageWriter.writeToImage();
         }
 
@@ -301,18 +301,19 @@ public class Camera implements Cloneable {
             for (int i=0;i<camera.imageWriter.getNy();i++)
                 for (int j=0;j<camera.imageWriter.getNx();j++)
                 {
-                    castRay(camera.imageWriter.getNx(),camera.imageWriter.getNy(),j,i);
+                    camera.castRay(camera.imageWriter.getNx(),camera.imageWriter.getNy(),j,i);
                 }
 
         }
 
-        private void castRay(int Nx, int Ny, int column, int row){
-
-            camera.imageWriter.writePixel(column, row, camera.rayTracer.traceRay(camera.constructRay(Nx, Ny, row, column)));
-        }
 
 
 
+
+    }
+
+    private void castRay(int Nx, int Ny, int column, int row){
+        imageWriter.writePixel(column, row,rayTracer.traceRay(constructRay(Nx, Ny, row, column)));
     }
 
 }
