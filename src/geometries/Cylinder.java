@@ -44,15 +44,9 @@ public class Cylinder extends Tube{
         if(Util.isZero(t-height))
             return direction;
 
-        ///////////////////////////////////////////////////////////////
         if (Util.isZero(direction.dotProduct(point.subtract(p0))))
             return direction;
-        ///////////////////////////////////////////////////////////////
 
         return super.getNormal(point);
     }
-   // @Override
-//    public List<Point> findIntsersections(Ray ray) {
-//        return null;
-//    }
 }

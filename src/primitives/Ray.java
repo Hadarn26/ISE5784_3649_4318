@@ -42,10 +42,20 @@ public class Ray {
         direction=v.normalize();
     }
 
+    /**
+     * Returns the direction vector of the ray.
+     *
+     * @return the direction vector of the ray.
+     */
     public Vector getDirection(){
         return direction;
     }
 
+    /**
+     * Returns the starting point (head) of the ray.
+     *
+     * @return the starting point of the ray.
+     */
     public Point getHead() {
         return head;
     }
@@ -56,6 +66,12 @@ public class Ray {
         return (obj instanceof Ray other)&&this.head.equals(other.head)&&this.direction.equals(other.direction);
     }
 
+    /**
+     * Returns a point on the ray at a given distance from the head.
+     *
+     * @param t the distance from the head.
+     * @return the point at the given distance.
+     */
     public Point getPoint(double t){
         if(Util.isZero(t))
             return head;
@@ -67,6 +83,12 @@ public class Ray {
         return "head= "+head.toString()+" direction= "+direction.toString();
     }
 
+    /**
+     * Finds and returns the closest point to the head of the ray from a list of points.
+     *
+     * @param points the list of points to search.
+     * @return the closest point to the head of the ray, or null if the list is empty.
+     */
     public Point findClosestPoint(List<Point> points){
         if (points.isEmpty())
             return null;
@@ -83,6 +105,3 @@ public class Ray {
         return closestPoint;
     }
 }
-/////sort
-
-////sphere

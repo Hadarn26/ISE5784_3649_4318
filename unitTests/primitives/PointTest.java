@@ -3,6 +3,12 @@ package primitives;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+
+/**
+ * Testing Points
+ * @author Hadar Nagar & Elinoy Damari
+ */
 class PointTest {
 
     @Test

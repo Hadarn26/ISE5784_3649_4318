@@ -87,8 +87,4 @@ public class Polygon implements Geometry {
         return null;
     }
 
-//    @Override
-//    public List<Point> findIntsersections(Ray ray) {
-//        return null;
-//    }
 }

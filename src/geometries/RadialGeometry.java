@@ -1,10 +1,5 @@
 package geometries;
 
-import primitives.Point;
-import primitives.Ray;
-import primitives.Vector;
-
-import java.util.List;
 
 /**
  * Represents a radial geometry, a geometric shape characterized by a radius.
@@ -23,10 +18,5 @@ public abstract class RadialGeometry implements Geometry{
     public RadialGeometry(double radius) {
         this.radius = radius;
     }
-
-//    @Override
-//    public Vector getNormal(Point point) {
-//        return null;
-//    }
 
 }

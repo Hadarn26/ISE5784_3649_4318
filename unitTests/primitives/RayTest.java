@@ -5,8 +5,17 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+
+/**
+ * Testing Rays
+ * @author Hadar Nagar & Elinoy Damari
+ */
 class RayTest {
 
+    /**
+     * Tests the findClosestPoint method of the Ray class.
+     */
     @Test
     void testGetPoint() {
         Point p1 = new Point(1, 2, 3);
@@ -23,7 +32,10 @@ class RayTest {
     }
 
     @Test
-    void testFindClosestPoint() {
+    /**
+     * Tests the findClosestPoint method of the Ray class.
+     */
+    void testFindClosestPoint() { ////////add
         Ray ray = new Ray( Point.ZERO, new Vector(1, 1, 0));
         Point a = new Point(2, 2, 0);
         Point b = new Point(3, 3, 0);

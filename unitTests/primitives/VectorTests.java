@@ -4,6 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
+/**
+ * Testing Vectors
+ * @author Hadar Nagar & Elinoy Damari
+ */
 class VectorTests {
 
     @Test

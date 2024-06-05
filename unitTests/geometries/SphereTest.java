@@ -152,12 +152,4 @@ class SphereTest {
                 "Ray's line is outside, ray is orthogonal to ray start to sphere's center line");
     }
 
-//    private void assertEquals(List<Point> p100, List<Point> result, double v, String incorrectIntersectionPoint) {
-//
-//        for(int i=0; i<result.size(); i++)
-//        {
-//            assertEquals(p100.get(i), result.get(i), 0.00001, "Incorrect intersection point");
-//
-//        }
-//    }
 }

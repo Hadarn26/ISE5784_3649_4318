@@ -1,8 +1,9 @@
+///////////////////////////////////////////////////////
+
 package renderer;
 
 import primitives.*;
 
-import java.nio.channels.Pipe;
 import java.util.MissingResourceException;
 
 /**
@@ -149,13 +150,6 @@ public class Camera implements Cloneable {
         // Return the constructed ray from the camera's location to the calculated point on the view plane
         return new Ray(position, pixelIJ.subtract(position));
 
-
-
-//        if (!Util.isZero(xJ))
-//            pixelIJ = pixelIJ.add(vRight.scale(-xJ));
-//        if (!Util.isZero(yI))
-//            pixelIJ = pixelIJ.add(vUp.scale(yI));
-//        return new Ray(position, pixelIJ.subtract(position));
     }
 
     @Override
@@ -174,15 +168,6 @@ public class Camera implements Cloneable {
 
         final private Camera camera = new Camera();
 
-//        public Builder() {
-//            camera=new Camera();
-//        }
-//
-//        public Builder(Camera camera) {
-//            this.camera=camera;
-//        }
-
-
         /**
          * Sets the location of the camera.
          *
@@ -194,6 +179,12 @@ public class Camera implements Cloneable {
             return this;
         }
 
+        /**
+         * Sets the ImageWriter for the camera.
+         *
+         * @param imageWriter the ImageWriter instance to be used by the camera.
+         * @return the builder instance.
+         */
         public Builder setImageWriter(ImageWriter imageWriter) {
             camera.imageWriter = imageWriter;
             return this;
@@ -232,10 +223,17 @@ public class Camera implements Cloneable {
             return this;
         }
 
+        /**
+         * Sets the RayTracer for the camera.
+         *
+         * @param rayTracer the RayTracerBase instance to be used by the camera.
+         * @return the builder instance.
+         */
         public Builder setRayTracer(RayTracerBase rayTracer) {
             camera.rayTracer = rayTracer;
             return this;
         }
+
         /**
          * Sets the distance from the camera to the view plane.
          *
@@ -281,6 +279,13 @@ public class Camera implements Cloneable {
 
             return camera.clone();
         }
+
+        /**
+         * Prints a grid on the image with the specified interval and color.
+         *
+         * @param interval the spacing between grid lines.
+         * @param color the color of the grid lines.
+         */
         public void printGrid(int interval, Color color){
             int nY = camera.imageWriter.getNy();
             int nX = camera.imageWriter.getNx();
@@ -292,10 +297,16 @@ public class Camera implements Cloneable {
                     camera.imageWriter.writePixel(j, i, color);
         }
 
+        /**
+         * Writes the image to the output.
+         */
         public void writeToImage(){
             camera.imageWriter.writeToImage();
         }
 
+        /**
+         * Renders the image by casting rays through each pixel.
+         */
         public void renderImage(){
 
             for (int i=0;i<camera.imageWriter.getNy();i++)
@@ -305,10 +316,6 @@ public class Camera implements Cloneable {
                 }
 
         }
-
-
-
-
 
     }
 
