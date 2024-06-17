@@ -15,7 +15,7 @@ import static primitives.Util.*;
  *
  * @author Hadar Nagar & Elinoy Damari
  */
-public class Plane implements Geometry {
+public class Plane extends Geometry {
 
     /** The base point of the plane. */
     final Point q;

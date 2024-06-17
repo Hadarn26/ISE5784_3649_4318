@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author  Hadar Nagar & Elinoy Damari
  */
-public class Geometries implements Intersectable{
+public class Geometries extends Intersectable{
 
     /**
      * A list of geometrical shapes that can be intersected.

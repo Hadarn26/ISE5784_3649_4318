@@ -1,5 +1,6 @@
 package geometries;
 
+import primitives.Color;
 import primitives.Point;
 import primitives.Vector;
 
@@ -11,7 +12,17 @@ import primitives.Vector;
  *
  * @author Hadar Nagar & Elinoy Damari
  */
-public interface Geometry extends Intersectable {
+public abstract class Geometry extends Intersectable {
+    protected Color emission=Color.BLACK;
+
+    public Color getEmission() {
+        return emission;
+    }
+
+    public Geometry setEmission(Color emission) {
+        this.emission = emission;
+        return this;
+    }
 
     /**
      * Retrieves the normal vector at a given point on the surface of the geometric shape.
@@ -19,5 +30,5 @@ public interface Geometry extends Intersectable {
      * @param point The point on the surface of the shape.
      * @return The normal vector at the specified point.
      */
-    Vector getNormal(Point point);
+    public abstract Vector getNormal(Point point);
 }
