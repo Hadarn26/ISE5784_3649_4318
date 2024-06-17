@@ -92,7 +92,7 @@ public class Ray {
      * @return the closest point to the head of the ray, or null if the list is empty.
      */
     public Point findClosestPoint(List<Point> points){
-        return points == null ? null
+        return points == null||points.size()==0 ? null
                 : findClosestGeoPoint(points.stream()
                 .map(p -> new GeoPoint(null, p)).toList()).point;
     }
