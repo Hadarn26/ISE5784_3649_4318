@@ -27,13 +27,30 @@ public abstract class Intersectable {
             return geometry==geoPoint.geometry && point.equals(geoPoint.point);
         }
 
+        @Override
+        public String toString() {
+            return "GeoPoint{" +
+                    "geometry=" + geometry +
+                    ", point=" + point +
+                    '}';
+        }
+
     }
-    /**
-     * Finds intersections of a ray with the shape.
-     *
-     * @param ray The ray to intersect with the shape.
-     * @return A list of intersection points, or null if no intersections are found.
-     */
+
+    public List<GeoPoint> findGeoIntersections(Ray ray){
+       return findGeoIntersectionsHelper(ray);
+    }
+
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+
+    }
+
+        /**
+         * Finds intersections of a ray with the shape.
+         *
+         * @param ray The ray to intersect with the shape.
+         * @return A list of intersection points, or null if no intersections are found.
+         */
    public List<Point> findIntersections(Ray ray);
 
 }
