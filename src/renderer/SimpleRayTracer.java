@@ -5,9 +5,8 @@
 package renderer;
 
 import geometries.Geometry;
-import primitives.Color;
-import primitives.Point;
-import primitives.Ray;
+import lighting.LightSource;
+import primitives.*;
 import scene.Scene;
 import java.util.List;
 import geometries.Intersectable.GeoPoint;
@@ -33,7 +32,7 @@ public class SimpleRayTracer extends  RayTracerBase {
         List<GeoPoint> intersections = scene.geometries.findGeoIntersections(ray);
         return intersections == null
                 ? scene.backGround
-                : calcColor(ray.findClosestGeoPoint(intersections));
+                : calcColor(ray.findClosestGeoPoint(intersections), ray);
 
     }
 
@@ -41,12 +40,47 @@ public class SimpleRayTracer extends  RayTracerBase {
      * Calculates the color at a given point.
      * In this simple implementation, it returns the ambient light intensity of the scene.
      *
-     * @param gp the point at which to calculate the color.
+     * @param intersection the point at which to calculate the color.
      * @return the color at the given point.
      */
-    private Color calcColor(GeoPoint gp)
+    private Color calcColor(GeoPoint intersection,Ray ray)
     {
         return scene.ambientLight.getIntensity()
-                .add(gp.geometry.getEmission());
+                .add(calcLocalEffects(intersection, ray));
+    }
+
+    private Color calcLocalEffects(GeoPoint gp, Ray ray){
+        Color color = gp.geometry.getEmission();
+        Vector n=gp.geometry.getNormal(gp.point);
+        Vector v=ray.getDirection();
+        double nv= Util.alignZero(n.dotProduct(v));
+        if (nv==0)
+            return color;
+        Material material=gp.geometry.getMaterial();
+        for(LightSource lightSource:scene.lights){
+            Vector l=lightSource.getL(gp.point);
+            double nl=Util.alignZero(n.dotProduct(l));
+            if(nl*nv>0){
+                Color il=lightSource.getIntensity(gp.point);
+                color = color.add(il.scale(calcDiffusive(material, nl)), il.scale(calcSpecular(material,n,l,nl,v)));
+            }
+        }
+        return color;
+    }
+    private Double3 calcDiffusive(Material mat, double nl) {
+        return mat.kD.scale(nl);
+    }
+
+    private Double3 calcSpecular(Material mat, Vector n, Vector l, double nl, Vector v) {
+        return mat.kS.scale(powr(Math.max(0, -v.dotProduct(l.subtract(n.scale(nl * 2)))), mat.nShininess));
+    }
+
+    private double powr(double b, int e) {
+        double res = 1;
+        for (int i = 0; i < e; ++i)
+            res *= b;
+        for (int i = 0; i > e; --i)
+            res /= b;
+        return res;
     }
 }
