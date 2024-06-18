@@ -68,11 +68,15 @@ public class SimpleRayTracer extends  RayTracerBase {
         return color;
     }
     private Double3 calcDiffusive(Material mat, double nl) {
-        return mat.kD.scale(nl);
+        return mat.kD.scale(nl>0?nl:-nl);
     }
 
-    private Double3 calcSpecular(Material mat, Vector n, Vector l, double nl, Vector v) {
-        return mat.kS.scale(powr(Math.max(0, -v.dotProduct(l.subtract(n.scale(nl * 2)))), mat.nShininess));
+    private Double3 calcSpecular(Material material, Vector normal, Vector lightDir, double cosAngle, Vector rayDir) {
+        Vector r = lightDir.subtract(normal.scale(2 * cosAngle));
+        double coefficient = -rayDir.dotProduct(r);
+        coefficient = coefficient > 0 ? coefficient : 0;
+        return material.kS.scale(Math.pow(coefficient, material.nShininess));
+        //return mat.kS.scale(powr(Math.max(0, -v.dotProduct(l.subtract(n.scale(nl * 2)))), mat.nShininess));
     }
 
     private double powr(double b, int e) {
