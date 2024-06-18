@@ -76,15 +76,16 @@ public class SimpleRayTracer extends  RayTracerBase {
         double coefficient = -rayDir.dotProduct(r);
         coefficient = coefficient > 0 ? coefficient : 0;
         return material.kS.scale(Math.pow(coefficient, material.nShininess));
+
         //return mat.kS.scale(powr(Math.max(0, -v.dotProduct(l.subtract(n.scale(nl * 2)))), mat.nShininess));
     }
 
-    private double powr(double b, int e) {
-        double res = 1;
-        for (int i = 0; i < e; ++i)
-            res *= b;
-        for (int i = 0; i > e; --i)
-            res /= b;
-        return res;
-    }
+//    private double powr(double b, int e) {
+//        double res = 1;
+//        for (int i = 0; i < e; ++i)
+//            res *= b;
+//        for (int i = 0; i > e; --i)
+//            res /= b;
+//        return res;
+//    }
 }
