@@ -31,7 +31,7 @@ public class LightsTests {
     private final Camera.Builder camera1 = Camera.getBuilder()
             .setRayTracer(new SimpleRayTracer(scene1))
             .setLocation(new Point(0, 0, 1000))
-            .setDirection( new Vector(0,1,0),new Vector(0,0,-1))//Point.ZERO
+            .setDirection( new Vector(0,-1,0),new Vector(0,0,-1))//Point.ZERO
             .setVpSize(150d, 150d).setVpDistance(1000d);
     /**
      * Second camera builder for some of tests
@@ -39,7 +39,7 @@ public class LightsTests {
     private final Camera.Builder camera2 = Camera.getBuilder()
             .setRayTracer(new SimpleRayTracer(scene2))
             .setLocation(new Point(0, 0, 1000))
-            .setDirection(new Vector(0,1,0),new Vector(0,0,-1))
+            .setDirection(new Vector(0,-1,0),new Vector(0,0,-1))
             .setVpSize(200d, 200d).setVpDistance(1000d);
 
     /**
@@ -232,7 +232,7 @@ public class LightsTests {
     public void sphereSpotSharp() {
         scene1.geometries.add(sphere);
         scene1.lights
-                .add(new SpotLight(sphereLightColor, sphereLightPosition, new Vector(1, 1, -0.5))
+                .add(new SpotLight(sphereColor, sphereLightPosition, new Vector(1, 1, -0.5))
                         .setkL(0.001).setkQ(0.00004));
                         //setNarrowBeam(10));
 

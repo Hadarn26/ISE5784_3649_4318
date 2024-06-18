@@ -10,10 +10,10 @@ import static primitives.Util.*;
 
 
 /**
- * Represents a plane in three-dimensional space.
- * This class implements the Geometry interface to provide methods for interacting with planes.
- *
- * @author Hadar Nagar & Elinoy Damari
+ * The Plane class represents a plane in three-dimensional space.
+ * It extends the {@code Geometry} class and provides methods to construct a plane
+ * and calculate intersections with rays.
+ * author Hadar Nagar & Elinoy Damari
  */
 public class Plane extends Geometry {
 
@@ -58,6 +58,12 @@ public class Plane extends Geometry {
         this.normal = normal.normalize();
     }
 
+    /**
+     * Retrieves the normal vector at a given point on the plane.
+     *
+     * @param point the point on the plane (not used in the calculation as the normal is constant)
+     * @return the normal vector to the plane
+     */
     @Override
     public Vector getNormal(Point point) {
         return normal;
@@ -65,12 +71,19 @@ public class Plane extends Geometry {
 
     /**
      * Retrieves the normal vector to the plane.
-     * @return The normal vector to the plane.
+     *
+     * @return the normal vector to the plane
      */
     public Vector getNormal() {
         return normal;
     }
 
+    /**
+     * Finds the geometric intersections of a ray with the plane.
+     *
+     * @param ray the ray to intersect with the plane
+     * @return a list of geometric intersection points, or null if no intersections are found
+     */
     @Override
     public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         Vector v=ray.getDirection();

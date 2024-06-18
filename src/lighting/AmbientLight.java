@@ -5,13 +5,10 @@ import primitives.*;
 /**
  * The AmbientLight class represents ambient lighting in a scene.
  * It is characterized by an intensity and can be scaled by a factor.
+ * @author Hadar Nagar & Elinoy Damari
  */
 public class AmbientLight extends Light {
 
-//    /**
-//     * The intensity of the ambient light.
-//     */
-//    private final Color intensity;
 
     /**
      * A static instance of AmbientLight with no intensity (black color).
@@ -39,12 +36,5 @@ public class AmbientLight extends Light {
         super(iA.scale(kA));
     }
 
-//    /**
-//     * Returns the intensity of the ambient light.
-//     *
-//     * @return the intensity color
-//     */
-//    public Color getIntensity(){
-//        return intensity;
-//    }
+
 }
