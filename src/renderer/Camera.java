@@ -1,10 +1,8 @@
 package renderer;
-
 import primitives.*;
-
 import java.util.MissingResourceException;
 
-/**
+/*
  * Camera class represents a camera in 3D space with position, direction, and view plane properties.
  * It provides functionality to construct rays through a view plane.
  *
@@ -159,7 +157,7 @@ public class Camera implements Cloneable {
         }
     }
 
-    /**
+    /*
      * Builder class for constructing Camera instances with a fluent API.
      */
     public static class Builder {
@@ -184,6 +182,9 @@ public class Camera implements Cloneable {
          * @return the builder instance.
          */
         public Builder setImageWriter(ImageWriter imageWriter) {
+            if (imageWriter == null) {
+                throw new IllegalArgumentException("ImageWriter cannot be null");
+            }
             camera.imageWriter = imageWriter;
             return this;
         }
@@ -196,7 +197,7 @@ public class Camera implements Cloneable {
          * @return the builder instance.
          * @throws IllegalArgumentException if the up vector and to vector are not orthogonal.
          */
-        public Builder setDirection(Vector vUp, Vector vTo) {
+        public Builder setDirection(Vector vTo,Vector vUp ) {
             if (!(Util.isZero(vUp.dotProduct(vTo))))
                 throw new IllegalArgumentException("The vectors aren't ortogonal");
             camera.vUp = vUp.normalize();
@@ -228,6 +229,9 @@ public class Camera implements Cloneable {
          * @return the builder instance.
          */
         public Builder setRayTracer(RayTracerBase rayTracer) {
+            if (rayTracer == null) {
+                throw new IllegalArgumentException("RayTracer cannot be null");
+            }
             camera.rayTracer = rayTracer;
             return this;
         }
@@ -273,52 +277,65 @@ public class Camera implements Cloneable {
             if (Util.alignZero(camera.distance) <= 0)
                 throw new MissingResourceException(missingRenderingData, cameraClass, "camera's distance");
 
+
+
             camera.vRight = (camera.vTo.crossProduct(camera.vUp)).normalize();
 
             return camera.clone();
         }
 
-        /**
-         * Prints a grid on the image with the specified interval and color.
-         *
-         * @param interval the spacing between grid lines.
-         * @param color the color of the grid lines.
-         */
-        public void printGrid(int interval, Color color){
-            int nY = camera.imageWriter.getNy();
-            int nX = camera.imageWriter.getNx();
-            for (int i = 0; i < nY; i += interval)
-                for (int j = 0; j < nX; j += 1)
-                    camera.imageWriter.writePixel(j, i, color);
-            for (int i = 0; i < nY; i += 1)
-                for (int j = 0; j < nX; j += interval)
-                    camera.imageWriter.writePixel(j, i, color);
-        }
+//
 
-        /**
-         * Writes the image to the output.
-         */
-        public void writeToImage(){
-            camera.imageWriter.writeToImage();
-        }
+//
 
-        /**
-         * Renders the image by casting rays through each pixel.
-         */
-        public void renderImage(){
+//
+    }
+//
 
-            for (int i=0;i<camera.imageWriter.getNy();i++)
-                for (int j=0;j<camera.imageWriter.getNx();j++)
-                {
-                    camera.castRay(camera.imageWriter.getNx(),camera.imageWriter.getNy(),j,i);
+//
+    /**
+     * Renders the image by casting rays through each pixel.
+     */
+    public Camera renderImage(){
+        for (int i=0;i<imageWriter.getNy();i++)
+            for (int j=0;j<imageWriter.getNx();j++)
+            {
+
+                this.imageWriter.writePixel(j, i, castRay(j,i));
+            }
+        return this;
+    }
+
+    /**
+     * Prints a grid on the image with the specified interval and color.
+     *
+     * @param interval the spacing between grid lines.
+     * @param color the color of the grid lines.
+     */
+    public Camera printGrid(int interval, Color color){
+        int nY = imageWriter.getNy();
+        int nX = imageWriter.getNx();
+        for (int i = 0; i < nY; i++) {
+            for (int j = 0; j < nX; j++) {
+                if (i % interval == 0 || j % interval == 0) {
+                    imageWriter.writePixel(j, i, color);
                 }
-
+            }
         }
-
+        return this;
     }
 
-    private void castRay(int Nx, int Ny, int column, int row){
-        imageWriter.writePixel(column, row,rayTracer.traceRay(constructRay(Nx, Ny, row, column)));
+    /**
+     * Writes the image to the output.
+     */
+    public void writeToImage(){
+        imageWriter.writeToImage();
     }
 
+    private Color castRay(int j, int i) {
+        Ray ray = constructRay(this.imageWriter.getNx(),this.imageWriter.getNy(),j,i);
+        return this.rayTracer.traceRay(ray);
+    }
 }
+
+

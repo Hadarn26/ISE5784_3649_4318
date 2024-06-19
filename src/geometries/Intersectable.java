@@ -95,7 +95,7 @@ public abstract class Intersectable {
      * @param ray the ray to intersect with the shape
      * @return a list of intersection points, or null if no intersections are found
      */
-   public List<Point> findIntersections(Ray ray){
+   public final List<Point> findIntersections(Ray ray){
        List<GeoPoint> geoList = findGeoIntersections(ray);
            return geoList == null ? null
                    : geoList.stream().map(gp -> gp.point).toList();

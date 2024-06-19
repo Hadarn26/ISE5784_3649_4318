@@ -7,9 +7,10 @@ import primitives.Vector;
 /**
  * The PointLight class represents a point light source, which emits light from a single point
  * in space. The intensity of the light decreases with distance from the light source.
+ *
  * @author Hadar Nagar & Elinoy Damari
  */
-public class PointLight extends Light implements LightSource{
+public class PointLight extends Light implements LightSource {
 
     /**
      * The position of the point light in 3D space.
@@ -18,15 +19,15 @@ public class PointLight extends Light implements LightSource{
     /**
      * The constant attenuation factor.
      */
-    private double kC=1;
+    private double kC = 1;
     /**
      * The linear attenuation factor.
      */
-    private double kL=0;
+    private double kL = 0;
     /**
      * The quadratic attenuation factor.
      */
-    private double kQ=0;
+    private double kQ = 0;
 
     /**
      * Constructs a new PointLight with the specified intensity and position.
@@ -81,10 +82,8 @@ public class PointLight extends Light implements LightSource{
      */
     @Override
     public Color getIntensity(Point p) {
-        double d=position.distance(p);
-
-         return super.getIntensity().scale(1d/(kC+kL*d+kQ*d*d));
-
+        double d = position.distance(p);
+        return super.getIntensity().scale(1d / (kC + kL * d + kQ * d * d));
     }
 
     /**

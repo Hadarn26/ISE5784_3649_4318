@@ -27,7 +27,7 @@ public class RenderTests {
      */
     private final Camera.Builder camera = Camera.getBuilder()
             .setRayTracer(new SimpleRayTracer(scene))
-            .setLocation(Point.ZERO).setDirection(new Vector(0,-1,0),new Vector(0, 0, -1))
+            .setLocation(Point.ZERO).setDirection(new Vector(0,0,-1),new Vector(0, 1, 0))
             .setVpDistance(100d)
             .setVpSize(500d, 500d);
 
@@ -51,9 +51,9 @@ public class RenderTests {
         camera
                 .setImageWriter(new ImageWriter("base render test", 1000, 1000))
                 .build();
-        camera.renderImage();
-        camera.printGrid(100, new Color(YELLOW));
-        camera.writeToImage();
+//        camera.renderImage();
+//        camera.printGrid(100, new Color(YELLOW));
+//        camera.writeToImage();
     }
 
 
@@ -79,10 +79,10 @@ public class RenderTests {
 
         camera
                 .setImageWriter(new ImageWriter("color render test", 1000, 1000))
-                .build();
-        camera.renderImage();
-        camera.printGrid(100, new Color(WHITE));
-        camera.writeToImage();
+                .build()
+                .renderImage()
+                .printGrid(100, new Color(WHITE))
+                .writeToImage();
     }
 
     /**
@@ -97,10 +97,10 @@ public class RenderTests {
 
         camera
                 .setImageWriter(new ImageWriter("xml render test", 1000, 1000))
-                .build();
-        camera.renderImage();
-        camera.printGrid(100, new Color(YELLOW));
-        camera.writeToImage();
+                .build()
+                .renderImage()
+                .printGrid(100, new Color(YELLOW))
+                .writeToImage();
     }
 }
 

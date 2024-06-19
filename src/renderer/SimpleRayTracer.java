@@ -60,7 +60,7 @@ public class SimpleRayTracer extends  RayTracerBase {
         for(LightSource lightSource:scene.lights){
             Vector l=lightSource.getL(gp.point);
             double nl=Util.alignZero(n.dotProduct(l));
-            if(nl*nv>0){
+            if(Util.alignZero(nl*nv)>0){
                 Color il=lightSource.getIntensity(gp.point);
                 color = color.add(il.scale(calcDiffusive(material, nl)), il.scale(calcSpecular(material,n,l,nl,v)));
             }
@@ -74,10 +74,9 @@ public class SimpleRayTracer extends  RayTracerBase {
     private Double3 calcSpecular(Material material, Vector normal, Vector lightDir, double cosAngle, Vector rayDir) {
         Vector r = lightDir.subtract(normal.scale(2 * cosAngle));
         double coefficient = -rayDir.dotProduct(r);
-        coefficient = coefficient > 0 ? coefficient : 0;
+        coefficient = Util.alignZero(coefficient) > 0 ? coefficient : 0;
         return material.kS.scale(Math.pow(coefficient, material.nShininess));
 
-        //return mat.kS.scale(powr(Math.max(0, -v.dotProduct(l.subtract(n.scale(nl * 2)))), mat.nShininess));
     }
 
 //    private double powr(double b, int e) {
