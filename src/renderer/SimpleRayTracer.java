@@ -32,11 +32,11 @@ public class SimpleRayTracer extends  RayTracerBase {
 
     @Override
     public Color traceRay(Ray ray) {
-        List<GeoPoint> intersections = scene.geometries.findGeoIntersections(ray);
-        return intersections == null
+        GeoPoint intersectionPoint = scene.geometries.findClosestIntersection(ray);
+        return intersectionPoint == null
                 ? scene.backGround
-                : calcColor(ray.findClosestGeoPoint(intersections), ray);
-
+                : calcColor(intersectionPoint, ray);
+        //findGeoIntersections
     }
 
     /**
@@ -119,13 +119,11 @@ public class SimpleRayTracer extends  RayTracerBase {
         Vector deltaVector=n.scale(Util.alignZero(nl)<0?DELTA:-DELTA);
         Point point=gp.point.add(deltaVector);
         Ray lightRay=new Ray(point,lightDirection);
-        List<GeoPoint> intersections=scene.geometries.findGeoIntersections(lightRay);
-        if(intersections==null)
+        GeoPoint intersectionPoint=scene.geometries.findClosestIntersection(lightRay);
+        if(intersectionPoint==null)
             return true;
-        for(GeoPoint geoPoint:intersections){
-            if(geoPoint.point.distance(point)<light.getDistance(point))
+        if(intersectionPoint.point.distance(point)<light.getDistance(point)&&gp.geometry.getMaterial().kT==Double3.ZERO)
                 return false;
-        }
         return true;
 
     }
