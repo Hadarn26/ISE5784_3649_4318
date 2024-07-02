@@ -47,7 +47,8 @@ public class Ray {
 
     public Ray(Point p, Vector v, Vector normalToP){
         double res = v.dotProduct(normalToP);
-        head = Util.isZero(res) ? p : res > 0 ? p.add(normalToP.scale(DELTA)) : p.add(normalToP.scale(-DELTA));
+
+        head = Util.isZero(res) ? p : p.add(normalToP.scale(Util.alignZero(res)<0? -DELTA:DELTA));
         direction=v.normalize();
     }
 

@@ -49,12 +49,13 @@ public class SimpleRayTracer extends  RayTracerBase {
     private Color calcColor(GeoPoint intersection,Ray ray)
     {
         return scene.ambientLight.getIntensity()
-                .add(calcLocalEffects(intersection, ray));
+                .add(calcColor(intersection, ray, MAX_CALC_COLOR_LEVEL, Double3.ONE));
     }
 
 
     private Color calcColor(GeoPoint gp, Ray ray,int level,Double3 k){
-        Color color=scene.ambientLight.getIntensity().add(calcLocalEffects(gp, ray));
+        Color color=calcLocalEffects(gp, ray);
+
         return 1==level?color:color.add(calcGlobalEffects(gp,ray,level,k));
 
     }
@@ -122,7 +123,7 @@ public class SimpleRayTracer extends  RayTracerBase {
         GeoPoint intersectionPoint=scene.geometries.findClosestIntersection(lightRay);
         if(intersectionPoint==null)
             return true;
-        if(intersectionPoint.point.distance(point)<light.getDistance(point)&&gp.geometry.getMaterial().kT==Double3.ZERO)
+        if(intersectionPoint.point.distance(point)<light.getDistance(point))
                 return false;
         return true;
 
