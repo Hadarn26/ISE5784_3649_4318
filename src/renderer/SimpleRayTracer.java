@@ -27,6 +27,8 @@ public class SimpleRayTracer extends  RayTracerBase {
         super(scene);
     }
     private static final double DELTA = 0.1;
+    private static final int MAX_CALC_COLOR_LEVEL = 10;
+    private static final double MIN_CALC_COLOR_K = 0.001;
 
     @Override
     public Color traceRay(Ray ray) {
@@ -49,6 +51,27 @@ public class SimpleRayTracer extends  RayTracerBase {
         return scene.ambientLight.getIntensity()
                 .add(calcLocalEffects(intersection, ray));
     }
+
+
+    private Color calcColor(GeoPoint gp, Ray ray,int level,Double3 k){
+        Color color=scene.ambientLight.getIntensity().add(calcLocalEffects(gp, ray));
+        return 1==level?color:color.add(calcGlobalEffects(gp,ray,level,k));
+
+    }
+
+    private Color calcGlobalEffects(GeoPoint gp, Ray ray, int level, Double3 k) {
+        Material material=gp.geometry.getMaterial();
+        return calcLocalEffect(constructRefractedRay(gp,ray),material.kT,level,k)
+                .add(calcLocalEffect(constructRefractedRay(gp,ray),material.kR,level,k));
+    }
+    private Color calcGlobalEffect( Ray ray,Double3 kX, int level, Double3 k) {
+        Double3 kKx=kX.product(k);
+        if(kKx.lowerThan(MIN_CALC_COLOR_K))
+            return Color.BLACK;
+        GeoPoint gp=scene.geometries.findClosestIntersection(ray);
+        return (gp==null?scene.backGround:calcColor(gp,ray,level-1,kKx)).scale(kX);
+    }
+
 
     private Color calcLocalEffects(GeoPoint gp, Ray ray){
         Color color = gp.geometry.getEmission();

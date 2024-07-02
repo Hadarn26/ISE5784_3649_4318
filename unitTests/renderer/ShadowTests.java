@@ -81,7 +81,7 @@ public class ShadowTests {
    public void sphereTriangleSpot2() {
       sphereTriangleHelper("shadowSphereTriangleSpot2", //
                            new Triangle(new Point(-70, -40, 0), new Point(-40, -70, 0), new Point(-68, -68, -4)), //
-                           new Point(-85,-85,140));
+                           new Point(-80,-80,110));
    }
 
    /** Produce a picture of a two triangles lighted by a spot light with a Sphere
