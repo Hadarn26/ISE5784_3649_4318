@@ -26,6 +26,7 @@ public class SimpleRayTracer extends  RayTracerBase {
     public SimpleRayTracer(Scene scene) {
         super(scene);
     }
+    private static final double DELTA = 0.1;
 
     @Override
     public Color traceRay(Ray ray) {
@@ -60,7 +61,7 @@ public class SimpleRayTracer extends  RayTracerBase {
         for(LightSource lightSource:scene.lights){
             Vector l=lightSource.getL(gp.point);
             double nl=Util.alignZero(n.dotProduct(l));
-            if(Util.alignZero(nl*nv)>0){
+            if(Util.alignZero(nl*nv)>0&&unshaded(gp,lightSource,l,n,nl)){
                 Color il=lightSource.getIntensity(gp.point);
                 color = color.add(il.scale(calcDiffusive(material, nl)), il.scale(calcSpecular(material,n,l,nl,v)));
             }
@@ -78,6 +79,23 @@ public class SimpleRayTracer extends  RayTracerBase {
         return material.kS.scale(Math.pow(coefficient, material.nShininess));
 
     }
+
+    private boolean unshaded(GeoPoint gp,LightSource light, Vector l, Vector n,double nl){
+        Vector lightDirection=l.scale(-1);
+        Vector deltaVector=n.scale(Util.alignZero(nl)<0?DELTA:-DELTA);
+        Point point=gp.point.add(deltaVector);
+        Ray lightRay=new Ray(point,lightDirection);
+        List<GeoPoint> intersections=scene.geometries.findGeoIntersections(lightRay);
+        if(intersections==null)
+            return true;
+        for(GeoPoint geoPoint:intersections){
+            if(geoPoint.point.distance(point)<light.getDistance(point))
+                return false;
+        }
+        return true;
+
+    }
+
 
 //    private double powr(double b, int e) {
 //        double res = 1;
