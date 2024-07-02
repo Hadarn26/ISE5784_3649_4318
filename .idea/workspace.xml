@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fa1e206-b9eb-406f-af29-0232df645b0f" name="Changes" comment="add documentation">
+    <list default="true" id="6fa1e206-b9eb-406f-af29-0232df645b0f" name="Changes" comment="update Camera + fix tests +final commit stage 6">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/renderer/IntegrationCameraTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/renderer/IntegrationCameraTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lighting/DirectionalLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/DirectionalLight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lighting/LightSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/LightSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lighting/PointLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/PointLight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/SimpleRayTracer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/SimpleRayTracer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,14 +20,20 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
         <option value="Interface" />
         <option value="Class" />
-        <option value="Class" />
-        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -35,8 +44,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Hadarn26/ISE5784_3649_4318..git&quot;,
-    &quot;accountId&quot;: &quot;70da460a-2e86-4003-9d68-c9ac63601127&quot;
+    &quot;url&quot;: &quot;https://github.com/Hadarn26/ISE5784_3649_4318.git&quot;,
+    &quot;accountId&quot;: &quot;9a57e212-8cc2-4255-8c7f-9030257c05c3&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -53,17 +62,27 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.All in ISE5784_3649_4318.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.All in ISE5784_3649_4318.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CameraTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.CameraTest.testConstructRay.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ImageWriterTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ImageWriterTest.testWriteToImage.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.IntegrationCameraTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LightsTests (1).executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LightsTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.LightsTests.trianglesSpotSharp.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RayTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RenderTests.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RenderTests.renderTwoColorTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.SphereTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.renderer in ISE5784_3649_4318.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/hadar/ISE5784_3649_4318&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/elino/Documents/ISE5784_8473_5425-master[1]&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/navat/ISE5784_3649_4318/src/Main.java&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;fileTemplates&quot;
   }
@@ -72,13 +91,20 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\elino\source\repos\ISE5784_3649_4318\unitTests\renderer" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="primitives" />
+      <recent name="renderer" />
+    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="renderer" />
       <recent name="primitives" />
       <recent name="geometries" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.IntegrationCameraTest">
+  <component name="RunManager" selected="JUnit.All in ISE5784_3649_4318">
     <configuration name="All in ISE5784_3649_4318" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5784_3649_4318" />
       <option name="PACKAGE_NAME" value="" />
@@ -87,7 +113,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CameraTest.testConstructRay" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CameraTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5784_3649_4318" />
       <extension name="coverage">
         <pattern>
@@ -97,13 +123,59 @@
       </extension>
       <option name="PACKAGE_NAME" value="renderer" />
       <option name="MAIN_CLASS_NAME" value="renderer.CameraTest" />
-      <option name="METHOD_NAME" value="testConstructRay" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LightsTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ISE5784_3649_4318" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="renderer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="renderer" />
+      <option name="MAIN_CLASS_NAME" value="renderer.LightsTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LightsTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ISE5784_3649_4318" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="renderer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="renderer" />
+      <option name="MAIN_CLASS_NAME" value="renderer.LightsTests" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LightsTests.trianglesSpotSharp" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ISE5784_3649_4318" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="renderer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="renderer" />
+      <option name="MAIN_CLASS_NAME" value="renderer.LightsTests" />
+      <option name="METHOD_NAME" value="trianglesSpotSharp" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="IntegrationCameraTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RenderTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5784_3649_4318" />
       <extension name="coverage">
         <pattern>
@@ -112,48 +184,19 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="renderer" />
-      <option name="MAIN_CLASS_NAME" value="renderer.IntegrationCameraTest" />
+      <option name="MAIN_CLASS_NAME" value="renderer.RenderTests" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SphereTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ISE5784_3649_4318" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="geometries.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="geometries" />
-      <option name="MAIN_CLASS_NAME" value="geometries.SphereTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="renderer in ISE5784_3649_4318" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ISE5784_3649_4318" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="renderer.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="renderer" />
-      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.IntegrationCameraTest" />
         <item itemvalue="JUnit.All in ISE5784_3649_4318" />
-        <item itemvalue="JUnit.CameraTest.testConstructRay" />
-        <item itemvalue="JUnit.renderer in ISE5784_3649_4318" />
-        <item itemvalue="JUnit.SphereTest" />
+        <item itemvalue="JUnit.RenderTests" />
+        <item itemvalue="JUnit.CameraTest" />
+        <item itemvalue="JUnit.LightsTests" />
+        <item itemvalue="JUnit.LightsTests.trianglesSpotSharp" />
       </list>
     </recent_temporary>
   </component>
@@ -206,7 +249,87 @@
       <option name="project" value="LOCAL" />
       <updated>1716964818995</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL‎-00006" summary="write ImageWriterTest+ add images folder to gitignore+ add package lighting + create class AmbientLight">
+      <option name="closed" value="true" />
+      <created>1717445573448</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL‎-00006" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1717445573448</updated>
+    </task>
+    <task id="LOCAL‎-00007" summary="add RayTracerBase class +add SimpleRayTracer + add fields in camera: imageWriter,rayTracer and functions: printGrid + setters in Builder and update the Build function">
+      <option name="closed" value="true" />
+      <created>1717451057868</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL‎-00007" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1717451057868</updated>
+    </task>
+    <task id="LOCAL‎-00008" summary="implementation of findClosestPoint in Ray+fix the RenderTests">
+      <option name="closed" value="true" />
+      <created>1717457335537</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL‎-00008" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1717457335537</updated>
+    </task>
+    <task id="LOCAL‎-00009" summary="add render tests">
+      <option name="closed" value="true" />
+      <created>1717518807012</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL‎-00009" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1717518807012</updated>
+    </task>
+    <task id="LOCAL‎-00010" summary="update render tests + turn Geometry &amp; Intersectable to abstract class">
+      <option name="closed" value="true" />
+      <created>1718654620278</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL‎-00010" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1718654620278</updated>
+    </task>
+    <task id="LOCAL‎-00011" summary="finish refactoring due GeoPoint">
+      <option name="closed" value="true" />
+      <created>1718659480780</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL‎-00011" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1718659480780</updated>
+    </task>
+    <task id="LOCAL‎-00012" summary="add light and sources of light+material">
+      <option name="closed" value="true" />
+      <created>1718737807047</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL‎-00012" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1718737807047</updated>
+    </task>
+    <task id="LOCAL‎-00013" summary="fixing the test lights">
+      <option name="closed" value="true" />
+      <created>1718738715851</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL‎-00013" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1718738715851</updated>
+    </task>
+    <task id="LOCAL‎-00014" summary="fixing the test lights+ add narrow beam">
+      <option name="closed" value="true" />
+      <created>1718744388401</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL‎-00014" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1718744388401</updated>
+    </task>
+    <task id="LOCAL‎-00015" summary="update Camera + fix tests +final commit stage 6">
+      <option name="closed" value="true" />
+      <created>1718787820071</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL‎-00015" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1718787820071</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -228,27 +351,17 @@
     <MESSAGE value="create Camera class and implement her , create CameraTest and ItegrationCameraTest" />
     <MESSAGE value="create integrationTest" />
     <MESSAGE value="add documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="add documentation" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/unitTests/renderer/IntegrationCameraTest.java</url>
-          <line>62</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/unitTests/renderer/IntegrationCameraTest.java</url>
-          <line>111</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/unitTests/renderer/IntegrationCameraTest.java</url>
-          <line>110</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="write ImageWriterTest+ add images folder to gitignore+ add package lighting + create class AmbientLight" />
+    <MESSAGE value="add RayTracerBase class +add SimpleRayTracer + add fields in camera: imageWriter,rayTracer and functions: printGrid + setters in Builder and update the Build function" />
+    <MESSAGE value="implementation of findClosestPoint in Ray+fix the RenderTests" />
+    <MESSAGE value="add render tests" />
+    <MESSAGE value="update render tests + turn Geometry &amp; Intersectable to abstract class" />
+    <MESSAGE value="finish refactoring due GeoPoint" />
+    <MESSAGE value="add light and sources of light+material" />
+    <MESSAGE value="fixing the test lights" />
+    <MESSAGE value="fixing the test lights+ add narrow beam" />
+    <MESSAGE value="update Camera + fix tests +final connit stage 6" />
+    <MESSAGE value="update Camera + fix tests +final commit stage 6" />
+    <option name="LAST_COMMIT_MESSAGE" value="update Camera + fix tests +final commit stage 6" />
   </component>
 </project>
