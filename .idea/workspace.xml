@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6fa1e206-b9eb-406f-af29-0232df645b0f" name="Changes" comment="add documentation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/renderer/IntegrationCameraTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/renderer/IntegrationCameraTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,9 +17,9 @@
       <list>
         <option value="Interface" />
         <option value="Interface" />
-        <option value="Class" />
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -50,35 +49,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.All in ISE5784_3649_4318.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.CameraTest.testConstructRay.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.IntegrationCameraTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.SphereTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.renderer in ISE5784_3649_4318.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/hadar/ISE5784_3649_4318&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/navat/ISE5784_3649_4318/src/Main.java&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;fileTemplates&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "JUnit.All in ISE5784_3649_4318.executor": "Run",
+    "JUnit.CameraTest.testConstructRay.executor": "Run",
+    "JUnit.IntegrationCameraTest.executor": "Run",
+    "JUnit.LightsTests.executor": "Run",
+    "JUnit.RenderTests.executor": "Run",
+    "JUnit.SphereTest.executor": "Run",
+    "JUnit.renderer in ISE5784_3649_4318.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/hadar/ISE5784_3649_4318",
+    "onboarding.tips.debug.path": "C:/Users/navat/ISE5784_3649_4318/src/Main.java",
+    "settings.editor.selected.configurable": "fileTemplates"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\navat\ISE5784_3649_4318\unitTests\renderer" />
+      <recent name="C:\Users\navat\ISE5784_3649_4318\src\renderer" />
+      <recent name="C:\Users\navat\ISE5784_3649_4318\src\primitives" />
+    </key>
     <key name="CreateTestDialog.RecentsKey">
-      <recent name="renderer" />
       <recent name="primitives" />
+      <recent name="renderer" />
       <recent name="geometries" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.IntegrationCameraTest">
+  <component name="RunManager" selected="JUnit.LightsTests">
     <configuration name="All in ISE5784_3649_4318" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5784_3649_4318" />
       <option name="PACKAGE_NAME" value="" />
@@ -118,22 +124,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SphereTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ISE5784_3649_4318" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="geometries.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="geometries" />
-      <option name="MAIN_CLASS_NAME" value="geometries.SphereTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="renderer in ISE5784_3649_4318" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LightsTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5784_3649_4318" />
       <extension name="coverage">
         <pattern>
@@ -142,18 +133,34 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="renderer" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="MAIN_CLASS_NAME" value="renderer.LightsTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RenderTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ISE5784_3649_4318" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="renderer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="renderer" />
+      <option name="MAIN_CLASS_NAME" value="renderer.RenderTests" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.IntegrationCameraTest" />
+        <item itemvalue="JUnit.LightsTests" />
         <item itemvalue="JUnit.All in ISE5784_3649_4318" />
+        <item itemvalue="JUnit.RenderTests" />
+        <item itemvalue="JUnit.IntegrationCameraTest" />
         <item itemvalue="JUnit.CameraTest.testConstructRay" />
-        <item itemvalue="JUnit.renderer in ISE5784_3649_4318" />
-        <item itemvalue="JUnit.SphereTest" />
       </list>
     </recent_temporary>
   </component>
@@ -206,7 +213,55 @@
       <option name="project" value="LOCAL" />
       <updated>1716964818995</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="trying to check the problems">
+      <option name="closed" value="true" />
+      <created>1717438113174</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1717438113175</updated>
+    </task>
+    <task id="LOCAL-00007" summary="add  the classes- Color , ImageWriter, ImageWriterTest">
+      <option name="closed" value="true" />
+      <created>1717442930191</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1717442930191</updated>
+    </task>
+    <task id="LOCAL-00008" summary="implement the class AmbientLight and add and implement the class Scene in package scene">
+      <option name="closed" value="true" />
+      <created>1717448198509</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1717448198509</updated>
+    </task>
+    <task id="LOCAL-00009" summary="implements the functions - writeToImage , renderImage , castRay , SimpleRayTracer in class Camera">
+      <option name="closed" value="true" />
+      <created>1717453854399</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1717453854399</updated>
+    </task>
+    <task id="LOCAL-00010" summary="add the function findGeoIntersectionsHelper in Intersectable and in his implemenet classes and change the functions according to this &#10;add the function findClosestGeoPoint in Ray">
+      <option name="closed" value="true" />
+      <created>1718657529147</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1718657529147</updated>
+    </task>
+    <task id="LOCAL-00011" summary="add documentation">
+      <option name="closed" value="true" />
+      <created>1718754534780</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1718754534780</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -227,28 +282,12 @@
     <MESSAGE value="add class Camera in renderer package" />
     <MESSAGE value="create Camera class and implement her , create CameraTest and ItegrationCameraTest" />
     <MESSAGE value="create integrationTest" />
+    <MESSAGE value="trying to check the problems" />
+    <MESSAGE value="add  the classes- Color , ImageWriter, ImageWriterTest" />
+    <MESSAGE value="implement the class AmbientLight and add and implement the class Scene in package scene" />
+    <MESSAGE value="implements the functions - writeToImage , renderImage , castRay , SimpleRayTracer in class Camera" />
+    <MESSAGE value="add the function findGeoIntersectionsHelper in Intersectable and in his implemenet classes and change the functions according to this &#10;add the function findClosestGeoPoint in Ray" />
     <MESSAGE value="add documentation" />
     <option name="LAST_COMMIT_MESSAGE" value="add documentation" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/unitTests/renderer/IntegrationCameraTest.java</url>
-          <line>62</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/unitTests/renderer/IntegrationCameraTest.java</url>
-          <line>111</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/unitTests/renderer/IntegrationCameraTest.java</url>
-          <line>110</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
