@@ -46,12 +46,25 @@ public class Ray {
     }
 
     public Ray(Point p, Vector v, Vector normalToP){
-        double res = v.dotProduct(normalToP);
-
-        head = Util.isZero(res) ? p : p.add(normalToP.scale(Util.alignZero(res)<0? -DELTA:DELTA));
         direction=v.normalize();
+        double result = v.dotProduct(normalToP);
+        if (Util.isZero(result))
+            this.head = p;
+        else
+            this.head = p.add(normalToP.scale(Util.alignZero(result) < 0 ? -DELTA : DELTA));
+
+//        head = Util.isZero(result) ? p : p.add(normalToP.scale(Util.alignZero(result)<0? -DELTA:DELTA));
+
     }
 
+
+
+//        if (Util.isZero(dotProduct))
+//            this.p0 = point;
+//        else
+//            this.p0 = point.add(normal.scale(Util.alignZero(dotProduct) < 0 ? -DELTA : DELTA));
+//
+//    }
 
     /**
      * Returns the direction vector of the ray.
