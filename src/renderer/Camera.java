@@ -2,6 +2,8 @@ package renderer;
 import primitives.*;
 import java.util.MissingResourceException;
 
+import static primitives.Util.isZero;
+
 /*
  * Camera class represents a camera in 3D space with position, direction, and view plane properties.
  * It provides functionality to construct rays through a view plane.
@@ -23,6 +25,7 @@ public class Camera implements Cloneable {
 
     private ImageWriter imageWriter;
     private RayTracerBase rayTracer;
+    private TargetArea targetArea;
 
     /**
      * Private constructor to enforce the use of the builder for creating Camera instances.
@@ -117,34 +120,38 @@ public class Camera implements Cloneable {
      * @return a Ray from the camera through the specified pixel.
      */
     public Ray constructRay(int nX, int nY, int j, int i) {
-        Double rY = height / nY;
-        Double rX = width / nX;
-        Point pixelIJ = position.add(vTo.scale(distance));
 
-        Double yI = -(i - (nY - 1) / 2.0) * rY;
-        Double xJ = (j - (nX - 1) / 2.0) * rX;
-        // Check if the pixel is at the center of the view plane
-        if (Util.isZero(xJ) && Util.isZero(yI)) {
-            return new Ray(position, pixelIJ.subtract(position));
-        }
+//        Double rY = height / nY;
+//        Double rX = width / nX;
+//        Point pixelIJ = position.add(vTo.scale(distance));
+//
+//        Double yI = -(i - (nY - 1) / 2.0) * rY;
+//        Double xJ = (j - (nX - 1) / 2.0) * rX;
+//        // Check if the pixel is at the center of the view plane
+//        if (Util.isZero(xJ) && Util.isZero(yI)) {
+//            return new Ray(position, pixelIJ.subtract(position));
+//        }
+//
+//        // Check if the pixel is on the horizontal axis of the view plane
+//        if (Util.isZero(xJ)) {
+//            pixelIJ = pixelIJ.add(vUp.scale(yI));
+//            return new Ray(position, pixelIJ.subtract(position));
+//        }
+//
+//        // Check if the pixel is on the vertical axis of the view plane
+//        if (Util.isZero(yI)) {
+//            pixelIJ = pixelIJ.add(vRight.scale(xJ));
+//            return new Ray(position, pixelIJ.subtract(position));
+//        }
+//
+//        // Calculate the final point on the view plane for the specified pixel
+//        pixelIJ = pixelIJ.add(vRight.scale(xJ).add(vUp.scale(yI)));
+//
+//        // Return the constructed ray from the camera's location to the calculated point on the view plane
+//        return new Ray(position, pixelIJ.subtract(position));
+        return targetArea.constructRay(nX, nY, j, i);
+        //return targetArea.constructRayBeamGrid()
 
-        // Check if the pixel is on the horizontal axis of the view plane
-        if (Util.isZero(xJ)) {
-            pixelIJ = pixelIJ.add(vUp.scale(yI));
-            return new Ray(position, pixelIJ.subtract(position));
-        }
-
-        // Check if the pixel is on the vertical axis of the view plane
-        if (Util.isZero(yI)) {
-            pixelIJ = pixelIJ.add(vRight.scale(xJ));
-            return new Ray(position, pixelIJ.subtract(position));
-        }
-
-        // Calculate the final point on the view plane for the specified pixel
-        pixelIJ = pixelIJ.add(vRight.scale(xJ).add(vUp.scale(yI)));
-
-        // Return the constructed ray from the camera's location to the calculated point on the view plane
-        return new Ray(position, pixelIJ.subtract(position));
 
     }
 
@@ -277,7 +284,9 @@ public class Camera implements Cloneable {
             if (Util.alignZero(camera.distance) <= 0)
                 throw new MissingResourceException(missingRenderingData, cameraClass, "camera's distance");
 
-
+            camera.targetArea=new TargetArea(camera.position,camera.vTo,camera.vUp);
+            camera.targetArea.setSize(camera.width, camera.height);
+            camera.targetArea.setDistance(camera.distance);
 
             camera.vRight = (camera.vTo.crossProduct(camera.vUp)).normalize();
 
@@ -335,6 +344,7 @@ public class Camera implements Cloneable {
     private Color castRay(int j, int i) {
         Ray ray = constructRay(this.imageWriter.getNx(),this.imageWriter.getNy(),j,i);
         return this.rayTracer.traceRay(ray);
+
     }
 }
 

@@ -54,7 +54,7 @@ public class SimpleRayTracer extends  RayTracerBase {
 
 
     private Color calcColor(GeoPoint gp, Ray ray,int level,Double3 k){
-        Color color=calcLocalEffects(gp, ray);
+        Color color=calcLocalEffects(gp, ray,k);
 
         return 1==level?color:color.add(calcGlobalEffects(gp,ray,level,k));
 
@@ -78,14 +78,20 @@ public class SimpleRayTracer extends  RayTracerBase {
 
     private Color calcGlobalEffect( Ray ray,Double3 kX, int level, Double3 k) {
         Double3 kKx=kX.product(k);
+//        double nv= Util.alignZero(n.dotProduct(v));
+//        if (nv==0)
+//            return color;
         if(kKx.lowerThan(MIN_CALC_COLOR_K))
             return Color.BLACK;
         GeoPoint gp=scene.geometries.findClosestIntersection(ray);
-        return (gp==null?scene.backGround:calcColor(gp,ray,level-1,kKx)).scale(kX);
+//        if(gp==null)
+//            return Color.BLACK;//scene.background.scale(kx)
+
+        return (gp==null?Color.BLACK:calcColor(gp,ray,level-1,kKx)).scale(kX);
     }
 
 
-    private Color calcLocalEffects(GeoPoint gp, Ray ray){
+    private Color calcLocalEffects(GeoPoint gp, Ray ray,Double3 k){
         Color color = gp.geometry.getEmission();
         Vector n=gp.geometry.getNormal(gp.point);
         Vector v=ray.getDirection();
@@ -94,11 +100,15 @@ public class SimpleRayTracer extends  RayTracerBase {
             return color;
         Material material=gp.geometry.getMaterial();
         for(LightSource lightSource:scene.lights){
+
             Vector l=lightSource.getL(gp.point);
             double nl=Util.alignZero(n.dotProduct(l));
-            if(Util.alignZero(nl*nv)>0&&unshaded(gp,lightSource,l,n,nl)){
-                Color il=lightSource.getIntensity(gp.point);
-                color = color.add(il.scale(calcDiffusive(material, nl)), il.scale(calcSpecular(material,n,l,nl,v)));
+            if(Util.alignZero(nl*nv)>0){
+                Double3 ktr = transperency(gp, lightSource, l, n,nl);
+                if (!(ktr.product(k).lowerThan(MIN_CALC_COLOR_K))) {
+                    Color il = lightSource.getIntensity(gp.point).scale(ktr);
+                    color = color.add(il.scale(calcDiffusive(material, nl)), il.scale(calcSpecular(material, n, l, nl, v)));
+                }
             }
         }
         return color;
@@ -126,6 +136,20 @@ public class SimpleRayTracer extends  RayTracerBase {
         if(intersectionPoint.point.distance(point)<light.getDistance(point))
                 return false;
         return true;
+
+    }
+        private Double3 transperency(GeoPoint gp,LightSource light, Vector l, Vector n,double nl){
+            Ray lightRay = new Ray( gp.point, l.scale(-1),n);
+            List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay);
+          //  GeoPoint intersectionPoint=scene.geometries.findClosestIntersection(lightRay);
+            Double3 ktr = Double3.ONE;
+            if (intersections == null)
+                return ktr;
+            for (GeoPoint intersection : intersections)
+                if(intersection.point.distance(gp.point)<light.getDistance(gp.point))
+                  ktr = ktr.product(intersection.geometry.getMaterial().kT);
+            return ktr;
+
 
     }
 

@@ -17,6 +17,7 @@ import java.util.Objects;
  */
 public abstract class Intersectable {
 
+
     /**
      * Inner class representing a geometric point of intersection.
      */
@@ -77,9 +78,14 @@ public abstract class Intersectable {
      * @param ray the ray to intersect with the shape
      * @return a list of geometric intersection points, or null if no intersections are found
      */
-    public final List<GeoPoint> findGeoIntersections(Ray ray){
-       return findGeoIntersectionsHelper(ray);
+    public final List<GeoPoint> findGeoIntersections(Ray ray) {
+        return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
     }
+    public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
+        return findGeoIntersectionsHelper(ray, maxDistance);
+    }
+
+
 
     /**
      * Helper method to be implemented by subclasses to find the geometric intersections of a ray with the shape.
@@ -87,7 +93,8 @@ public abstract class Intersectable {
      * @param ray the ray to intersect with the shape
      * @return a list of geometric intersection points, or null if no intersections are found
      */
-    protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray);
+    abstract protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance);
+
 
     /**
      * Finds the intersections of a ray with the shape.
@@ -100,6 +107,7 @@ public abstract class Intersectable {
            return geoList == null ? null
                    : geoList.stream().map(gp -> gp.point).toList();
    }
+
 
     /**
      * finds the closest intersection point to a given ray

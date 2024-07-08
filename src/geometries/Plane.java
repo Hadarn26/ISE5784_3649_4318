@@ -2,6 +2,7 @@ package geometries;
 
 import primitives.Point;
 import primitives.Ray;
+import primitives.Util;
 import primitives.Vector;
 
 import java.util.List;
@@ -85,16 +86,32 @@ public class Plane extends Geometry {
      * @return a list of geometric intersection points, or null if no intersections are found
      */
     @Override
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
-        Vector v=ray.getDirection();
-        double nv=normal.dotProduct(v);
-        if (isZero(nv))
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+        Point rayP0 = ray.getHead();
+        if (rayP0.equals(q))
             return null;
-        if(q.equals(ray.getHead()))
+        double denom = normal.dotProduct(ray.getDirection());
+        if (Util.isZero(denom))
             return null;
-        double t=alignZero((normal.dotProduct((q.subtract(ray.getHead()))))/(nv));
-        if(t>0)
-            return List.of(new GeoPoint (this,ray.getPoint(t)));
-        return null;
+        double t = Util.alignZero(normal.dotProduct(q.subtract(rayP0)) / denom);
+        return t <= 0 || Util.alignZero(t - maxDistance) >= 0 ? null : List.of(new GeoPoint(this, ray.getPoint(t)));
     }
+//        Vector v=ray.getDirection();
+//        double nv=normal.dotProduct(v);
+//        if (isZero(nv))
+//            return null;
+//        if(q.equals(ray.getHead()))
+//            return null;
+//        double t=alignZero((normal.dotProduct((q.subtract(ray.getHead()))))/(nv));
+//        return t <= 0 || Util.alignZero(t - maxDistance) >= 0 ? null : List.of(new GeoPoint(this, ray.getPoint(t)));
+////
+////        if(t>0)
+//            return List.of(new GeoPoint (this,ray.getPoint(t)));
+//        return null;
+   // }
+
+//    @Override
+//    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+//        return List.of();
+//    }
 }
