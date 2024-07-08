@@ -29,15 +29,40 @@ public class SimpleRayTracer extends  RayTracerBase {
     private static final double DELTA = 0.1;
     private static final int MAX_CALC_COLOR_LEVEL = 10;
     private static final double MIN_CALC_COLOR_K = 0.001;
+    private static final int NUM_SAMPLES = 5;
+
 
     @Override
     public Color traceRay(Ray ray) {
+       // return traceRay(ray, NUM_SAMPLES);
         GeoPoint intersectionPoint = scene.geometries.findClosestIntersection(ray);
         return intersectionPoint == null
                 ? scene.backGround
                 : calcColor(intersectionPoint, ray);
         //findGeoIntersections
     }
+
+    public Color traceRay(Ray ray, int numSamples) {
+        Color color = Color.BLACK;
+
+        TargetArea targetArea=new TargetArea(ray,numSamples);
+        // Generate multiple rays for super sampling
+        List<Ray> rays = targetArea.constructRayBeamGrid();
+
+        for (Ray sampleRay : rays) {
+            GeoPoint intersectionPoint = scene.geometries.findClosestIntersection(sampleRay);
+               if (intersectionPoint != null) {
+                color = color.add(calcColor(intersectionPoint, sampleRay));
+            }
+             else {
+                color = color.add(scene.backGround);
+            }
+
+        }
+
+        return color.reduce(rays.size());
+    }
+
 
     /**
      * Calculates the color at a given point.
