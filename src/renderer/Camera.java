@@ -1,5 +1,8 @@
 package renderer;
+
 import primitives.*;
+
+import java.util.List;
 import java.util.MissingResourceException;
 
 import static primitives.Util.isZero;
@@ -107,9 +110,6 @@ public class Camera implements Cloneable {
     }
 
 
-
-
-
     /**
      * Constructs a ray through a specific pixel in the view plane.
      *
@@ -204,7 +204,7 @@ public class Camera implements Cloneable {
          * @return the builder instance.
          * @throws IllegalArgumentException if the up vector and to vector are not orthogonal.
          */
-        public Builder setDirection(Vector vTo,Vector vUp ) {
+        public Builder setDirection(Vector vTo, Vector vUp) {
             if (!(Util.isZero(vUp.dotProduct(vTo))))
                 throw new IllegalArgumentException("The vectors aren't ortogonal");
             camera.vUp = vUp.normalize();
@@ -265,18 +265,18 @@ public class Camera implements Cloneable {
          * @throws MissingResourceException if any of the required parameters are not set.
          */
         public Camera build() {
-            String missingRenderingData="missing rendering data";
-            String cameraClass="Camera";
+            String missingRenderingData = "missing rendering data";
+            String cameraClass = "Camera";
             if (camera.position == null)
                 throw new MissingResourceException(missingRenderingData, cameraClass, "camera's position");
             if (camera.vTo == null)
                 throw new MissingResourceException(missingRenderingData, cameraClass, "camera's vTo");
             if (camera.vUp == null)
-                throw new MissingResourceException(missingRenderingData,cameraClass, "camera's vUp");
+                throw new MissingResourceException(missingRenderingData, cameraClass, "camera's vUp");
             if (camera.imageWriter == null)
-                throw new MissingResourceException(missingRenderingData,cameraClass, "camera's image Writer");
+                throw new MissingResourceException(missingRenderingData, cameraClass, "camera's image Writer");
             if (camera.rayTracer == null)
-                throw new MissingResourceException(missingRenderingData,cameraClass, "camera's ray tracer");
+                throw new MissingResourceException(missingRenderingData, cameraClass, "camera's ray tracer");
             if (Util.alignZero(camera.height) <= 0)
                 throw new MissingResourceException(missingRenderingData, cameraClass, "camera's height");
             if (Util.alignZero(camera.width) <= 0)
@@ -284,7 +284,7 @@ public class Camera implements Cloneable {
             if (Util.alignZero(camera.distance) <= 0)
                 throw new MissingResourceException(missingRenderingData, cameraClass, "camera's distance");
 
-            camera.targetArea=new TargetArea(camera.position,camera.vTo,camera.vUp);
+            camera.targetArea = new TargetArea(camera.position, camera.vTo, camera.vUp);
             camera.targetArea.setSize(camera.width, camera.height);
             camera.targetArea.setDistance(camera.distance);
 
@@ -302,15 +302,15 @@ public class Camera implements Cloneable {
 //
 
 //
+
     /**
      * Renders the image by casting rays through each pixel.
      */
-    public Camera renderImage(){
-        for (int i=0;i<imageWriter.getNy();i++)
-            for (int j=0;j<imageWriter.getNx();j++)
-            {
+    public Camera renderImage() {
+        for (int i = 0; i < imageWriter.getNy(); i++)
+            for (int j = 0; j < imageWriter.getNx(); j++) {
 
-                this.imageWriter.writePixel(j, i, castRay(j,i));
+                this.imageWriter.writePixel(j, i, castRay(j, i));
             }
         return this;
     }
@@ -319,9 +319,9 @@ public class Camera implements Cloneable {
      * Prints a grid on the image with the specified interval and color.
      *
      * @param interval the spacing between grid lines.
-     * @param color the color of the grid lines.
+     * @param color    the color of the grid lines.
      */
-    public Camera printGrid(int interval, Color color){
+    public Camera printGrid(int interval, Color color) {
         int nY = imageWriter.getNy();
         int nX = imageWriter.getNx();
         for (int i = 0; i < nY; i++) {
@@ -337,14 +337,17 @@ public class Camera implements Cloneable {
     /**
      * Writes the image to the output.
      */
-    public void writeToImage(){
+    public void writeToImage() {
         imageWriter.writeToImage();
     }
 
     private Color castRay(int j, int i) {
-        Ray ray = constructRay(this.imageWriter.getNx(),this.imageWriter.getNy(),j,i);
+       // List<Ray> lst = targetArea.constructRayBeamGrid();
+        Ray ray = constructRay(this.imageWriter.getNx(), this.imageWriter.getNy(), j, i);
+       // Color sumColor=Color.BLACK;
+       // for (Ray ray1 : lst)
         return this.rayTracer.traceRay(ray);
-
+        //return sumColor.reduce(lst.size());
     }
 }
 
