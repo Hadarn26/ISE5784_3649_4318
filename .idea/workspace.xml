@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fa1e206-b9eb-406f-af29-0232df645b0f" name="Changes" comment="update Camera + fix tests +final commit stage 6">
+    <list default="true" id="6fa1e206-b9eb-406f-af29-0232df645b0f" name="Changes" comment="fix the tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lighting/DirectionalLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/DirectionalLight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lighting/LightSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/LightSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lighting/PointLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/PointLight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/SimpleRayTracer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/SimpleRayTracer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,39 +55,46 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.All in ISE5784_3649_4318.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CameraTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CameraTest.testConstructRay.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ImageWriterTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ImageWriterTest.testWriteToImage.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.IntegrationCameraTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.LightsTests (1).executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.LightsTests.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.LightsTests.trianglesSpotSharp.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.RayTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.RenderTests.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.RenderTests.renderTwoColorTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.SphereTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.renderer in ISE5784_3649_4318.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/elino/Documents/ISE5784_8473_5425-master[1]&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/navat/ISE5784_3649_4318/src/Main.java&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;fileTemplates&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "JUnit.All in ISE5784_3649_4318.executor": "Run",
+    "JUnit.CameraTest.executor": "Run",
+    "JUnit.CameraTest.testConstructRay.executor": "Run",
+    "JUnit.ImageWriterTest.executor": "Run",
+    "JUnit.ImageWriterTest.testWriteToImage.executor": "Run",
+    "JUnit.IntegrationCameraTest.executor": "Run",
+    "JUnit.LightsTests (1).executor": "Run",
+    "JUnit.LightsTests.executor": "Run",
+    "JUnit.LightsTests.trianglesSpotSharp.executor": "Run",
+    "JUnit.RayTest.executor": "Run",
+    "JUnit.ReflectionRefractionTests.executor": "Run",
+    "JUnit.RenderTests.executor": "Run",
+    "JUnit.RenderTests.renderTwoColorTest.executor": "Run",
+    "JUnit.ShadowTests.executor": "Run",
+    "JUnit.ShadowTests.sphereTriangleMove1.executor": "Run",
+    "JUnit.ShadowTests.sphereTriangleMove2.executor": "Run",
+    "JUnit.ShadowTests.sphereTriangleSpot1.executor": "Run",
+    "JUnit.ShadowTests.sphereTriangleSpot2.executor": "Run",
+    "JUnit.SphereTest.executor": "Run",
+    "JUnit.renderer in ISE5784_3649_4318.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/elino/Documents/ISE5784_8473_5425-master[1]",
+    "onboarding.tips.debug.path": "C:/Users/navat/ISE5784_3649_4318/src/Main.java",
+    "settings.editor.selected.configurable": "fileTemplates"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\navat\ISE5784_3649_4318\unitTests\renderer" />
       <recent name="C:\Users\elino\source\repos\ISE5784_3649_4318\unitTests\renderer" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -104,41 +107,11 @@
       <recent name="geometries" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in ISE5784_3649_4318">
+  <component name="RunManager" selected="JUnit.ReflectionRefractionTests">
     <configuration name="All in ISE5784_3649_4318" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5784_3649_4318" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CameraTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ISE5784_3649_4318" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="renderer.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="renderer" />
-      <option name="MAIN_CLASS_NAME" value="renderer.CameraTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="LightsTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ISE5784_3649_4318" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="renderer.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="renderer" />
-      <option name="MAIN_CLASS_NAME" value="renderer.LightsTests" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -159,7 +132,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LightsTests.trianglesSpotSharp" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ReflectionRefractionTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5784_3649_4318" />
       <extension name="coverage">
         <pattern>
@@ -168,14 +141,44 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="renderer" />
-      <option name="MAIN_CLASS_NAME" value="renderer.LightsTests" />
-      <option name="METHOD_NAME" value="trianglesSpotSharp" />
+      <option name="MAIN_CLASS_NAME" value="renderer.ReflectionRefractionTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ShadowTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ISE5784_3649_4318" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="renderer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="renderer" />
+      <option name="MAIN_CLASS_NAME" value="renderer.ShadowTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ShadowTests.sphereTriangleSpot1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ISE5784_3649_4318" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="renderer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="renderer" />
+      <option name="MAIN_CLASS_NAME" value="renderer.ShadowTests" />
+      <option name="METHOD_NAME" value="sphereTriangleSpot1" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RenderTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ShadowTests.sphereTriangleSpot2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5784_3649_4318" />
       <extension name="coverage">
         <pattern>
@@ -184,19 +187,20 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="renderer" />
-      <option name="MAIN_CLASS_NAME" value="renderer.RenderTests" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="renderer.ShadowTests" />
+      <option name="METHOD_NAME" value="sphereTriangleSpot2" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ReflectionRefractionTests" />
         <item itemvalue="JUnit.All in ISE5784_3649_4318" />
-        <item itemvalue="JUnit.RenderTests" />
-        <item itemvalue="JUnit.CameraTest" />
-        <item itemvalue="JUnit.LightsTests" />
-        <item itemvalue="JUnit.LightsTests.trianglesSpotSharp" />
+        <item itemvalue="JUnit.ShadowTests.sphereTriangleSpot2" />
+        <item itemvalue="JUnit.ShadowTests.sphereTriangleSpot1" />
+        <item itemvalue="JUnit.ShadowTests" />
       </list>
     </recent_temporary>
   </component>
@@ -329,7 +333,31 @@
       <option name="project" value="LOCAL‎" />
       <updated>1718787820071</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="add ShadowTests">
+      <option name="closed" value="true" />
+      <created>1719937213818</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1719937213818</updated>
+    </task>
+    <task id="LOCAL-00017" summary="add the functions constructReflectedRay and constructRefractedRay to SimpleRayTracer">
+      <option name="closed" value="true" />
+      <created>1719957022073</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1719957022073</updated>
+    </task>
+    <task id="LOCAL-00018" summary="fix the tests">
+      <option name="closed" value="true" />
+      <created>1719962399569</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1719962399569</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -362,6 +390,9 @@
     <MESSAGE value="fixing the test lights+ add narrow beam" />
     <MESSAGE value="update Camera + fix tests +final connit stage 6" />
     <MESSAGE value="update Camera + fix tests +final commit stage 6" />
-    <option name="LAST_COMMIT_MESSAGE" value="update Camera + fix tests +final commit stage 6" />
+    <MESSAGE value="add ShadowTests" />
+    <MESSAGE value="add the functions constructReflectedRay and constructRefractedRay to SimpleRayTracer" />
+    <MESSAGE value="fix the tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix the tests" />
   </component>
 </project>
