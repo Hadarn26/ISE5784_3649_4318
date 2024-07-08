@@ -52,12 +52,21 @@ public class Point {
     public Point(Double3 xyz){
         this.xyz= xyz;
     }
+
     //////////////////////////////////////////////////////////////////////////////////
     public Double3 getXyz() {
         return xyz;
     }
     /////////////////////////////////////////////////////////////////////////////////
-
+    public double getX() {
+        return xyz.d1;
+    }
+    public double getY() {
+        return xyz.d2;
+    }
+    public double getZ() {
+        return xyz.d3;
+    }
     /**
      * Computes the vector from this point to another point.
      * @param other The other point.

@@ -162,8 +162,8 @@ Point b=new Point(70,-80,100);
 
       scene.geometries.add(
               new Sphere( 50d,new Point(10, 10, -100)).setEmission(new Color(39,183,285))
-                      .setMaterial(new Material().setKd(0.25).setKs(0.7).setNShininess(20).setKT(new Double3(0.2, 0, 0))),
-              new Triangle(a,b,c).setMaterial(new Material().setKd(0.5).setKs(0.5).setNShininess(60))
+                      .setMaterial(new Material().setKd(0.25).setKs(0.7).setNShininess(20).setKT(new Double3(0.2, 0, 0)))
+             // new Triangle(a,b,c).setMaterial(new Material().setKd(0.5).setKs(0.5).setNShininess(60))
       );
 
 //              new Sphere(200d,new Point(-950, -900, -1000)).setEmission(new Color(100, 50, 20))
@@ -190,8 +190,8 @@ Point b=new Point(70,-80,100);
 
       scene.setAmbientLight(new AmbientLight(new Color(WHITE), 0.15));
       scene.lights.add(
-                new SpotLight(new Color(RED), new Point(150, 140, 50) ,new Vector(-1, -1, -4)).setKL(0.00001).setKQ(0.000005)
-              // new DirectionalLight(new Color(RED), new Vector(-1, -1, -4))
+              //  new SpotLight(new Color(RED), new Point(150, 140, 50) ,new Vector(-1, -1, -4)).setKL(0.00001).setKQ(0.000005)
+               new DirectionalLight(new Color(RED), new Vector(-1, -1, -4))
               );
               //new SpotLight(new Color(RED), new Point(40, 40, 50) ,new Vector(-1, -1, -4))
            //  .setKL(0.00001).setKQ(0.000005)
@@ -201,10 +201,10 @@ Point b=new Point(70,-80,100);
 
   //    scene.lights.add(new DirectionalLight(new Color(WHITE), new Vector(-1, -1, -100 )));//
 
-      ImageWriter imageWriter = new ImageWriter("multyObjects", 600, 600);
+     // ImageWriter imageWriter = new ImageWriter("multyObjects", 600, 600);
       cameraBuilder.setLocation(new Point(0, 0, 1000)).setVpDistance(1000d)
               .setVpSize(200d, 200d)
-              .setImageWriter(new ImageWriter("SphereShadowLight", 600, 600))
+              .setImageWriter(new ImageWriter("SphereDirectionalMP1Light", 600, 600))
               .build()
               .renderImage()
               .writeToImage();
