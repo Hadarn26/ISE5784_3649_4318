@@ -38,7 +38,7 @@ public class ReflectionRefractionTests {
                               .setMaterial(new Material().setKd(0.5).setKs(0.5).setNShininess(100)));
       scene.lights.add(
                        new SpotLight(new Color(1000, 600, 0), new Point(-100, -100, 500), new Vector(-1, -1, -2))
-                          .setKL(0.0004).setKQ(0.0000006));
+                          .setkL(0.0004).setkQ(0.0000006));
 
       cameraBuilder.setLocation(new Point(0, 0, 1000)).setVpDistance(1000d)
          .setVpSize(150d, 150d)
@@ -67,7 +67,7 @@ public class ReflectionRefractionTests {
                               .setMaterial(new Material().setKR(new Double3(0.5, 0, 0.4))));
       scene.setAmbientLight(new AmbientLight(new Color(255, 255, 255), 0.1));
       scene.lights.add(new SpotLight(new Color(1020, 400, 400), new Point(-750, -750, -150), new Vector(-1, -1, -4))
-         .setKL(0.00001).setKQ(0.000005));
+         .setkL(0.00001).setkQ(0.000005));
 
       cameraBuilder.setLocation(new Point(0, 0, 10000)).setVpDistance(10000d)
          .setVpSize(2500d, 2500d)
@@ -93,7 +93,7 @@ public class ReflectionRefractionTests {
       scene.setAmbientLight(new AmbientLight(new Color(WHITE), 0.15));
       scene.lights.add(
                        new SpotLight(new Color(700, 400, 400), new Point(60, 50, 0), new Vector(0, 0, -1))
-                          .setKL(4E-5).setKQ(2E-7));
+                          .setkL(4E-5).setkQ(2E-7));
 
       cameraBuilder.setLocation(new Point(0, 0, 1000)).setVpDistance(1000d)
          .setVpSize(200d, 200d)
