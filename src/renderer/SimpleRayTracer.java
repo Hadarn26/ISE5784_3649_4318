@@ -29,7 +29,7 @@ public class SimpleRayTracer extends  RayTracerBase {
     private static final double DELTA = 0.1;
     private static final int MAX_CALC_COLOR_LEVEL = 10;
     private static final double MIN_CALC_COLOR_K = 0.001;
-    private static final int NUM_SAMPLES = 5;
+    private static final int NUM_SAMPLES = 3;
 
 
     @Override
@@ -165,8 +165,9 @@ public class SimpleRayTracer extends  RayTracerBase {
     }
         private Double3 transperency(GeoPoint gp,LightSource light, Vector l, Vector n,double nl){
             Ray lightRay = new Ray( gp.point, l.scale(-1),n);
-            List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay);
+            List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay, light.getDistance(gp.point));
           //  GeoPoint intersectionPoint=scene.geometries.findClosestIntersection(lightRay);
+
             Double3 ktr = Double3.ONE;
             if (intersections == null)
                 return ktr;
