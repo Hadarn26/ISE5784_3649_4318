@@ -29,15 +29,52 @@ public class SimpleRayTracer extends  RayTracerBase {
     private static final double DELTA = 0.1;
     private static final int MAX_CALC_COLOR_LEVEL = 10;
     private static final double MIN_CALC_COLOR_K = 0.001;
+    private static final int NUM_SAMPLES = 3;
+
 
     @Override
     public Color traceRay(Ray ray) {
+       // return traceRay(ray, NUM_SAMPLES);
         GeoPoint intersectionPoint = scene.geometries.findClosestIntersection(ray);
         return intersectionPoint == null
                 ? scene.backGround
                 : calcColor(intersectionPoint, ray);
         //findGeoIntersections
     }
+
+    @Override
+    public Color traceRays(List<Ray> rays) {
+
+        Color color = Color.BLACK;
+        for (Ray ray : rays) {
+            color = color.add(traceRay(ray));
+        }
+        return color.reduce(rays.size());
+
+    }
+
+
+    public Color traceRay(Ray ray, int numSamples) {
+        Color color = Color.BLACK;
+
+        TargetArea targetArea=new TargetArea(ray,200);
+        // Generate multiple rays for super sampling
+        List<Ray> rays = targetArea.constructRayBeamGrid();
+
+        for (Ray sampleRay : rays) {
+            GeoPoint intersectionPoint = scene.geometries.findClosestIntersection(sampleRay);
+               if (intersectionPoint != null) {
+                color = color.add(calcColor(intersectionPoint, sampleRay));
+            }
+             else {
+                color = color.add(scene.backGround);
+            }
+
+        }
+
+        return color.reduce(rays.size());
+    }
+
 
     /**
      * Calculates the color at a given point.
@@ -48,8 +85,72 @@ public class SimpleRayTracer extends  RayTracerBase {
      */
     private Color calcColor(GeoPoint intersection,Ray ray)
     {
-        return scene.ambientLight.getIntensity()
-                .add(calcColor(intersection, ray, MAX_CALC_COLOR_LEVEL, Double3.ONE));
+//        Color color = Color.BLACK;
+//
+//        TargetArea targetArea=new TargetArea(ray,NUM_SAMPLES);
+//        List<Ray> rays = targetArea.constructRayBeamGrid();
+//        for (Ray sampleRay : rays) {
+//            GeoPoint intersectionPoint = scene.geometries.findClosestIntersection(sampleRay);
+//            if (intersectionPoint != null) {
+//                color = scene.ambientLight.getIntensity()
+//                        .add(color.add(calcColor(intersection, ray, MAX_CALC_COLOR_LEVEL, Double3.ONE)));
+//            }
+//            else {
+//                color = color.add(scene.backGround);
+//            }
+//
+//        }
+//
+//        return color.reduce(rays.size());
+    // return antiAlising(intersection,ray);
+       return scene.ambientLight.getIntensity()
+               .add(calcColor(intersection, ray, MAX_CALC_COLOR_LEVEL, Double3.ONE));
+    }
+
+    private Color antiAlising(GeoPoint intersection,Ray ray){
+        Color color = Color.BLACK;
+
+        TargetArea targetArea=new TargetArea(ray,0.35);
+        List<Ray> rays = targetArea.constructRayBeamGrid();
+        for (Ray sampleRay : rays) {
+            GeoPoint intersectionPoint = scene.geometries.findClosestIntersection(sampleRay);
+            if (intersectionPoint != null) {
+                color = color.add(calcColor(intersection, sampleRay, MAX_CALC_COLOR_LEVEL, Double3.ONE));
+//                color = scene.ambientLight.getIntensity()
+//                        .add(color.add(calcColor(intersection, ray, MAX_CALC_COLOR_LEVEL, Double3.ONE)));
+            }
+            else {
+                color = color.add(scene.backGround);
+//                color = scene.ambientLight.getIntensity()
+//                        .add(color.add(scene.backGround));
+            }
+
+        }
+
+        return scene.ambientLight.getIntensity().add(color.reduce(rays.size()));
+    }
+
+    private Color antiAlising(GeoPoint gp, Ray ray,int level,Double3 k){
+        Color color = Color.BLACK;
+
+        TargetArea targetArea=new TargetArea(ray,NUM_SAMPLES);
+        List<Ray> rays = targetArea.constructRayBeamGrid();
+        for (Ray sampleRay : rays) {
+            GeoPoint intersectionPoint = scene.geometries.findClosestIntersection(sampleRay);
+            if (intersectionPoint != null) {
+                color = color.add(calcColor(intersectionPoint, ray, MAX_CALC_COLOR_LEVEL, Double3.ONE));
+//                color = scene.ambientLight.getIntensity()
+//                        .add(color.add(calcColor(intersection, ray, MAX_CALC_COLOR_LEVEL, Double3.ONE)));
+            }
+            else {
+                color = color.add(scene.backGround);
+//                color = scene.ambientLight.getIntensity()
+//                        .add(color.add(scene.backGround));
+            }
+
+        }
+
+        return scene.ambientLight.getIntensity().add(color.reduce(rays.size()));
     }
 
 
@@ -140,8 +241,9 @@ public class SimpleRayTracer extends  RayTracerBase {
     }
         private Double3 transperency(GeoPoint gp,LightSource light, Vector l, Vector n,double nl){
             Ray lightRay = new Ray( gp.point, l.scale(-1),n);
-            List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay);
+            List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay, light.getDistance(gp.point));
           //  GeoPoint intersectionPoint=scene.geometries.findClosestIntersection(lightRay);
+
             Double3 ktr = Double3.ONE;
             if (intersections == null)
                 return ktr;

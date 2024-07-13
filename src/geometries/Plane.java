@@ -18,40 +18,45 @@ import static primitives.Util.*;
  */
 public class Plane extends Geometry {
 
-    /** The base point of the plane. */
+    /**
+     * The base point of the plane.
+     */
     final Point q;
 
-    /** The normal vector to the plane.*/
+    /**
+     * The normal vector to the plane.
+     */
     final Vector normal;
 
     /**
      * Constructs a plane from three points on the plane.
      * The normal vector is computed from the cross product of two vectors formed by the given points.
+     *
      * @param p1 The first point on the plane.
      * @param p2 The second point on the plane.
      * @param p3 The third point on the plane.
      */
-    public Plane(Point p1, Point p2, Point p3){
-       if(p1.equals(p2)||p2.equals(p3)||p1.equals(p3))
-           throw new IllegalArgumentException("can't create plane with less than 3 different points");
+    public Plane(Point p1, Point p2, Point p3) {
+        if (p1.equals(p2) || p2.equals(p3) || p1.equals(p3))
+            throw new IllegalArgumentException("can't create plane with less than 3 different points");
 
-       Vector v1=p2.subtract(p1);
-       Vector v2=p3.subtract(p1);
-       q=p1;
+        Vector v1 = p2.subtract(p1);
+        Vector v2 = p3.subtract(p1);
+        q = p1;
 
-       try {
-           normal=(v1.crossProduct(v2)).normalize();
-       } catch (IllegalArgumentException zeroVectorIgnore) {
-           throw new IllegalArgumentException("can't create plane with 3 points on the same line");
-       }
+        try {
+            normal = (v1.crossProduct(v2)).normalize();
+        } catch (IllegalArgumentException zeroVectorIgnore) {
+            throw new IllegalArgumentException("can't create plane with 3 points on the same line");
+        }
 
     }
 
 
-
     /**
      * Constructs a plane from a point on the plane and its normal vector.
-     * @param q The point on the plane.
+     *
+     * @param q      The point on the plane.
      * @param normal The normal vector to the plane.
      */
     public Plane(Point q, Vector normal) {
@@ -87,31 +92,18 @@ public class Plane extends Geometry {
      */
     @Override
     public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
-        Point rayP0 = ray.getHead();
-        if (rayP0.equals(q))
+        Point rayHead = ray.getHead();
+        if (q.equals(ray.getHead()))
             return null;
-        double denom = normal.dotProduct(ray.getDirection());
-        if (Util.isZero(denom))
+        Vector v = ray.getDirection();
+        double nv = normal.dotProduct(v);
+        if (isZero(nv))
             return null;
-        double t = Util.alignZero(normal.dotProduct(q.subtract(rayP0)) / denom);
+        double t = alignZero((normal.dotProduct((q.subtract(ray.getHead())))) / (nv));
         return t <= 0 || Util.alignZero(t - maxDistance) >= 0 ? null : List.of(new GeoPoint(this, ray.getPoint(t)));
     }
-//        Vector v=ray.getDirection();
-//        double nv=normal.dotProduct(v);
-//        if (isZero(nv))
-//            return null;
-//        if(q.equals(ray.getHead()))
-//            return null;
-//        double t=alignZero((normal.dotProduct((q.subtract(ray.getHead()))))/(nv));
-//        return t <= 0 || Util.alignZero(t - maxDistance) >= 0 ? null : List.of(new GeoPoint(this, ray.getPoint(t)));
-////
-////        if(t>0)
-//            return List.of(new GeoPoint (this,ray.getPoint(t)));
-//        return null;
-   // }
-
-//    @Override
-//    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
-//        return List.of();
-//    }
 }
+
+
+
+

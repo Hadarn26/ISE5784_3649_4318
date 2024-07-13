@@ -96,4 +96,22 @@ class PlaneTest {
                 "ERROR: findIntersections() did not return null when the ray begins in the same point which appears as reference point in the plane");
 
     }
+
+    @Test
+    void testFindGeoIntersectionsWithDistance() {
+        Plane plane = new Plane(new Point(1, 0, 0), new Point(-2, 0, -2), new Point(0, 0, 2));
+        Ray ray = new Ray(new Point(0, 2, 0), new Vector(0, -1, 0));
+        // ================= Equivalence Partitions Tests ===========================
+        // TC01: the plane is not too far
+        List<Intersectable.GeoPoint> result = plane.findGeoIntersections(ray, 3);
+        assertEquals(1, result.size());
+        // TC02: the plane is too far
+        result = plane.findGeoIntersections(ray, 1);
+        assertNull(result);
+        // ================= BVA Tests ===========================
+        // TC03: the intersection is exactly at the max distance (0 points)
+        result = plane.findGeoIntersections(ray, 2);
+        assertNull(result);
+
+    }
 }

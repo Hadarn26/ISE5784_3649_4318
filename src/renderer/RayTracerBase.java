@@ -5,6 +5,9 @@ package renderer;
 import primitives.Color;
 import primitives.Ray;
 import scene.Scene;
+
+import java.util.List;
+
 /**
  * The RayTracerBase class is an abstract class that defines the basic structure for a ray tracer.
  * It contains a reference to a scene and defines an abstract method for tracing rays.
@@ -31,4 +34,5 @@ public abstract class RayTracerBase {
      * @return the color resulting from tracing the ray.
      */
     public abstract Color traceRay(Ray ray);
+    public abstract Color traceRays(List<Ray> rays);
 }
