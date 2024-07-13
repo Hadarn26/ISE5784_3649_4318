@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fa1e206-b9eb-406f-af29-0232df645b0f" name="Changes" comment="add findintersections with maxdistance">
+    <list default="true" id="6fa1e206-b9eb-406f-af29-0232df645b0f" name="Changes" comment="no change">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -355,7 +354,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1719974321807</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="no change">
+      <option name="closed" value="true" />
+      <created>1720467671406</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1720467671407</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -392,6 +399,7 @@
     <MESSAGE value="start the calculation of color with taking in account the refraction and reflaction" />
     <MESSAGE value="finish the calcColor with all the k's+add test" />
     <MESSAGE value="add findintersections with maxdistance" />
-    <option name="LAST_COMMIT_MESSAGE" value="add findintersections with maxdistance" />
+    <MESSAGE value="no change" />
+    <option name="LAST_COMMIT_MESSAGE" value="no change" />
   </component>
 </project>
