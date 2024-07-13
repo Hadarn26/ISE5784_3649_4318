@@ -117,7 +117,7 @@ public class TargetArea {
 	 *
 	 * @return list of rays.
 	 */
-	public List<Ray> constructRayBeamGrid() {
+	public List<Ray>  constructRayBeamGrid() {
 		List<Ray> rays = new LinkedList<>();
 		// Adding the central ray to ensure the center is covered
 		//rays.add(new Ray(position, vTo));

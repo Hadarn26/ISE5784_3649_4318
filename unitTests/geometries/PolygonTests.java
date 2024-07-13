@@ -6,7 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import geometries.Polygon;
 import primitives.Point;
+import primitives.*;
 import primitives.Vector;
+
+import java.util.List;
 
 /**
  * Testing Polygons
@@ -88,6 +91,52 @@ public class PolygonTests {
    }
 
    @Test
-   void testFindIntsersections() {
+   void testFindIntersections() {
+      Polygon rectangle = new Polygon(new Point(2, 0, 0), new Point(2, 0, 1), new Point(0, 0, 1), new Point(0, 0, 0));
+      // ================= Equivalence Partitions Tests ===========================
+      // TC01: intersection inside the Polygon (1 point)
+      List<Point> result = rectangle.findIntersections(new Ray(new Point(0.25d, 3d, 0.25d), new Vector(0, -1, 0)));
+      assertEquals(1, result.size(), "Wrong number of points");
+      assertEquals(new Point(0.25, 0, 0.25), result.get(0), "wrong point was found");
+      // TC02: intersection with plane but outside the Polygon against edge (0 points)
+      result = rectangle.findIntersections(new Ray(new Point(4, 1, -2), new Vector(-1, -1, 0)));
+      assertNull(result, "Wrong number of points");
+      // TC03: intersection with plane but outside the Polygon against vertex (0
+      // points)
+      result = rectangle.findIntersections(new Ray(new Point(-1, -4, -5), new Vector(0, 1, 1)));
+      assertNull(result, "Wrong number of points");
+
+      // ================= BVA Tests ===========================
+      // TC04: intersection on edge (0 points)
+      result = rectangle.findIntersections(new Ray(new Point(1, 3, 1), new Vector(0, -1, 0)));
+      assertNull(result, "Wrong number of points");
+      // TC05: intersection on vertex (0 points)
+      result = rectangle.findIntersections(new Ray(new Point(3, 2, 2), new Vector(-1, -2, -1)));
+      assertNull(result, "Wrong number of points");
+      // TC06: intersection on continuation of a edge (0 points)
+      result = rectangle.findIntersections(new Ray(new Point(4, 1, 2), new Vector(-1, -1, -1)));
+      assertNull(result, "Wrong number of points");
+   }
+
+   /**
+    * tests {@link geometries.Polygon#findGeoIntersectionsHelper(Ray, double)} (Point, double)}
+    */
+   @Test
+   void testFindGeoIntersectionsWithDistance() {
+      Polygon rectangle = new Polygon(new Point(1, 0, 0), new Point(-2, 0, -2), new Point(0, 0, 2),
+              new Point(2, 0, 2));
+      Ray ray = new Ray(new Point(0, 2, 0), new Vector(0, -1, 0));
+      // ================= Equivalence Partitions Tests ===========================
+      // TC01: the rectangle is not too far
+      List<Intersectable.GeoPoint> result = rectangle.findGeoIntersections(ray, 3);
+      assertEquals(1, result.size());
+      // TC02: the rectangle is too far
+      result = rectangle.findGeoIntersections(ray, 1);
+      assertNull(result);
+      // ================= BVA Tests ===========================
+      // TC03: the intersection is exactly at the max distance (0 points)
+      result = rectangle.findGeoIntersections(ray, 2);
+      assertNull(result);
+
    }
 }

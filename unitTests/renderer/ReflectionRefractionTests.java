@@ -204,11 +204,26 @@ Point b=new Point(70,-80,100);
      // ImageWriter imageWriter = new ImageWriter("multyObjects", 600, 600);
       cameraBuilder.setLocation(new Point(0, 0, 1000)).setVpDistance(1000d)
               .setVpSize(200d, 200d)
-              .setImageWriter(new ImageWriter("SphereDirectionalMP1Light", 600, 600))
+              .setAntiAliasingFactor(9)
+              .setImageWriter(new ImageWriter("SphereDirectionalMP1LightIMPROVED", 600, 600))
               .build()
               .renderImage()
               .writeToImage();
 
 
+   }
+
+   @Test
+   public void mp1Test(){
+
+      scene.geometries.add(new Sphere(50d,Point.ZERO).setEmission(Color.BLACK));
+      scene.setBackGround(new Color(white));
+      cameraBuilder.setLocation(new Point(0, 0, 1000)).setVpDistance(1000d)
+              .setVpSize(200d, 200d)
+              .setImageWriter(new ImageWriter("MP1ImprovedImage2", 600, 600))
+              .setAntiAliasingFactor(9)
+              .build()
+              .renderImage()
+              .writeToImage();
    }
 }

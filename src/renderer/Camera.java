@@ -2,6 +2,7 @@ package renderer;
 
 import primitives.*;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.MissingResourceException;
 
@@ -29,6 +30,8 @@ public class Camera implements Cloneable {
     private ImageWriter imageWriter;
     private RayTracerBase rayTracer;
     private TargetArea targetArea;
+
+    private int antiAliasingFactor = 1;
 
     /**
      * Private constructor to enforce the use of the builder for creating Camera instances.
@@ -119,40 +122,56 @@ public class Camera implements Cloneable {
      * @param i  pixel index in the Y direction.
      * @return a Ray from the camera through the specified pixel.
      */
+//    public Ray constructRay(int nX, int nY, int j, int i) {
+//
+////        Double rY = height / nY;
+////        Double rX = width / nX;
+////        Point pixelIJ = position.add(vTo.scale(distance));
+////
+////        Double yI = -(i - (nY - 1) / 2.0) * rY;
+////        Double xJ = (j - (nX - 1) / 2.0) * rX;
+////        // Check if the pixel is at the center of the view plane
+////        if (Util.isZero(xJ) && Util.isZero(yI)) {
+////            return new Ray(position, pixelIJ.subtract(position));
+////        }
+////
+////        // Check if the pixel is on the horizontal axis of the view plane
+////        if (Util.isZero(xJ)) {
+////            pixelIJ = pixelIJ.add(vUp.scale(yI));
+////            return new Ray(position, pixelIJ.subtract(position));
+////        }
+////
+////        // Check if the pixel is on the vertical axis of the view plane
+////        if (Util.isZero(yI)) {
+////            pixelIJ = pixelIJ.add(vRight.scale(xJ));
+////            return new Ray(position, pixelIJ.subtract(position));
+////        }
+////
+////        // Calculate the final point on the view plane for the specified pixel
+////        pixelIJ = pixelIJ.add(vRight.scale(xJ).add(vUp.scale(yI)));
+////
+////        // Return the constructed ray from the camera's location to the calculated point on the view plane
+////        return new Ray(position, pixelIJ.subtract(position));
+//        return targetArea.constructRay(nX, nY, j, i);
+//        //return targetArea.constructRayBeamGrid()
+//
+//
+//    }
+    private Point findPixelLocation(int nX, int nY, int j, int i) {
+
+        double rY = height / nY;
+        double rX = width / nX;
+
+        double yI = -(i - (nY - 1d) / 2) * rY;
+        double jX = (j - (nX - 1d) / 2) * rX;
+        Point pIJ = position.add(vTo.scale(distance));
+
+        if (yI != 0) pIJ = pIJ.add(vUp.scale(yI));
+        if (jX != 0) pIJ = pIJ.add(vRight.scale(jX));
+        return pIJ;
+    }
     public Ray constructRay(int nX, int nY, int j, int i) {
-
-//        Double rY = height / nY;
-//        Double rX = width / nX;
-//        Point pixelIJ = position.add(vTo.scale(distance));
-//
-//        Double yI = -(i - (nY - 1) / 2.0) * rY;
-//        Double xJ = (j - (nX - 1) / 2.0) * rX;
-//        // Check if the pixel is at the center of the view plane
-//        if (Util.isZero(xJ) && Util.isZero(yI)) {
-//            return new Ray(position, pixelIJ.subtract(position));
-//        }
-//
-//        // Check if the pixel is on the horizontal axis of the view plane
-//        if (Util.isZero(xJ)) {
-//            pixelIJ = pixelIJ.add(vUp.scale(yI));
-//            return new Ray(position, pixelIJ.subtract(position));
-//        }
-//
-//        // Check if the pixel is on the vertical axis of the view plane
-//        if (Util.isZero(yI)) {
-//            pixelIJ = pixelIJ.add(vRight.scale(xJ));
-//            return new Ray(position, pixelIJ.subtract(position));
-//        }
-//
-//        // Calculate the final point on the view plane for the specified pixel
-//        pixelIJ = pixelIJ.add(vRight.scale(xJ).add(vUp.scale(yI)));
-//
-//        // Return the constructed ray from the camera's location to the calculated point on the view plane
-//        return new Ray(position, pixelIJ.subtract(position));
-        return targetArea.constructRay(nX, nY, j, i);
-        //return targetArea.constructRayBeamGrid()
-
-
+        return new Ray(position, findPixelLocation(nX, nY, j, i).subtract(position));
     }
 
     @Override
@@ -162,6 +181,26 @@ public class Camera implements Cloneable {
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException("Cloning not supported", e);
         }
+    }
+
+    public List<Ray> constructRays(int nX, int nY, int j, int i) {
+        List<Ray> rays = new LinkedList<>();
+        Point centralPixel = findPixelLocation(nX, nY, j, i);
+        double rY = height / nY / antiAliasingFactor;
+        double rX = width / nX / antiAliasingFactor;
+        double x, y;
+
+        for (int rowNumber = 0; rowNumber < antiAliasingFactor; rowNumber++) {
+            for (int colNumber = 0; colNumber < antiAliasingFactor; colNumber++) {
+                y = -(rowNumber - (antiAliasingFactor - 1d) / 2) * rY;
+                x = (colNumber - (antiAliasingFactor - 1d) / 2) * rX;
+                Point pIJ = centralPixel;
+                if (y != 0) pIJ = pIJ.add(vUp.scale(y));
+                if (x != 0) pIJ = pIJ.add(vRight.scale(x));
+                rays.add(new Ray(position, pIJ.subtract(position)));
+            }
+        }
+        return rays;
     }
 
     /*
@@ -211,6 +250,13 @@ public class Camera implements Cloneable {
             camera.vTo = vTo.normalize();
             return this;
         }
+
+        public Builder setAntiAliasingFactor(int antiAliasingFactor) {
+            camera.antiAliasingFactor = antiAliasingFactor;
+            return this;
+        }
+
+
 
         /**
          * Sets the size of the view plane.
@@ -341,13 +387,21 @@ public class Camera implements Cloneable {
         imageWriter.writeToImage();
     }
 
-    private Color castRay(int j, int i) {
-       // List<Ray> lst = targetArea.constructRayBeamGrid();
-        Ray ray = constructRay(this.imageWriter.getNx(), this.imageWriter.getNy(), j, i);
-       // Color sumColor=Color.BLACK;
-       // for (Ray ray1 : lst)
-        return this.rayTracer.traceRay(ray);
-        //return sumColor.reduce(lst.size());
+//    private Color castRay(int j, int i) {
+//       // List<Ray> lst = targetArea.constructRayBeamGrid();
+//        Ray ray = constructRay(this.imageWriter.getNx(), this.imageWriter.getNy(), j, i);
+//       // Color sumColor=Color.BLACK;
+//       // for (Ray ray1 : lst)
+//        return this.rayTracer.traceRay(ray);
+//        //return sumColor.reduce(lst.size());
+//    }
+
+    private Color castRay( int i, int j) {
+
+        if (antiAliasingFactor == 1)
+            return rayTracer.traceRay(constructRay(this.imageWriter.getNx(), this.imageWriter.getNy(), i, j));
+        else
+            return rayTracer.traceRays(constructRays(this.imageWriter.getNx(), this.imageWriter.getNy(), i, j));
     }
 }
 
