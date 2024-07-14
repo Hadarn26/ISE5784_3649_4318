@@ -5,6 +5,7 @@ package renderer;
 
 import static java.awt.Color.*;
 
+import geometries.Polygon;
 import lighting.DirectionalLight;
 import lighting.PointLight;
 import org.junit.jupiter.api.Test;
@@ -222,6 +223,48 @@ Point b=new Point(70,-80,100);
               .setVpSize(200d, 200d)
               .setImageWriter(new ImageWriter("MP1ImprovedImage2", 600, 600))
               .setAntiAliasingFactor(9)
+              .build()
+              .renderImage()
+              .writeToImage();
+   }
+
+   @Test
+   public void multyObjectTest(){
+////      scene.setBackGround(new Color(89,188,217));
+//      scene.setBackGround( Color.BLACK);
+//      scene.geometries.add(
+//              new Triangle(new Point(-150, -150, -115), new Point(250, -150, -135),
+//                      new Point(-150, -30, -50))
+//                      .setEmission(new Color(12,143,12)),
+//
+//              new Sphere(30,new Point(60,50,-50))
+//                      .setMaterial(new Material().setKT(0.8)
+//                              //.setKR(0.5)
+//                              .setKd(0.6)
+//                              .setKs(0.6)
+//                              .setNShininess(30))
+//                      .setEmission(new Color(50,50,255))
+//      );
+//      scene.setAmbientLight(new AmbientLight(new Color(153,217,234), 0.15));
+//      scene.lights.add(
+////              new SpotLight(new Color(700, 400, 400), new Point(60, 50, 0), new Vector(0, 0, -1))
+////                      .setkL(4E-5).setkQ(2E-7)
+//              new DirectionalLight(new Color(YELLOW), new Vector(0, 0, -1))
+//      );
+      scene.setBackGround(new Color(89,188,217));
+      scene.geometries.add(
+              new Triangle(new Point(-150, -150, -115), new Point(250, -150, -135),
+                      new Point(-150, -30, -50))
+                      .setMaterial(new Material().setKd(0.5).setKs(0.5).setNShininess(60)).setEmission(new Color(12,143,12)),
+              new Sphere(30d,new Point(60, 50, -50)).setEmission(new Color(BLUE))
+                      .setMaterial(new Material().setKd(0.2).setKs(0.2).setNShininess(30).setKT(0.8)));
+      scene.setAmbientLight(new AmbientLight(new Color(153,217,234), 0.15));
+      scene.lights.add(
+              new DirectionalLight(new Color(700, 400, 400), new Vector(1, 1, -1)));
+                    //  .setkL(4E-5).setkQ(2E-7));
+      cameraBuilder.setLocation(new Point(0, 0, 1000)).setVpDistance(1000d)
+              .setVpSize(200d, 200d)
+              .setImageWriter(new ImageWriter("multyObject07", 600, 600))
               .build()
               .renderImage()
               .writeToImage();
