@@ -256,11 +256,14 @@ Point b=new Point(70,-80,100);
               new Triangle(new Point(-150, -150, -115), new Point(250, -150, -135),
                       new Point(-150, -30, -50))
                       .setMaterial(new Material().setKd(0.5).setKs(0.5).setNShininess(60)).setEmission(new Color(12,143,12)),
-              new Sphere(30d,new Point(60, 50, -50)).setEmission(new Color(BLUE))
-                      .setMaterial(new Material().setKd(0.2).setKs(0.2).setNShininess(30).setKT(0.8)));
+              new Sphere(10d,new Point(30, 20, -50)).setEmission(new Color(0,218,230))
+                      .setMaterial(new Material().setKd(0.2).setKs(0.2).setNShininess(30).setKT(0.8).setKR(0.6)),
+              new Sphere(5d,new Point(50, 40, -50)).setEmission(new Color(0,218,230))
+                      .setMaterial(new Material().setKd(0.2).setKs(0.2).setNShininess(30).setKT(0.8).setKR(0.6))
+      );
       scene.setAmbientLight(new AmbientLight(new Color(153,217,234), 0.15));
       scene.lights.add(
-              new DirectionalLight(new Color(700, 400, 400), new Vector(1, 1, -1)));
+              new DirectionalLight(new Color(700, 400, 400), new Vector(10, 10, -1)));
                     //  .setkL(4E-5).setkQ(2E-7));
       cameraBuilder.setLocation(new Point(0, 0, 1000)).setVpDistance(1000d)
               .setVpSize(200d, 200d)
