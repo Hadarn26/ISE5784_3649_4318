@@ -257,9 +257,9 @@ Point b=new Point(70,-80,100);
                       new Point(-150, -30, -50))
                       .setMaterial(new Material().setKd(0.5).setKs(0.5).setNShininess(60)).setEmission(new Color(12,143,12)),
               new Sphere(10d,new Point(30, 20, -50)).setEmission(new Color(0,218,230))
-                      .setMaterial(new Material().setKd(0.2).setKs(0.2).setNShininess(30).setKT(0.8).setKR(0.6)),
+                      .setMaterial(new Material().setKd(0.2).setKs(0.2).setNShininess(30).setKT(0.9).setKR(0.6)),
               new Sphere(5d,new Point(50, 40, -50)).setEmission(new Color(0,218,230))
-                      .setMaterial(new Material().setKd(0.2).setKs(0.2).setNShininess(30).setKT(0.8).setKR(0.6))
+                      .setMaterial(new Material().setKd(0.2).setKs(0.2).setNShininess(30).setKT(0.9).setKR(0.6))
       );
       scene.setAmbientLight(new AmbientLight(new Color(153,217,234), 0.15));
       scene.lights.add(
