@@ -296,6 +296,7 @@ public class ReflectionRefractionTests {
         //  .setkL(4E-5).setkQ(2E-7));
         cameraBuilder.setLocation(new Point(0, 0, 1000)).setVpDistance(1000d)
                 .setVpSize(200d, 200d)
+                //.setAntiAliasingFactor(3)
                 .setImageWriter(new ImageWriter("multyObject07", 600, 600))
                 .build()
                 .renderImage()
