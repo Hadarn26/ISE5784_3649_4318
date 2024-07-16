@@ -26,7 +26,7 @@ public class SnookerTests {
     public void mp1Test() {
         int nX = 600;
         int nY = 400;
-        double zWall = -100;
+        double zWall = -1000;
         double yTable = 30;
         double zTable = -120;
         double n = 10;
@@ -34,8 +34,9 @@ public class SnookerTests {
         double xWall = nX / 2 - 2 * nX / 3 - 50;
         double b = 5;
         double bb = 1.5 * b;
-
-
+        double radiusBall = 7;
+        double x = 100;
+        double z = (-110454545.45 - 490909.09 * x) / 36818.18;
         scene.setBackGround(new Color(WHITE));
 //        Point p1=new Point(5,3,-10);
 //        Point p2=new Point(10,3,0);
@@ -53,19 +54,56 @@ public class SnookerTests {
                         , new Point(115, -55, 200), new Point(-190, -55, 200))
                         .setMaterial(new Material().setKs(0.5)),
                 new Polygon(new Point(115, -55, 200), new Point(-190, -55, 200),
-                        new Point(-190 + bb, -55 - bb, 200), new Point(115 , -55 - bb, 200))
+                        new Point(-190 + bb, -55 - bb, 200), new Point(115, -55 - bb, 200))/////////
                         .setMaterial(new Material().setKs(0.5)),
                 new Polygon(new Point(300, 30, -120), new Point(115, -55, 200),
-                        new Point(115, -55 -  bb, 200), new Point(300, 30 - bb, -120))
+                        new Point(115, -55 - bb, 200), new Point(300, 30 - bb, -120))////////
                         .setMaterial(new Material().setKs(0.5)),
                 new Polygon(new Point(-100 + b, 30 + 0.0001, -120), new Point(300 - b, 30 + 0.0001, -120)
                         , new Point(115 - b, -55 + 0.0001, 200), new Point(-190 + b, -55 + 0.0001, 200))
-                        .setEmission(new Color(29, 148, 0))
+                        .setEmission(new Color(29, 148, 0)),//*********
+                new Triangle(new Point(115, -55, 200), new Point(115 - b, -55, 200), new Point(115, -285, 200)),
+                new Triangle(new Point(115, -55, 200), new Point(125, -55, 190), new Point(115, -285, 200)),
+                new Triangle(new Point(-190, -55, 200), new Point(-190 + bb, -55, 200), new Point(-190, -285, 200)),
+                new Triangle(new Point(-190, -55, 200), new Point(-190, -55, 190), new Point(-190, -285, 200)),
+                new Triangle(new Point(300, 30, -120), new Point(300 - b, 30, -120), new Point(300, -285, -120)),
+                new Triangle(new Point(300, 30, -120), new Point(300 - 2 * b, 30, -120), new Point(300, -285, -120)),
+                new Triangle(new Point(-100, 30, -120), new Point(-100 + b, 30, -120), new Point(-100, -285, -120)),
+                new Triangle(new Point(-100, 20, -120), new Point(-100 - b, 20, -110), new Point(-100, -285, -120)),
+                new Triangle(new Point(-190 + bb, -55 - bb, 200), new Point(-190 + 5 * radiusBall + bb, -55 - bb, 200)
+                        , new Point(-190 + 6 * radiusBall + bb, -55 - 2.5 * radiusBall - bb, 200 - radiusBall))
+                        .setEmission(new Color(WHITE))
+                        .setMaterial(new Material().setKd(0.2).setKs(0.2).setNShininess(30).setKT(0.8).setKR(0.3)),
+                new Triangle(new Point(-190 + bb, -55 - bb, 200), new Point(-190 + 5 * radiusBall + bb, -55 - bb, 200 - 3 * radiusBall)
+                        , new Point(-190 + 6 * radiusBall + bb, -55 - 2.5 * radiusBall - bb, 200 - radiusBall))
+                        .setEmission(new Color(WHITE))
+                        .setMaterial(new Material().setKd(0.2).setKs(0.2).setNShininess(30).setKT(0.8).setKR(0.3)),
+                new Sphere(radiusBall, new Point(-190 + 4 * radiusBall + bb, -55 - 2 * radiusBall, 200 - radiusBall - bb))
+                        .setEmission(new Color(RED))
+                        .setMaterial(new Material().setKd(0.1).setKs(0.7)),
+                new Triangle(new Point(115, -55 - bb, 200), new Point(100 - 5 * radiusBall + bb, -55 - bb, 200)
+                        , new Point(100 - 6 * radiusBall + bb, -55 - 2.5 * radiusBall - bb, 200 - radiusBall))
+                        .setEmission(new Color(WHITE))
+                        .setMaterial(new Material().setKd(0.2).setKs(0.2).setNShininess(30).setKT(0.8).setKR(0.3)),
+                new Triangle(new Point(115, -55 - bb, 200), new Point(100 - 5 * radiusBall + bb, -55 - bb, 200 - 3 * radiusBall)
+                        , new Point(100 - 6 * radiusBall + bb, -55 - 2.5 * radiusBall - bb, 200 - radiusBall))
+                        .setEmission(new Color(WHITE))
+                        .setMaterial(new Material().setKd(0.2).setKs(0.2).setNShininess(30).setKT(0.8).setKR(0.3)),
+                new Triangle(new Point(x+1, -49, z+1), new Point(x+6, 51,z+6),new Point(x-4, 51,z-4))
+                        .setEmission(new Color(BLUE))
+//                new Triangle(new Point(300 - 2 * b, 15, -150), new Point(260, 15, -50)
+//                        , new Point(280, 0, -10))
+//                        .setEmission(new Color(RED)),
+//                   //     .setMaterial(new Material().setKd(0.2).setKs(0.2).setNShininess(30).setKT(0.8).setKR(0.3)),
+//                new Triangle(new Point(115, -55 - bb, 200), new Point(100 - 5 * radiusBall + bb, -55 - bb, 200 - 3 * radiusBall)
+//                        , new Point(100 - 6 * radiusBall + bb, -55 - 2.5 * radiusBall - bb, 200 - radiusBall))
+//                        .setEmission(new Color(WHITE))
+//                    //    .setMaterial(new Material().setKd(0.2).setKs(0.2).setNShininess(30).setKT(0.8).setKR(0.3))
+
 
 //                new Polygon(new Point(-100+bb,30-bb,-120),new Point(300+bb,30-bb,-120)
 //                        ,new Point(115+bb,-55-bb,200),new Point(-190+bb,-55-bb,200))
 //                        .setMaterial(new Material().setKs(0.5)).setEmission(new Color(GRAY))
-
 
         );
 
@@ -76,7 +114,6 @@ public class SnookerTests {
                 .build()
                 .renderImage()
                 .writeToImage();
-
 
     }
 }
