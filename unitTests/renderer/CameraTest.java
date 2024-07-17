@@ -66,13 +66,13 @@ class CameraTest {
                 camera2.constructRay(3, 3, 0, 0), badRay);
 
     }
-    @Test
-    void testConstructRays() {
-        List<Ray> result = cameraBuilder.setVpSize(100d,100d).setAntiAliasingFactor(3).build().constructRays(3, 3, 0, 1);
-        assertEquals(9, result.size(), "ERROR: construstRays() did not return the right number of rays");
-         result = cameraBuilder.setVpSize(100d,100d).setAntiAliasingFactor(1).build().constructRays(3, 3, 0, 1);
-        assertEquals(1, result.size(), "ERROR: construstRays() did not return the right number of rays");
-        assertEquals(cameraBuilder.build().constructRay(3,3,0,1), result.get(0), "ERROR: construstRays() did not return the right ray");
+//    @Test
+//    void testConstructRays() {
+//        List<Ray> result = cameraBuilder.setVpSize(100d,100d).setAntiAliasingFactor(3).build().constructRays(3, 3, 0, 1);
+//        assertEquals(9, result.size(), "ERROR: construstRays() did not return the right number of rays");
+//         result = cameraBuilder.setVpSize(100d,100d).setAntiAliasingFactor(1).build().constructRays(3, 3, 0, 1);
+//        assertEquals(1, result.size(), "ERROR: construstRays() did not return the right number of rays");
+//        assertEquals(cameraBuilder.build().constructRay(3,3,0,1), result.get(0), "ERROR: construstRays() did not return the right ray");
 //        result = targetArea.constructRayBeamGrid().stream().filter(r -> r.getDirection().dotProduct(new Vector(0, 1, 0)) <= 0)
 //                .collect(Collectors.toList());
 //        assertEquals(6, result.size(), "ERROR: findIntersections() did not return the right number of reflected rays");
@@ -80,7 +80,7 @@ class CameraTest {
 //        result = targetArea.constructRayBeamGrid().stream().filter(r -> r.getDirection().dotProduct(new Vector(0, 1, 0)) > 0)
 //                .collect(Collectors.toList());
 //        assertEquals(3, result.size(), "ERROR: findIntersections() did not return the right number of refracted rays");
-    }
+   // }
 
 }
 

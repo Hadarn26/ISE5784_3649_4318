@@ -47,6 +47,7 @@ public class SnookerTests {
                 new Plane(new Point(nX / 2, nY / 2, zWall), new Point(xWall, nY / 2, zWall)
                         , new Point(xWall, -5 * nY / 44, zWall))
                         .setEmission(new Color(89, 52, 0)),
+                        //.setMaterial(new Material().setKR(1)),
                 new Plane(new Point(nX / 2, -5 * nY / 44, zWall), new Point(xWall, -5 * nY / 44, zWall), new Point(-nX / 2, -nY / 2, 1000))
                         .setEmission(new Color(245, 234, 180)),
                 new Plane(new Point(xWall, nY / 2, zWall), new Point(xWall, -5 * nY / 44, zWall), new Point(-nX / 2, -nY / 2, 1000))
@@ -93,13 +94,13 @@ public class SnookerTests {
                         .setMaterial(new Material().setKd(0.25).setKs(0.25).setNShininess(20)
                                 .setKT(new Double3(0.5, 0, 0))),
                 new Triangle(new Point(-200, -105, 100), new Point(-200, 90, 120), new Point(-200, 100, 80))
-                        .setEmission(new Color(BLUE)),
+                        .setEmission(new Color(214,165,143)),
                 new Triangle(new Point(-200, -105, 55), new Point(-200, 100, 35), new Point(-200, 90, 75))
-                        .setEmission(new Color(BLUE)),
+                        .setEmission(new Color(214,165,143)),
                 new Triangle(new Point(-200, -105, 10), new Point(-200, 100, -10), new Point(-200, 90, 30))
-                        .setEmission(new Color(BLUE)),
+                        .setEmission(new Color(214,165,143)),
                 new Triangle(new Point(-200, -105, -35), new Point(-200, 100, -55), new Point(-200, 90, -15))
-                        .setEmission(new Color(BLUE)),
+                        .setEmission(new Color(214,165,143)),
                 new Polygon(new Point(-1, 200, 0), new Point(1, 200, 0), new Point(1, 140, 0)
                         , new Point(-1, 140, 0))
                         .setEmission(new Color(PINK)),
@@ -144,18 +145,22 @@ public class SnookerTests {
        // scene.setAmbientLight(new AmbientLight(new Color(WHITE),0.2));
         //scene.lights.add(new SpotLight(new Color(RED),new Point(0, 110, 0),new Vector(0,-1,0)).setkL(4E-5).setkQ(2E-7));
         scene.lights.add(new PointLight(new Color(251,248,176),new Point(0, 110, 0)).setkL(4E-5).setkQ(2E-7));
-        //  scene.lights.add(new DirectionalLight(new Color(RED),new Vector(-1, -1, -4)));
-       // scene.lights.add(new DirectionalLight(new Color(RED), new Vector(-200, -105, 55)));
+          scene.lights.add(new DirectionalLight(new Color(239,104,132),new Vector(-1, -1, 4)));
+      //  scene.lights.add(new DirectionalLight(new Color(RED), new Vector(0, 0, -950)));
+        scene.lights.add(new SpotLight(new Color(RED), new Point(90+2*radiusBall,-15,75+radiusBall), new Vector(-1, 0, -1))
+        ) ;//   .setkL(0.00001).setkQ(0.000005));
 //        scene.setAmbientLight(new AmbientLight(new Color(255, 255, 255), 0.1));
 //        scene.lights.add(new SpotLight(new Color(1020, 400, 400), new Point(-750, -750, -150), new Vector(-1, -1, -4))
 //                .setkL(0.00001).setkQ(0.000005));
         cameraBuilder.setLocation(new Point(0, 0, 1000)).setVpDistance(1000d)
                 .setVpSize((double) nY, (double) nX)
-                //.setAntiAliasingFactor(3)
-                .setImageWriter(new ImageWriter("mp1SNOOKER", nX, nY))
+               // .setAntiAliasingFactor(25)
+                .setImageWriter(new ImageWriter("mp1SNOOKER300rays", nX, nY))
                 .build()
                 .renderImage()
                 .writeToImage();
 
     }
+
+
 }

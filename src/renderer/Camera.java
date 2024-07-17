@@ -29,7 +29,7 @@ public class Camera implements Cloneable {
 
     private ImageWriter imageWriter;
     private RayTracerBase rayTracer;
-    private TargetArea targetArea;
+   // private TargetArea targetArea;
 
     private int antiAliasingFactor = 1;
 
@@ -330,9 +330,9 @@ public class Camera implements Cloneable {
             if (Util.alignZero(camera.distance) <= 0)
                 throw new MissingResourceException(missingRenderingData, cameraClass, "camera's distance");
 
-            camera.targetArea = new TargetArea(camera.position, camera.vTo, camera.vUp);
-            camera.targetArea.setSize(camera.width, camera.height);
-            camera.targetArea.setDistance(camera.distance);
+//            camera.targetArea = new TargetArea(camera.position, camera.vTo, camera.vUp);
+//            camera.targetArea.setSize(camera.width, camera.height);
+//            camera.targetArea.setDistance(camera.distance);
 
             camera.vRight = (camera.vTo.crossProduct(camera.vUp)).normalize();
 
@@ -402,6 +402,16 @@ public class Camera implements Cloneable {
             return rayTracer.traceRay(constructRay(this.imageWriter.getNx(), this.imageWriter.getNy(), i, j));
         else
             return rayTracer.traceRays(constructRays(this.imageWriter.getNx(), this.imageWriter.getNy(), i, j));
+    }
+
+    private Color traceRays(List<Ray> rays) {
+
+        Color color = Color.BLACK;
+        for (Ray ray : rays) {
+            color = color.add(rayTracer.traceRay(ray));
+        }
+        return color.reduce(rays.size());
+
     }
 }
 
