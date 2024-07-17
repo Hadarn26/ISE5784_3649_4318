@@ -49,7 +49,7 @@ public class SnookerTests {
         scene.geometries.add(
                 new Plane(new Point(nX / 2, nY / 2, zWall), new Point(xWall, nY / 2, zWall)
                         , new Point(xWall, -5 * nY / 44, zWall))
-                        .setEmission(new Color(89, 52, 0)),
+                        .setEmission(new Color(89, 52, 0)).setMaterial(new Material().setKR(1)),
                 new Plane(new Point(nX / 2, -5 * nY / 44, zWall), new Point(xWall, -5 * nY / 44, zWall), new Point(-nX / 2, -nY / 2, 1000))
                         .setEmission(new Color(245, 234, 180)),
                 new Plane(new Point(xWall, nY / 2, zWall), new Point(xWall, -5 * nY / 44, zWall), new Point(-nX / 2, -nY / 2, 1000))
@@ -125,9 +125,9 @@ public class SnookerTests {
         );
         //scene.setAmbientLight(new AmbientLight(new Color(WHITE),0.1));
         //scene.lights.add(new SpotLight(new Color(RED),new Point(0, 110, 0),new Vector(0,-1,0)).setkL(4E-5).setkQ(2E-7));
-    //    scene.lights.add(new PointLight(new Color(YELLOW),new Point(0, 110, 0)).setkL(4E-5).setkQ(2E-7));
+        scene.lights.add(new PointLight(new Color(YELLOW),new Point(-150,70,-55)).setkL(4E-5).setkQ(2E-7));
       //  scene.lights.add(new DirectionalLight(new Color(WHITE),new Vector(0, 0, -1)));
-        scene.lights.add(new DirectionalLight(new Color(RED),new Vector(-200, -105, 55)));
+       // scene.lights.add(new DirectionalLight(new Color(RED),new Vector(-200, -105, 55)));
         cameraBuilder.setLocation(new Point(0, 0, 1000)).setVpDistance(1000d)
                 .setVpSize((double) nY, (double) nX)
                 //.setAntiAliasingFactor(3)
