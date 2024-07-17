@@ -6,10 +6,7 @@ import lighting.DirectionalLight;
 import lighting.PointLight;
 import lighting.SpotLight;
 import org.junit.jupiter.api.Test;
-import primitives.Color;
-import primitives.Material;
-import primitives.Point;
-import primitives.Vector;
+import primitives.*;
 import scene.Scene;
 
 import static java.awt.Color.*;
@@ -84,28 +81,49 @@ public class SnookerTests {
                         .setMaterial(new Material().setKd(0.2).setKs(0.2).setNShininess(30).setKT(0.8).setKR(0.3)),
                 new Sphere(radiusBall, new Point(-190 + 4 * radiusBall + bb, -55 - 2 * radiusBall, 200 - radiusBall - bb))
                         .setEmission(new Color(RED))
-                        .setMaterial(new Material().setKd(0.1).setKs(0.7)),
+                        .setMaterial(new Material().setKd(0.25).setKs(0.25).setNShininess(20)),
                 new Triangle(new Point(115, -55 - bb, 200), new Point(100 - 5 * radiusBall + bb, -55 - bb, 200)
                         , new Point(100 - 6 * radiusBall + bb, -55 - 2.5 * radiusBall - bb, 200 - radiusBall))
                         .setEmission(new Color(WHITE))
-                        .setMaterial(new Material().setKd(0.2).setKs(0.2).setNShininess(30).setKT(0.8).setKR(0.3)),
+                        .setMaterial(new Material().setKd(0.25).setKs(0.25).setNShininess(20)
+                                .setKT(new Double3(0.5, 0, 0))),
                 new Triangle(new Point(115, -55 - bb, 200), new Point(100 - 5 * radiusBall + bb, -55 - bb, 200 - 3 * radiusBall)
                         , new Point(100 - 6 * radiusBall + bb, -55 - 2.5 * radiusBall - bb, 200 - radiusBall))
                         .setEmission(new Color(WHITE))
-                        .setMaterial(new Material().setKd(0.2).setKs(0.2).setNShininess(30).setKT(0.8).setKR(0.3)),
-                new Triangle(new Point(-200, -105, 100),new Point(-200,90,120),new Point(-200,100,80))
+                        .setMaterial(new Material().setKd(0.25).setKs(0.25).setNShininess(20)
+                                .setKT(new Double3(0.5, 0, 0))),
+                new Triangle(new Point(-200, -105, 100), new Point(-200, 90, 120), new Point(-200, 100, 80))
                         .setEmission(new Color(BLUE)),
-                new Triangle(new Point(-200, -105, 55),new Point(-200,100,35),new Point(-200,90,75))
+                new Triangle(new Point(-200, -105, 55), new Point(-200, 100, 35), new Point(-200, 90, 75))
                         .setEmission(new Color(BLUE)),
-                 new Triangle(new Point(-200, -105, 10),new Point(-200,100,-10),new Point(-200,90,30))
-                .setEmission(new Color(BLUE)),
-                new Triangle(new Point(-200, -105, -35),new Point(-200,100,-55),new Point(-200,90,-15))
+                new Triangle(new Point(-200, -105, 10), new Point(-200, 100, -10), new Point(-200, 90, 30))
                         .setEmission(new Color(BLUE)),
-    new Polygon(new Point(-1,200,0),new Point(1,200,0),new Point(1,140,0)
-            ,new Point(-1,140,0))
-            .setEmission(new Color(PINK)),
-    new Sphere(30,new Point(0,110,0)) .setEmission(new Color(WHITE))
-            .setMaterial(new Material().setKs(0.00000000000001).setKT(0.8).setNShininess(50))
+                new Triangle(new Point(-200, -105, -35), new Point(-200, 100, -55), new Point(-200, 90, -15))
+                        .setEmission(new Color(BLUE)),
+                new Polygon(new Point(-1, 200, 0), new Point(1, 200, 0), new Point(1, 140, 0)
+                        , new Point(-1, 140, 0))
+                        .setEmission(new Color(PINK)),
+                new Sphere(30, new Point(0, 110, 0)).setEmission(new Color(WHITE))
+                        .setMaterial(new Material().setKd(0.2).setKs(0.2).setNShininess(30).setKT(0.6)),
+                      //  .setMaterial(new Material().setKs(0.00000000000001).setKT(0.8).setNShininess(50)),
+                new Sphere(radiusBall, new Point(-60,10+2*radiusBall,-60)).setEmission(new Color (RED))
+                        .setMaterial(new Material().setKd(0.1).setKs(0.7)),
+                new Sphere(radiusBall, new Point(0,10+radiusBall,-10)).setEmission(new Color (ORANGE))
+                        .setMaterial(new Material().setKd(0.1).setKs(0.7)),
+                new Sphere(radiusBall, new Point(90,-15,75)).setEmission(new Color (WHITE))//
+                        .setMaterial(new Material().setKd(0.1).setKs(0.7)),
+                new Sphere(radiusBall, new Point(205,2,40)).setEmission(new Color (BLACK))
+                        .setMaterial(new Material().setKd(0.1).setKs(0.7)),
+                new Sphere(radiusBall, new Point(-120,-20,95)).setEmission(new Color (BLUE))
+                        .setMaterial(new Material().setKd(0.1).setKs(0.7)),
+                new Sphere(radiusBall, new Point(-75,-40,180)).setEmission(new Color (ORANGE))
+                        .setMaterial(new Material().setKd(0.1).setKs(0.7)),
+                new Sphere(radiusBall, new Point(85,-38,170)).setEmission(new Color (YELLOW))
+                        .setMaterial(new Material().setKd(0.1).setKs(0.7)),
+                new Sphere(radiusBall, new Point(65,-41,185)).setEmission(new Color (89,40,89))
+                        .setMaterial(new Material().setKd(0.1).setKs(0.7)),
+                new Sphere(radiusBall, new Point(-15,-15,75)).setEmission(new Color (GREEN))
+                        .setMaterial(new Material().setKd(0.1).setKs(0.7))
 
 
 //                new Triangle(new Point(300 - 2 * b, 15, -150), new Point(260, 15, -50)
@@ -123,11 +141,14 @@ public class SnookerTests {
 //                        .setMaterial(new Material().setKs(0.5)).setEmission(new Color(GRAY))
 
         );
-        //scene.setAmbientLight(new AmbientLight(new Color(WHITE),0.1));
+       // scene.setAmbientLight(new AmbientLight(new Color(WHITE),0.2));
         //scene.lights.add(new SpotLight(new Color(RED),new Point(0, 110, 0),new Vector(0,-1,0)).setkL(4E-5).setkQ(2E-7));
-    //    scene.lights.add(new PointLight(new Color(YELLOW),new Point(0, 110, 0)).setkL(4E-5).setkQ(2E-7));
-      //  scene.lights.add(new DirectionalLight(new Color(WHITE),new Vector(0, 0, -1)));
-        scene.lights.add(new DirectionalLight(new Color(RED),new Vector(-200, -105, 55)));
+        scene.lights.add(new PointLight(new Color(251,248,176),new Point(0, 110, 0)).setkL(4E-5).setkQ(2E-7));
+        //  scene.lights.add(new DirectionalLight(new Color(RED),new Vector(-1, -1, -4)));
+       // scene.lights.add(new DirectionalLight(new Color(RED), new Vector(-200, -105, 55)));
+//        scene.setAmbientLight(new AmbientLight(new Color(255, 255, 255), 0.1));
+//        scene.lights.add(new SpotLight(new Color(1020, 400, 400), new Point(-750, -750, -150), new Vector(-1, -1, -4))
+//                .setkL(0.00001).setkQ(0.000005));
         cameraBuilder.setLocation(new Point(0, 0, 1000)).setVpDistance(1000d)
                 .setVpSize((double) nY, (double) nX)
                 //.setAntiAliasingFactor(3)
