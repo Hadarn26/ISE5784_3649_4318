@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.MissingResourceException;
 
+import renderer.PixelManager;
+
 import static primitives.Util.isZero;
 
 /*
@@ -29,9 +31,15 @@ public class Camera implements Cloneable {
 
     private ImageWriter imageWriter;
     private RayTracerBase rayTracer;
-   // private TargetArea targetArea;
+    // private TargetArea targetArea;
 
     private int antiAliasingFactor = 1;
+
+    private boolean threads = false;
+    private PixelManager pixelManager;
+    private double printInterval = 0;
+    private int threadsCount = 0;
+
 
     /**
      * Private constructor to enforce the use of the builder for creating Camera instances.
@@ -170,6 +178,7 @@ public class Camera implements Cloneable {
         if (jX != 0) pIJ = pIJ.add(vRight.scale(jX));
         return pIJ;
     }
+
     public Ray constructRay(int nX, int nY, int j, int i) {
         return new Ray(position, findPixelLocation(nX, nY, j, i).subtract(position));
     }
@@ -209,6 +218,33 @@ public class Camera implements Cloneable {
     public static class Builder {
 
         final private Camera camera = new Camera();
+
+        /**
+         * Sets number of threads in builder pattern.
+         *
+         * @param threadsCount
+         * @return Camera that results
+         */
+        public Builder setMultiThreading(int threadsCount) {
+            camera.threadsCount = threadsCount;
+            return this;
+        }
+
+        /**
+         * Sets interval size for progress printing in builder pattern.
+         *
+         * @param d
+         * @return Camera that results
+         */
+        public Builder setDebugPrint(double d) {
+            camera.printInterval = d;
+            return this;
+        }
+
+//        public Builder setThreads() {
+//            camera.threads = true;
+//            return this;
+//        }
 
         /**
          * Sets the location of the camera.
@@ -257,7 +293,6 @@ public class Camera implements Cloneable {
         }
 
 
-
         /**
          * Sets the size of the view plane.
          *
@@ -303,6 +338,7 @@ public class Camera implements Cloneable {
             camera.distance = distance;
             return this;
         }
+
 
         /**
          * Builds and returns the Camera instance.
@@ -353,13 +389,40 @@ public class Camera implements Cloneable {
      * Renders the image by casting rays through each pixel.
      */
     public Camera renderImage() {
-        for (int i = 0; i < imageWriter.getNy(); i++)
-            for (int j = 0; j < imageWriter.getNx(); j++) {
+        pixelManager = new PixelManager(imageWriter.getNy(), imageWriter.getNx(), printInterval);
+        if (threadsCount == 0) {
+            for (int i = 0; i < imageWriter.getNy(); i++)
+                for (int j = 0; j < imageWriter.getNx(); j++) {
 
-                this.imageWriter.writePixel(j, i, castRay(j, i));
+                    this.imageWriter.writePixel(j, i, castRay(j, i));
+                }
+        } else { // see further... option 2
+            var threads = new LinkedList<Thread>(); // list of threads
+            while (threadsCount-- > 0) // add appropriate number of threads
+                threads.add(new Thread(() -> { // add a thread with its code
+                    PixelManager.Pixel pixel; // current pixel(row,col)
+                    // allocate pixel(row,col) in loop until there are no more pixels
+                    while ((pixel = pixelManager.nextPixel()) != null)
+                        // cast ray through pixel (and color it – inside castRay)
+                        this.imageWriter.writePixel(pixel.row(), pixel.col(), castRay(pixel.row(), pixel.col()));
+                    // castRay(imageWriter.getNx(), imageWriter.getNy(), pixel.col(), pixel.row());
+                }));
+            // start all the threads
+            for (var thread : threads)
+                thread.start();
+            // wait until all the threads have finished
+            try {
+                for (var thread : threads)
+                    thread.join();
+            } catch (InterruptedException ignore) {
             }
+        }
         return this;
     }
+
+
+//
+
 
     /**
      * Prints a grid on the image with the specified interval and color.
@@ -396,12 +459,21 @@ public class Camera implements Cloneable {
 //        //return sumColor.reduce(lst.size());
 //    }
 
-    private Color castRay( int i, int j) {
+    private Color castRay(int i, int j) {
 
+        Color color;
         if (antiAliasingFactor == 1)
-            return rayTracer.traceRay(constructRay(this.imageWriter.getNx(), this.imageWriter.getNy(), i, j));
+            color = rayTracer.traceRay(constructRay(this.imageWriter.getNx(), this.imageWriter.getNy(), i, j));
         else
-            return rayTracer.traceRays(constructRays(this.imageWriter.getNx(), this.imageWriter.getNy(), i, j));
+            color = rayTracer.traceRays(constructRays(this.imageWriter.getNx(), this.imageWriter.getNy(), i, j));
+
+        if (i == 0 && j % 10 == 0) {
+            System.out.print("Traced: ");
+            System.out.print((float) i / (float) imageWriter.getNy() * 100);
+            System.out.println("%");
+        }
+        pixelManager.pixelDone();
+        return color;
     }
 
     private Color traceRays(List<Ray> rays) {

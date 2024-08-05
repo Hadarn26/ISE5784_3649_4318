@@ -154,7 +154,8 @@ public class SnookerTests {
 //                .setkL(0.00001).setkQ(0.000005));
         cameraBuilder.setLocation(new Point(0, 0, 1000)).setVpDistance(1000d)
                 .setVpSize((double) nY, (double) nX)
-               // .setAntiAliasingFactor(25)
+                .setAntiAliasingFactor(9)
+                .setMultiThreading(3)
                 .setImageWriter(new ImageWriter("mp1SNOOKER300rays", nX, nY))
                 .build()
                 .renderImage()
