@@ -147,12 +147,32 @@ public class SnookerTests {
         ) ;
         cameraBuilder.setLocation(new Point(0, 0, 1000)).setVpDistance(1000d)
                 .setVpSize((double) nY, (double) nX)
-                .setAntiAliasingFactor(9)
-                .setMultiThreading(3)
-                .setImageWriter(new ImageWriter("mp1SNOOKER300rays", nX, nY))
+                .setAntiAliasingFactor(25)
+                .setMultiThreading(3);
+//                .setAdaptive(true)
+//
+//              //  .setImageWriter(new ImageWriter("mp1SNOOKER300rays", nX, nY))
+//                .setImageWriter(new ImageWriter("mp2withAdaptiveSuperSampelingandThreads", nX, nY))
+//                .build()
+//                .renderImage()
+//                .writeToImage();
+        cameraBuilder
+                .setAdaptive(false)
+
+                //  .setImageWriter(new ImageWriter("mp1SNOOKER300rays", nX, nY))
+                .setImageWriter(new ImageWriter("mp2WithThreads", nX, nY))
                 .build()
                 .renderImage()
                 .writeToImage();
+//        cameraBuilder
+//                .setMultiThreading(0)
+//                .setAdaptive(true)
+//
+//                //  .setImageWriter(new ImageWriter("mp1SNOOKER300rays", nX, nY))
+//                .setImageWriter(new ImageWriter("mp2WithoutAnyImproves", nX, nY))
+//                .build()
+//                .renderImage()
+//                .writeToImage();
 
     }
 

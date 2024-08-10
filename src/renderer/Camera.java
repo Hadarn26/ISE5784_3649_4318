@@ -37,9 +37,9 @@ public class Camera implements Cloneable {
 
     private boolean threads = false;
     private PixelManager pixelManager;
-    private double printInterval = 0;
-    private int threadsCount = 0;
-
+    private double printInterval = 1;
+    private int threadsCount = 0;//num of threads
+    //private Point centerPoint;
 
     private boolean useAdaptive=false;
     /**
@@ -199,6 +199,10 @@ public class Camera implements Cloneable {
         double rX = width / nX / antiAliasingFactor;
         double x, y;
 
+        if (useAdaptive)
+        {
+
+        }
         for (int rowNumber = 0; rowNumber < antiAliasingFactor; rowNumber++) {
             for (int colNumber = 0; colNumber < antiAliasingFactor; colNumber++) {
                 y = -(rowNumber - (antiAliasingFactor - 1d) / 2) * rY;
@@ -227,6 +231,11 @@ public class Camera implements Cloneable {
          */
         public Builder setMultiThreading(int threadsCount) {
             camera.threadsCount = threadsCount;
+            return this;
+        }
+
+        public Builder setAdaptive(boolean adaptive) {
+            camera.useAdaptive = adaptive;
             return this;
         }
 
@@ -389,35 +398,98 @@ public class Camera implements Cloneable {
      * Renders the image by casting rays through each pixel.
      */
     public Camera renderImage() {
-        pixelManager = new PixelManager(imageWriter.getNy(), imageWriter.getNx(), printInterval);
+       // pixelManager = new PixelManager(imageWriter.getNy(), imageWriter.getNx(), printInterval);
+        PixelManager.initialize(imageWriter.getNy(), imageWriter.getNx(), printInterval);
         if (threadsCount == 0) {
             for (int i = 0; i < imageWriter.getNy(); i++)
                 for (int j = 0; j < imageWriter.getNx(); j++) {
 
                     this.imageWriter.writePixel(j, i, castRay(j, i));
                 }
-        } else { // see further... option 2
-            var threads = new LinkedList<Thread>(); // list of threads
-            while (threadsCount-- > 0) // add appropriate number of threads
-                threads.add(new Thread(() -> { // add a thread with its code
-                    PixelManager.Pixel pixel; // current pixel(row,col)
-                    // allocate pixel(row,col) in loop until there are no more pixels
-                    while ((pixel = pixelManager.nextPixel()) != null)
-                        // cast ray through pixel (and color it – inside castRay)
-                        this.imageWriter.writePixel(pixel.row(), pixel.col(), castRay(pixel.row(), pixel.col()));
-                    // castRay(imageWriter.getNx(), imageWriter.getNy(), pixel.col(), pixel.row());
-                }));
-            // start all the threads
-            for (var thread : threads)
-                thread.start();
-            // wait until all the threads have finished
-            try {
-                for (var thread : threads)
-                    thread.join();
-            } catch (InterruptedException ignore) {
-            }
         }
+//        else { // see further... option 2
+//            var threads = new LinkedList<Thread>(); // list of threads
+//            while (threadsCount-- > 0) // add appropriate number of threads
+//                threads.add(new Thread(() -> { // add a thread with its code
+//                    PixelManager pixel; // current pixel(row,col)
+//                    // allocate pixel(row,col) in loop until there are no more pixels
+//                    while ( pixelManager.nextPixel())
+//                        // cast ray through pixel (and color it – inside castRay)
+//                        this.imageWriter.writePixel(pixelManager.row, pixelManager.col, castRay(pixelManager.row, pixelManager.col));
+//                    // castRay(imageWriter.getNx(), imageWriter.getNy(), pixel.col(), pixel.row());
+//                }));
+//            // start all the threads
+//            for (var thread : threads)
+//                thread.start();
+//            // wait until all the threads have finished
+//            try {
+//                for (var thread : threads)
+//                    thread.join();
+//            } catch (InterruptedException ignore) {
+//            }
+    //    }
+
+                else {
+            // Render the image using adaptive super-sampling
+            // Create multiple threads to process the pixels in parallel
+
+            while (threadsCount-- > 0) {
+                new Thread(() -> {
+                    // Iterate over each pixel in the image
+                    for (PixelManager pixel=new PixelManager(); pixel.nextPixel(); PixelManager.pixelDone()) {
+                        // Apply adaptive super-sampling to determine the pixel color
+                        if (useAdaptive){
+                            Color pixelColorAdaptive = SuperSampling(imageWriter.getNx(), imageWriter.getNy(), pixel.col, pixel.row, antiAliasingFactor, false);
+                            imageWriter.writePixel(pixel.col, pixel.row, pixelColorAdaptive);
+                    }
+                        else{
+                        // Construct rays for the current pixel and trace them using the ray tracer
+                        List<Ray> rays = constructRays(imageWriter.getNx(), imageWriter.getNy(), pixel.col, pixel.row);
+                        Color pixelColor = rayTracer.traceRays(rays);
+                            imageWriter.writePixel(pixel.col, pixel.row, pixelColor);
+                        }
+
+                    }
+                }).start();
+            }
+            // Wait for all the threads to finish processing the pixels
+            PixelManager.waitToFinish();
+        }
+
         return this;
+    }
+    private Color SuperSampling(int nX, int nY, int j, int i,  int numOfRays, boolean adaptiveAlising)  {
+        // Get the right and up vectors of the camera
+        Vector Vright = vRight;
+        Vector Vup = vUp;
+        // Get the location of the camera
+        Point cameraLoc =position;
+        // Calculate the number of rays in each row and column
+        int numOfRaysInRowCol = (int)Math.floor(Math.sqrt(numOfRays));
+        // If the number of rays is 1, perform regular ray tracing
+        if(numOfRaysInRowCol == 1)
+            return rayTracer.traceRay(constructRayThroughPixel(nX, nY, j, i));
+        // Calculate the center point of the current pixel
+        Point pIJ = findPixelLocation(nX, nY, j, i);///////////////////////////////////////
+        // Calculate the height and width ratios of the pixel
+        double rY = Util.alignZero(height / nY);
+        double rX = Util.alignZero(width / nX);
+
+        // Calculate the pixel row and column ratios
+        double PRy = rY/numOfRaysInRowCol;
+        double PRx = rX/numOfRaysInRowCol;
+
+        if (adaptiveAlising)
+            return rayTracer.AdaptiveSuperSamplingRec(pIJ, rX, rY, PRx, PRy,cameraLoc,Vright, Vup,null);
+        else
+            return rayTracer.RegularSuperSampling(pIJ, rX, rY, PRx, PRy,cameraLoc,Vright, Vup,null);
+    }
+    public Ray constructRayThroughPixel(int nX, int nY, int j, int i) {
+        Point pIJ = findPixelLocation(nX, nY, j, i); // center point of the pixel
+
+        //Vi,j = Pi,j - P0, the direction of the ray to the pixel(j, i)
+        Vector vIJ = pIJ.subtract(position);
+        return new Ray(position, vIJ);
     }
 
     /**
@@ -456,20 +528,26 @@ public class Camera implements Cloneable {
 //    }
 
     private Color castRay( int i, int j) {
-
-        Color color;
-        if (antiAliasingFactor == 1)
-            color = rayTracer.traceRay(constructRay(this.imageWriter.getNx(), this.imageWriter.getNy(), i, j));
-        else
-            color = rayTracer.traceRays(constructRays(this.imageWriter.getNx(), this.imageWriter.getNy(), i, j));
-
-        if (i == 0 && j % 10 == 0) {
-            System.out.print("Traced: ");
-            System.out.print((float) i / (float) imageWriter.getNy() * 100);
-            System.out.println("%");
+        if (antiAliasingFactor == 1) {
+            List<Ray> ray = constructRays(this.imageWriter.getNx(), this.imageWriter.getNy(), j, i);
+            return this.rayTracer.traceRay(ray.get(0));
+        } else {
+            List<Ray> rays = constructRays(this.imageWriter.getNx(), this.imageWriter.getNy(), j, i);
+            return (rayTracer.traceRays(constructRays(this.imageWriter.getNx(), this.imageWriter.getNy(), i, j)));
+//        Color color;
+//        if (antiAliasingFactor == 1)
+//            color = rayTracer.traceRay(constructRay(this.imageWriter.getNx(), this.imageWriter.getNy(), i, j));
+//        else
+//            color = rayTracer.traceRays(constructRays(this.imageWriter.getNx(), this.imageWriter.getNy(), i, j));
+//
+////        if (i == 0 && j % 10 == 0) {
+////            System.out.print("Traced: ");
+////            System.out.print((float) i / (float) imageWriter.getNy() * 100);
+////            System.out.println("%");
+////        }
+//        pixelManager.pixelDone();
+//        return color;
         }
-        pixelManager.pixelDone();
-        return color;
     }
 
     private Color traceRays(List<Ray> rays) {

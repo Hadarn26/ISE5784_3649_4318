@@ -3,7 +3,9 @@
 package renderer;
 
 import primitives.Color;
+import primitives.Point;
 import primitives.Ray;
+import primitives.Vector;
 import scene.Scene;
 
 import java.util.List;
@@ -35,4 +37,7 @@ public abstract class RayTracerBase {
      */
     public abstract Color traceRay(Ray ray);
     public abstract Color traceRays(List<Ray> rays);
+    public abstract Color AdaptiveSuperSamplingRec(Point centerP, double Width, double Height, double minWidth, double minHeight, Point cameraLoc, Vector Vright, Vector Vup, List<Point> prePoints);
+    public abstract Color RegularSuperSampling(Point centerP, double Width, double Height, double minWidth, double minHeight, Point cameraLoc, Vector Vright, Vector Vup, List<Point> prePoints);
+
 }
