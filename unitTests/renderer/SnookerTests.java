@@ -20,9 +20,24 @@ public class SnookerTests {
      * Camera builder for the tests with triangles
      */
     private final Camera.Builder cameraBuilder = Camera.getBuilder()
-            .setDirection(new Vector(0, 0, -1), new Vector(0, 1, 0))
+            .setDirection( new Vector(0,0,-1),new Vector(0, 1, 0))
             .setRayTracer(new SimpleRayTracer(scene));
-
+ //   @Test
+//    public void cameraChangeLocationTest() {
+//        scene.geometries.add(
+//                new Plane(new Point(-1500,0,0),new Vector(1,0,0)).setEmission(new Color(RED)),
+//                new Plane(new Point(0,-1500,0),new Vector(0,1,0)).setEmission(new Color(BLUE)),
+//                new Plane(new Point(0,0,-1500),new Vector(0,0,1)).setEmission(new Color(YELLOW))
+//        );
+//        //  cameraBuilder.setLocation(new Point(1500, 1800, 2000)).setVpDistance(1000d)
+//        cameraBuilder.setLocation(new Point(0, 0, 0)).setVpDistance(2000d)
+//                .setVpSize((double) 400, (double) 600)
+//                // .setAntiAliasingFactor(25)
+//                .setImageWriter(new ImageWriter("angleCameraTest", 600, 400))
+//                .build()
+//                .renderImage()
+//                .writeToImage();
+//    }
     @Test
     public void mp1Test() {
         int nX = 600;
@@ -39,10 +54,7 @@ public class SnookerTests {
         double x = -100;
         double z = (-110454545.45 - 490909.09 * x) / 36818.18;
         scene.setBackGround(new Color(WHITE));
-//        Point p1=new Point(5,3,-10);
-//        Point p2=new Point(10,3,0);
-//        Point p3=new Point(-5,3,-10);
-//    Polygon rectangle=new Polygon(p1,new Point(-5,3,-10),new Point(-5,-3,-10),new Point(5,-3,-10));
+
         scene.geometries.add(
                 new Plane(new Point(nX / 2, nY / 2, zWall), new Point(xWall, nY / 2, zWall)
                         , new Point(xWall, -5 * nY / 44, zWall))
@@ -125,22 +137,6 @@ public class SnookerTests {
                         .setMaterial(new Material().setKd(0.1).setKs(0.7)),
                 new Sphere(radiusBall, new Point(-15,-15,75)).setEmission(new Color (GREEN))
                         .setMaterial(new Material().setKd(0.1).setKs(0.7))
-
-
-//                new Triangle(new Point(300 - 2 * b, 15, -150), new Point(260, 15, -50)
-//                        , new Point(280, 0, -10))
-//                        .setEmission(new Color(RED)),
-//                   //     .setMaterial(new Material().setKd(0.2).setKs(0.2).setNShininess(30).setKT(0.8).setKR(0.3)),
-//                new Triangle(new Point(115, -55 - bb, 200), new Point(100 - 5 * radiusBall + bb, -55 - bb, 200 - 3 * radiusBall)
-//                        , new Point(100 - 6 * radiusBall + bb, -55 - 2.5 * radiusBall - bb, 200 - radiusBall))
-//                        .setEmission(new Color(WHITE))
-//                    //    .setMaterial(new Material().setKd(0.2).setKs(0.2).setNShininess(30).setKT(0.8).setKR(0.3))
-
-
-//                new Polygon(new Point(-100+bb,30-bb,-120),new Point(300+bb,30-bb,-120)
-//                        ,new Point(115+bb,-55-bb,200),new Point(-190+bb,-55-bb,200))
-//                        .setMaterial(new Material().setKs(0.5)).setEmission(new Color(GRAY))
-
         );
        // scene.setAmbientLight(new AmbientLight(new Color(WHITE),0.2));
         //scene.lights.add(new SpotLight(new Color(RED),new Point(0, 110, 0),new Vector(0,-1,0)).setkL(4E-5).setkQ(2E-7));
@@ -148,10 +144,7 @@ public class SnookerTests {
           scene.lights.add(new DirectionalLight(new Color(239,104,132),new Vector(-1, -1, 4)));
       //  scene.lights.add(new DirectionalLight(new Color(RED), new Vector(0, 0, -950)));
         scene.lights.add(new SpotLight(new Color(RED), new Point(90+2*radiusBall,-15,75+radiusBall), new Vector(-1, 0, -1))
-        ) ;//   .setkL(0.00001).setkQ(0.000005));
-//        scene.setAmbientLight(new AmbientLight(new Color(255, 255, 255), 0.1));
-//        scene.lights.add(new SpotLight(new Color(1020, 400, 400), new Point(-750, -750, -150), new Vector(-1, -1, -4))
-//                .setkL(0.00001).setkQ(0.000005));
+        ) ;
         cameraBuilder.setLocation(new Point(0, 0, 1000)).setVpDistance(1000d)
                 .setVpSize((double) nY, (double) nX)
                // .setAntiAliasingFactor(25)

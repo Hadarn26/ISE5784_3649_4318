@@ -33,6 +33,7 @@ public class Camera implements Cloneable {
 
     private int antiAliasingFactor = 1;
 
+    private boolean useAdaptive=false;
     /**
      * Private constructor to enforce the use of the builder for creating Camera instances.
      */
@@ -405,7 +406,9 @@ public class Camera implements Cloneable {
     }
 
     private Color traceRays(List<Ray> rays) {
+        if (useAdaptive){
 
+        }
         Color color = Color.BLACK;
         for (Ray ray : rays) {
             color = color.add(rayTracer.traceRay(ray));
